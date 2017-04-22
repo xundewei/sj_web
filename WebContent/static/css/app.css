@@ -1,0 +1,77 @@
+.place {
+    height: 28px;
+    background: url(../images/righttop.gif) repeat-x;
+}
+
+.place span {
+    line-height: 28px;
+    font-weight: bold;
+    float: left;
+    margin-left: 12px;
+}
+
+.place ul {
+    display: block;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.place li {
+    display: block;
+    margin: 0;
+    padding: 0;
+    list-style: none;
+}
+
+.placeul li {
+    float: left;
+    line-height: 28px;
+    padding-left: 7px;
+    padding-right: 12px;
+    background: url(../images/rlist.gif) no-repeat right;
+}
+
+.placeul li:last-child {
+    background: none;
+}
+
+.placeul li a, a:focus {
+    text-decoration: none;
+    color: #000;
+    outline: none;
+    blr: expression(this.onFocus=this.blur());
+}
+
+.placeul li a:hover {
+    color: #00a4ac;
+    text-decoration: none;
+}
+
+.hlg-title {
+    /*padding:5px 0;*/
+    margin-bottom:10px;
+}
+
+.hlg-title, .hlg-search, .hlg-search2 {
+    font-family: "微软雅黑", "宋体", Arial, sans-serif, Verdana, Tahoma;
+    font-size: 12px;
+    font-weight:bold;
+    color: #369;
+    /*padding-bottom: 1px;*/
+    border-bottom: 1px solid #ddd;
+}
+
+.hlg-search {
+    padding-left: 20px;
+    background: url('../images/search.png') no-repeat 0 50%;
+}
+
+.hlg-toolbar {
+    font-family: "微软雅黑", "宋体", Arial, sans-serif, Verdana, Tahoma;
+    font-size: 12px;
+    font-weight:bold;
+    color: #369;
+    padding-left: 20px;
+    background: url('../images/list.png') no-repeat 0 50%;
+}
