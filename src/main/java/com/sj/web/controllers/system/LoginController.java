@@ -8,6 +8,7 @@ import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 
+import com.sj.web.controllers.BaseController;
 import com.sj.web.model.system.SysUser;
 import com.sj.web.services.system.UserService;
 
@@ -20,7 +21,7 @@ import com.sj.web.services.system.UserService;
  */
 @Controller
 @RequestMapping(value = "/login")
-public class LoginController {
+public class LoginController extends BaseController{
 	 @Autowired
 	private UserService service;
 
@@ -72,6 +73,7 @@ public class LoginController {
                 if ("1".equals(user.getFlag()) || "1".equals(user.getDr())) {
                     errorMsg = "提示信息：登录用户已被禁用";
                 } else {
+                	this.getCurrentSession().setAttribute("usermsg", user);//目前先用SESSION提代一下 
                     //shiro login check
 //                    appRealm.clearCachedAuthorizationInfo(userName);
 //                    token = new UsernamePasswordToken(userName, password);
