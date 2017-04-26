@@ -21,6 +21,8 @@ public interface SysMenuMapper {
     SysMenu selectByPrimaryKey(String pkSysMenu);
     
     List<SysMenu> selectBylev1(String pk_sys_user);
+    
+    List<SysMenu> GetMenuByMoreLev2(String pk_sys_user);
 
     int updateByExampleSelective(@Param("record") SysMenu record, @Param("example") SysMenuExample example);
 

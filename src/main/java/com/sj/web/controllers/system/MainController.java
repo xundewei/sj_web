@@ -1,9 +1,8 @@
 package com.sj.web.controllers.system;
 
 
-import java.util.Collection;
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
@@ -13,9 +12,12 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.ui.ModelMap;
+import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
+import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.sj.core.utils.web.easyui.EzTreeNode;
 import com.sj.web.common.Consts;
 import com.sj.web.controllers.BaseController;
 import com.sj.web.model.system.SysMenu;
@@ -103,6 +105,19 @@ public class MainController extends BaseController{
         model.addAttribute("leftmenu", list);
         logger.info("菜单页面加载控制完成！");
         return "main/leftmenu";
+    }
+    
+    /**
+     * 构造树的功能
+     * @param 
+     * 		menucode 一级菜单编码
+     * @return
+     */
+    @RequestMapping(value = "main/menutree/{menucode}", method = RequestMethod.GET)
+    @ResponseBody
+    public List<EzTreeNode> loadMenuTree(@PathVariable String menucode) {
+        List<EzTreeNode> list = sysmenuservice.GetMenuByMoreLev2("1",menucode);
+        return list;
     }
    
 }

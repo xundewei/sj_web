@@ -39,11 +39,8 @@
     <c:set var="first" value="true"/>
     <c:forEach items="${leftmenu}" var="entry"><!-- 一级菜单集合-->
         <div title="${entry.displayname}" data-options="iconCls:'icon-menu',selected:${first}"><!-- 一级菜单名称 -->
-            <%-- <c:forEach items="${entry.value}" var="menu"> --%>
             <!-- 根据没一级菜单找到相关子树 -->
-              <%--   <ul class="easyui-tree" data-options="url:'tree/menutree/${menu.id}',method:'get',animate: true,loadFilter:myLoadFilter,onClick:treeNodeClick"></ul> --%>
-    <%--         </c:forEach> --%>
-
+         	<ul class="easyui-tree" data-options="url:'main/menutree/${entry.menucode}',method:'get',animate: true,loadFilter:myLoadFilter,onClick:treeNodeClick"></ul> 
         </div>
         <c:set var="first" value="false"/>
     </c:forEach>
@@ -88,6 +85,7 @@
     }
 
     function myLoadFilter(data, parent) {
+    	//alert("111");
         /*var state = $.data(this, 'tree');
 
          function setData(){
