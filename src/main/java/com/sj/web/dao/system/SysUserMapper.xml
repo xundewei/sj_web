@@ -212,6 +212,13 @@
 			<include refid="Example_Where_Clause" />
 		</if>
 	</select>
+	
+	<select id="countByExample2" parameterType="com.sj.web.common.mybatis.plugin.Page" resultType="java.lang.Integer">
+		select count(*) from SYS_USER
+		
+	</select>
+	
+	
 	<update id="updateByExampleSelective" parameterType="map">
 		update SYS_USER
 		<set>

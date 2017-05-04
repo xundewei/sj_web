@@ -1,5 +1,6 @@
 package com.sj.web.dao.system;
 
+import com.sj.web.common.mybatis.plugin.Page;
 import com.sj.web.model.system.SysUser;
 import com.sj.web.model.system.SysUserExample;
 import java.util.List;
@@ -10,6 +11,7 @@ import org.apache.ibatis.annotations.Param;
 
 public interface SysUserMapper {
     int countByExample(SysUserExample example);
+    int countByExample2(Page<SysUser> page);
 
     int deleteByExample(SysUserExample example);
 
@@ -20,6 +22,7 @@ public interface SysUserMapper {
     int insertSelective(SysUser record);
 
     List<SysUser> selectByExample(SysUserExample example);
+    
 
     SysUser selectByPrimaryKey(String pkSysUser);
 
@@ -31,5 +34,5 @@ public interface SysUserMapper {
 
     int updateByPrimaryKey(SysUser record);
     
-    SysUser selectByUsercode_Pwd(@Param("usercode") String usercode,@Param("pwd") String pwd);
+    SysUser selectByUsercode_Pwd(@Param("usercode") String usercode,@Param("pwd") String pwd,@Param("aaa") String aaa);
 }

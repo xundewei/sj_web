@@ -1,5 +1,7 @@
 package com.sj.web.services.system;
 
+import java.util.Map;
+
 import com.sj.web.model.system.SysUser;
 
 
@@ -18,5 +20,14 @@ public interface UserService{
      * @return
      */
     public SysUser getByLogin(String usercode,String pwd);
+    
+    /**
+     * 根据过滤条件查询所有用户
+     * @param 
+     * 		searchFilter 查询的条件
+     * @return
+     * 		MAP 多少记录和具体记录数
+     */
+    public Map<String,Object> getAllSysUsers(String searchFilter);
 
 }

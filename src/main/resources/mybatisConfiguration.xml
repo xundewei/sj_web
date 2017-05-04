@@ -7,4 +7,9 @@
     <typeAliases>
        
     </typeAliases>
+    <!-- <plugins>  
+        <plugin interceptor="com.sj.web.common.mybatis.plugin.PageHelper">  
+            <property name="dialect" value="oracle"/>  
+        </plugin>  
+    </plugins>   -->
 </configuration>

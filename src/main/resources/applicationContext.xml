@@ -51,13 +51,24 @@
 		<property name="dataSource" ref="dataSource" />
 		<!-- 加载Mybatis全局配置文件 -->
 		<property name="configLocation" value="classpath:mybatisConfiguration.xml" />
+		 <property name="plugins">
+			<array>
+				<bean class="com.sj.web.common.mybatis.plugin.PageHelper">
+					<property name="properties">
+						<!-- 使用下面的方式配置参数，一行配置一个 -->
+						<value>
+							dialect=oracle
+						</value>
+					</property>
+				</bean>
+			</array>
+		</property> 
 	</bean>
-	
 	<bean class="org.mybatis.spring.mapper.MapperScannerConfigurer">
 		<property name="basePackage" value="com.sj.web.dao" />
 		<property name="sqlSessionFactoryBeanName" value="sqlSessionFactory"></property>
 	</bean>
-
+<!-- dialectClass=com.github.miemiedev.mybatis.paginator.dialect.OracleDialect -->
 	<!-- (事务管理)transaction manager, use JtaTransactionManager for global tx -->
 	<bean id="transactionManager"
 		class="org.springframework.jdbc.datasource.DataSourceTransactionManager">

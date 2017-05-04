@@ -11,7 +11,7 @@ public class Consts {
     public static final String appPermissionCache = "appPermissionCache";
 
     //系统是否是多标签模式
-    public static final boolean DEFAULT_TAB_MODE = false;
+    public static final boolean DEFAULT_TAB_MODE = true;
 
     //EasyUI默认的皮肤
     public static final String DEFAULT_THEME = "bootstrap";
