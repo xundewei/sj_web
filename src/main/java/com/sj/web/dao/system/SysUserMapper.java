@@ -34,5 +34,7 @@ public interface SysUserMapper {
 
     int updateByPrimaryKey(SysUser record);
     
-    SysUser selectByUsercode_Pwd(@Param("usercode") String usercode,@Param("pwd") String pwd,@Param("aaa") String aaa);
+    SysUser selectByUsercode_Pwd(@Param("usercode") String usercode,@Param("pwd") String pwd);
+    
+    List<SysUser> selectAll(@Param("page") Page<SysUser> page);
 }

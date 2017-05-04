@@ -1,0 +1,341 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
+<mapper namespace="com.sj.web.dao.system.SysOrgMapper">
+	<resultMap id="BaseResultMap" type="com.sj.web.model.system.SysOrg">
+		<id column="PK_SYS_ORG" jdbcType="VARCHAR" property="pkSysOrg" />
+		<result column="ORGCODE" jdbcType="VARCHAR" property="orgcode" />
+		<result column="ORGNAME" jdbcType="VARCHAR" property="orgname" />
+		<result column="PARENTCODE" jdbcType="VARCHAR" property="parentcode" />
+		<result column="DISPLAYORDER" jdbcType="DECIMAL" property="displayorder" />
+		<result column="DUTY" jdbcType="VARCHAR" property="duty" />
+		<result column="ENABLEFLAG" jdbcType="CHAR" property="enableflag" />
+		<result column="REMARK" jdbcType="VARCHAR" property="remark" />
+		<result column="CREATEUSER" jdbcType="VARCHAR" property="createuser" />
+		<result column="TS" jdbcType="VARCHAR" property="ts" />
+		<result column="DR" jdbcType="CHAR" property="dr" />
+	</resultMap>
+	<sql id="Example_Where_Clause">
+		<where>
+			<foreach collection="oredCriteria" item="criteria" separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" prefixOverrides="and" suffix=")">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach close=")" collection="criterion.value" item="listItem"
+										open="(" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Update_By_Example_Where_Clause">
+		<where>
+			<foreach collection="example.oredCriteria" item="criteria"
+				separator="or">
+				<if test="criteria.valid">
+					<trim prefix="(" prefixOverrides="and" suffix=")">
+						<foreach collection="criteria.criteria" item="criterion">
+							<choose>
+								<when test="criterion.noValue">
+									and ${criterion.condition}
+								</when>
+								<when test="criterion.singleValue">
+									and ${criterion.condition} #{criterion.value}
+								</when>
+								<when test="criterion.betweenValue">
+									and ${criterion.condition} #{criterion.value} and
+									#{criterion.secondValue}
+								</when>
+								<when test="criterion.listValue">
+									and ${criterion.condition}
+									<foreach close=")" collection="criterion.value" item="listItem"
+										open="(" separator=",">
+										#{listItem}
+									</foreach>
+								</when>
+							</choose>
+						</foreach>
+					</trim>
+				</if>
+			</foreach>
+		</where>
+	</sql>
+	<sql id="Base_Column_List">
+		PK_SYS_ORG, ORGCODE, ORGNAME, PARENTCODE, DISPLAYORDER, DUTY, ENABLEFLAG, REMARK,
+		CREATEUSER, TS, DR
+
+	</sql>
+	<select id="selectByExample" parameterType="com.sj.web.model.system.SysOrgExample"
+		resultMap="BaseResultMap">
+		select
+		<if test="distinct">
+			distinct
+		</if>
+		<include refid="Base_Column_List" />
+		from SYS_ORG
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+		<if test="orderByClause != null">
+			order by ${orderByClause}
+		</if>
+	</select>
+
+
+	<select id="selectAll" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from SYS_ORG
+		order by DISPLAYORDER
+	</select>
+
+	<select id="selectByPrimaryKey" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from SYS_ORG
+		where PK_SYS_ORG = #{pkSysOrg,jdbcType=VARCHAR}
+	</select>
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from SYS_ORG
+		where PK_SYS_ORG = #{pkSysOrg,jdbcType=VARCHAR}
+	</delete>
+	<delete id="deleteByExample" parameterType="com.sj.web.model.system.SysOrgExample">
+		delete from SYS_ORG
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</delete>
+	<insert id="insert" parameterType="com.sj.web.model.system.SysOrg">
+		insert into SYS_ORG (PK_SYS_ORG, ORGCODE, ORGNAME,
+		PARENTCODE, DISPLAYORDER, DUTY,
+		ENABLEFLAG, REMARK, CREATEUSER,
+		TS, DR, ID)
+		values (#{pkSysOrg,jdbcType=VARCHAR}, #{orgcode,jdbcType=VARCHAR},
+		#{orgname,jdbcType=VARCHAR},
+		#{parentcode,jdbcType=VARCHAR}, #{displayorder,jdbcType=DECIMAL}, #{duty,jdbcType=VARCHAR},
+		#{enableflag,jdbcType=CHAR}, #{remark,jdbcType=VARCHAR},
+		#{createuser,jdbcType=VARCHAR},
+		#{ts,jdbcType=VARCHAR}, #{dr,jdbcType=CHAR}, #{id,jdbcType=VARCHAR})
+	</insert>
+	<insert id="insertSelective" parameterType="com.sj.web.model.system.SysOrg">
+		insert into SYS_ORG
+		<trim prefix="(" suffix=")" suffixOverrides=",">
+			<if test="pkSysOrg != null">
+				PK_SYS_ORG,
+			</if>
+			<if test="orgcode != null">
+				ORGCODE,
+			</if>
+			<if test="orgname != null">
+				ORGNAME,
+			</if>
+			<if test="parentcode != null">
+				PARENTCODE,
+			</if>
+			<if test="displayorder != null">
+				DISPLAYORDER,
+			</if>
+			<if test="duty != null">
+				DUTY,
+			</if>
+			<if test="enableflag != null">
+				ENABLEFLAG,
+			</if>
+			<if test="remark != null">
+				REMARK,
+			</if>
+			<if test="createuser != null">
+				CREATEUSER,
+			</if>
+			<if test="ts != null">
+				TS,
+			</if>
+			<if test="dr != null">
+				DR,
+			</if>
+			<if test="id != null">
+				ID,
+			</if>
+		</trim>
+		<trim prefix="values (" suffix=")" suffixOverrides=",">
+			<if test="pkSysOrg != null">
+				#{pkSysOrg,jdbcType=VARCHAR},
+			</if>
+			<if test="orgcode != null">
+				#{orgcode,jdbcType=VARCHAR},
+			</if>
+			<if test="orgname != null">
+				#{orgname,jdbcType=VARCHAR},
+			</if>
+			<if test="parentcode != null">
+				#{parentcode,jdbcType=VARCHAR},
+			</if>
+			<if test="displayorder != null">
+				#{displayorder,jdbcType=DECIMAL},
+			</if>
+			<if test="duty != null">
+				#{duty,jdbcType=VARCHAR},
+			</if>
+			<if test="enableflag != null">
+				#{enableflag,jdbcType=CHAR},
+			</if>
+			<if test="remark != null">
+				#{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="createuser != null">
+				#{createuser,jdbcType=VARCHAR},
+			</if>
+			<if test="ts != null">
+				#{ts,jdbcType=VARCHAR},
+			</if>
+			<if test="dr != null">
+				#{dr,jdbcType=CHAR},
+			</if>
+			<if test="id != null">
+				#{id,jdbcType=VARCHAR},
+			</if>
+		</trim>
+	</insert>
+	<select id="countByExample" parameterType="com.sj.web.model.system.SysOrgExample"
+		resultType="java.lang.Integer">
+		select count(*) from SYS_ORG
+		<if test="_parameter != null">
+			<include refid="Example_Where_Clause" />
+		</if>
+	</select>
+	<update id="updateByExampleSelective" parameterType="map">
+		update SYS_ORG
+		<set>
+			<if test="record.pkSysOrg != null">
+				PK_SYS_ORG = #{record.pkSysOrg,jdbcType=VARCHAR},
+			</if>
+			<if test="record.orgcode != null">
+				ORGCODE = #{record.orgcode,jdbcType=VARCHAR},
+			</if>
+			<if test="record.orgname != null">
+				ORGNAME = #{record.orgname,jdbcType=VARCHAR},
+			</if>
+			<if test="record.parentcode != null">
+				PARENTCODE = #{record.parentcode,jdbcType=VARCHAR},
+			</if>
+			<if test="record.displayorder != null">
+				DISPLAYORDER = #{record.displayorder,jdbcType=DECIMAL},
+			</if>
+			<if test="record.duty != null">
+				DUTY = #{record.duty,jdbcType=VARCHAR},
+			</if>
+			<if test="record.enableflag != null">
+				ENABLEFLAG = #{record.enableflag,jdbcType=CHAR},
+			</if>
+			<if test="record.remark != null">
+				REMARK = #{record.remark,jdbcType=VARCHAR},
+			</if>
+			<if test="record.createuser != null">
+				CREATEUSER = #{record.createuser,jdbcType=VARCHAR},
+			</if>
+			<if test="record.ts != null">
+				TS = #{record.ts,jdbcType=VARCHAR},
+			</if>
+			<if test="record.dr != null">
+				DR = #{record.dr,jdbcType=CHAR},
+			</if>
+			<if test="record.id != null">
+				ID = #{record.id,jdbcType=VARCHAR},
+			</if>
+		</set>
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByExample" parameterType="map">
+		update SYS_ORG
+		set PK_SYS_ORG = #{record.pkSysOrg,jdbcType=VARCHAR},
+		ORGCODE = #{record.orgcode,jdbcType=VARCHAR},
+		ORGNAME = #{record.orgname,jdbcType=VARCHAR},
+		PARENTCODE = #{record.parentcode,jdbcType=VARCHAR},
+		DISPLAYORDER = #{record.displayorder,jdbcType=DECIMAL},
+		DUTY = #{record.duty,jdbcType=VARCHAR},
+		ENABLEFLAG = #{record.enableflag,jdbcType=CHAR},
+		REMARK = #{record.remark,jdbcType=VARCHAR},
+		CREATEUSER = #{record.createuser,jdbcType=VARCHAR},
+		TS = #{record.ts,jdbcType=VARCHAR},
+		DR = #{record.dr,jdbcType=CHAR},
+		ID = #{record.id,jdbcType=VARCHAR}
+		<if test="_parameter != null">
+			<include refid="Update_By_Example_Where_Clause" />
+		</if>
+	</update>
+	<update id="updateByPrimaryKeySelective" parameterType="com.sj.web.model.system.SysOrg">
+		update SYS_ORG
+		<set>
+			<if test="orgcode != null">
+				ORGCODE = #{orgcode,jdbcType=VARCHAR},
+			</if>
+			<if test="orgname != null">
+				ORGNAME = #{orgname,jdbcType=VARCHAR},
+			</if>
+			<if test="parentcode != null">
+				PARENTCODE = #{parentcode,jdbcType=VARCHAR},
+			</if>
+			<if test="displayorder != null">
+				DISPLAYORDER = #{displayorder,jdbcType=DECIMAL},
+			</if>
+			<if test="duty != null">
+				DUTY = #{duty,jdbcType=VARCHAR},
+			</if>
+			<if test="enableflag != null">
+				ENABLEFLAG = #{enableflag,jdbcType=CHAR},
+			</if>
+			<if test="remark != null">
+				REMARK = #{remark,jdbcType=VARCHAR},
+			</if>
+			<if test="createuser != null">
+				CREATEUSER = #{createuser,jdbcType=VARCHAR},
+			</if>
+			<if test="ts != null">
+				TS = #{ts,jdbcType=VARCHAR},
+			</if>
+			<if test="dr != null">
+				DR = #{dr,jdbcType=CHAR},
+			</if>
+			<if test="id != null">
+				ID = #{id,jdbcType=VARCHAR},
+			</if>
+		</set>
+		where PK_SYS_ORG = #{pkSysOrg,jdbcType=VARCHAR}
+	</update>
+	<update id="updateByPrimaryKey" parameterType="com.sj.web.model.system.SysOrg">
+		update SYS_ORG
+		set ORGCODE = #{orgcode,jdbcType=VARCHAR},
+		ORGNAME = #{orgname,jdbcType=VARCHAR},
+		PARENTCODE = #{parentcode,jdbcType=VARCHAR},
+		DISPLAYORDER = #{displayorder,jdbcType=DECIMAL},
+		DUTY = #{duty,jdbcType=VARCHAR},
+		ENABLEFLAG = #{enableflag,jdbcType=CHAR},
+		REMARK = #{remark,jdbcType=VARCHAR},
+		CREATEUSER = #{createuser,jdbcType=VARCHAR},
+		TS = #{ts,jdbcType=VARCHAR},
+		DR = #{dr,jdbcType=CHAR},
+		ID = #{id,jdbcType=VARCHAR}
+		where PK_SYS_ORG = #{pkSysOrg,jdbcType=VARCHAR}
+	</update>
+
+</mapper>

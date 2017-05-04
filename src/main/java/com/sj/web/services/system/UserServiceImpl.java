@@ -25,7 +25,7 @@ public class UserServiceImpl implements UserService{
 
     @Override
     public SysUser getByLogin(String usercode,String pwd) {
-        SysUser user = userdao.selectByUsercode_Pwd(usercode, pwd,"王明");
+        SysUser user = userdao.selectByUsercode_Pwd(usercode, pwd);
         return user;
     }
 
@@ -33,10 +33,9 @@ public class UserServiceImpl implements UserService{
 	public Map<String, Object> getAllSysUsers(String searchFilter) {
 		SysUserExample sysuserexample=new SysUserExample();
 		Criteria criteria=sysuserexample.createCriteria();
-		Page<SysUser> page = new Page<SysUser>(); 
-		//int total2=userdao.countByExample2(page);
+		Page<SysUser> page = new Page<SysUser>();
 		int total=userdao.countByExample(sysuserexample);
-		List<SysUser> list=userdao.selectByExample(sysuserexample);
+		List<SysUser> list=userdao.selectAll(page);
 		HashMap hm=new HashMap<>();
 		hm.put("total", total);
 		hm.put("rows", list);
