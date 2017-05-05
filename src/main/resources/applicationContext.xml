@@ -19,7 +19,8 @@
 	<context:component-scan base-package="com.sj.web">
 
 	</context:component-scan>
-
+<!--shiro配置-->
+    <import resource="applicationContext-shiro.xml"/>
 	<!-- 外部properties文件位置 -->
 	<context:property-placeholder
 		ignore-resource-not-found="true" location="classpath*:/application.properties" />
