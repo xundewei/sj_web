@@ -48,7 +48,7 @@
     <div class="loginbox">
         <form id="loginform" name="loginform" action="" method="post" onsubmit="return check();">
             <ul>
-                <li><input name="username" id="username" type="text" class="loginuser" placeholder="用户名" value=""/></li>
+                <li><input name="usercode" id="usercode" type="text" class="loginuser" placeholder="用户名" value=""/></li>
                 <li><input name="password" id="password" type="password" class="loginpwd" placeholder="密码" value=""/></li>
                 <li><input type="submit" class="btn_flat" value="登录"/>
                     <label><a href="#">忘记密码？</a></label>
@@ -63,7 +63,7 @@
 
 <div class="loginbm">版权所有 2017 <a href="http://www.ihuolong.com/">欢迎登录三伽财团管理系统</a></div>
 <script type="text/javascript">
-    var txtUser = document.getElementById("username");
+    var txtUser = document.getElementById("usercode");
     var txtPass = document.getElementById("password");
     txtUser.focus();
 

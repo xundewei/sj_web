@@ -1,6 +1,8 @@
 package com.sj.web.model.system;
 
-public class SysUser {
+import java.io.Serializable;
+
+public class SysUser implements Serializable {
     private String pkSysUser;
 
     private String usercode;

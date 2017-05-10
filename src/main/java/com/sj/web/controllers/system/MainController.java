@@ -1,12 +1,14 @@
 package com.sj.web.controllers.system;
 
 
-import java.util.ArrayList;
 import java.util.List;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
+import org.apache.shiro.SecurityUtils;
+import org.apache.shiro.authz.annotation.RequiresAuthentication;
+import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -19,6 +21,8 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sj.core.utils.web.easyui.EzTreeNode;
 import com.sj.web.common.Consts;
+import com.sj.web.common.security.ShiroRealm;
+import com.sj.web.common.security.ShiroUser;
 import com.sj.web.controllers.BaseController;
 import com.sj.web.model.system.SysMenu;
 import com.sj.web.model.system.SysUser;
@@ -41,7 +45,6 @@ public class MainController extends BaseController{
     @Autowired
    	private SysMenuService sysmenuservice;
     
-    
     @RequestMapping(method = RequestMethod.GET)
     public String index(HttpServletRequest request, HttpServletResponse response, ModelMap model) {
         model.addAttribute("message", "Hello world!");
@@ -51,7 +54,8 @@ public class MainController extends BaseController{
         response.setDateHeader("Expires", -10);
         
         model.addAttribute("groupname", Consts.GROUPNAME);
-
+      //页面加载用户信息
+        ShiroUser shiroUser = getCurrentUser();
         //加载个人配置信息
 //        Sys_Userconfig userconfig = userConfigService.get(shiroUser.id);
         SysUser sysuer = (SysUser) this.getCurrentSession().getAttribute("usermsg");
@@ -72,6 +76,15 @@ public class MainController extends BaseController{
         return "main/main";
     }
     
+    /**
+     * 获取当前Shiro用户
+     * @return
+     */
+    protected ShiroUser getCurrentUser(){
+        ShiroUser user = (ShiroUser) SecurityUtils.getSubject().getPrincipal();
+        SecurityUtils.getSubject().isPermitted("admin");
+        return user;
+    }
     /**
      * 框架主页面
      * @return
