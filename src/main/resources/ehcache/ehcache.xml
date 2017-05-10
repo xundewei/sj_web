@@ -1,0 +1,98 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<!--如果有多个配置文件产生多个CacheManager，需要在配置文件里加上名字-->
+<ehcache xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance"
+         xsi:noNamespaceSchemaLocation="ehcache.xsd" updateCheck="false" dynamicConfig="false">
+    <!-- 当前系统的临时目录，对应Tomcat为Tomcat目录下的 temp 子目录 -->
+    <diskStore path="java.io.tmpdir"/>
+
+    <cacheManagerEventListenerFactory class="" properties=""/>
+
+    <!-- 默认缓存，120秒/120秒 -->
+    <defaultCache
+            maxElementsInMemory="1000"
+            eternal="false"
+            timeToIdleSeconds="120"
+            timeToLiveSeconds="120"
+            overflowToDisk="true"
+            maxElementsOnDisk="10000"
+            diskPersistent="false"
+            diskExpiryThreadIntervalSeconds="120"
+            memoryStoreEvictionPolicy="LRU"
+            />
+    <!--
+       配置自定义缓存
+       maxElementsInMemory：缓存中允许创建的最大对象数
+       eternal：缓存中对象是否为永久的，如果是，超时设置将被忽略，对象从不过期。
+       overflowToDisk:如果内存中数据超过内存限制，是否要缓存到磁盘上
+       diskSpoolBufferSizeMB： DiskStore使用的磁盘大小，默认值30MB。每个cache使用各自的DiskStore。
+       timeToIdleSeconds：缓存数据的钝化时间，也就是在一个元素消亡之前，
+                   两次访问时间的最大时间间隔值，这只能在元素不是永久驻留时有效，
+                   如果该值是 0 就意味着元素可以停顿无穷长的时间。
+       timeToLiveSeconds：缓存数据的生存时间，也就是一个元素从构建到消亡的最大时间间隔值，
+                   这只能在元素不是永久驻留时有效，如果该值是0就意味着元素可以停顿无穷长的时间。
+       diskPersistent： 是否在磁盘上持久化。指重启jvm后，数据是否有效。默认为false。
+       diskExpiryThreadIntervalSeconds： 对象检测线程运行时间间隔。标识对象状态的线程多长时间运行一次。
+       memoryStoreEvictionPolicy：缓存满了之后的淘汰算法。
+   -->
+
+    <!-- 标准缓存，300秒/600秒 -->
+    <cache name="appCache"
+           maxElementsInMemory="1000"
+           maxElementsOnDisk="1000"
+           eternal="false"
+           overflowToDisk="true"
+           diskSpoolBufferSizeMB="20"
+           timeToIdleSeconds="300"
+           timeToLiveSeconds="600"
+           memoryStoreEvictionPolicy="LFU"
+            />
+
+    <!-- 永不过期的缓存，用于菜单，只有在增/删/改时才更新 -->
+    <cache name="appMenuCache"
+           maxElementsInMemory="1000"
+           maxElementsOnDisk="1000"
+           eternal="false"
+           overflowToDisk="true"
+           diskSpoolBufferSizeMB="20"
+           timeToIdleSeconds="0"
+           timeToLiveSeconds="0"
+           memoryStoreEvictionPolicy="LFU"
+            />
+
+    <!-- 永不过期的缓存，用于用户，只有在增/删/改时才更新 -->
+    <cache name="appUserCache"
+           maxElementsInMemory="1000"
+           maxElementsOnDisk="1000"
+           eternal="false"
+           overflowToDisk="true"
+           diskSpoolBufferSizeMB="20"
+           timeToIdleSeconds="0"
+           timeToLiveSeconds="0"
+           memoryStoreEvictionPolicy="LFU"
+            />
+
+    <!-- 永不过期的缓存，用于组织架构（公司/部门/岗位/用户），只有在增/删/改时才更新 -->
+    <cache name="appOrgCache"
+           maxElementsInMemory="1000"
+           maxElementsOnDisk="1000"
+           eternal="true"
+           overflowToDisk="true"
+           diskSpoolBufferSizeMB="20"
+           timeToIdleSeconds="0"
+           timeToLiveSeconds="0"
+           memoryStoreEvictionPolicy="LFU"
+            />
+
+    <!-- 用户权限缓存，永不过期，只有每次登录时才更新 -->
+    <cache name="appPermissionCache"
+           maxElementsInMemory="1000"
+           maxElementsOnDisk="1000"
+           eternal="true"
+           overflowToDisk="true"
+           diskSpoolBufferSizeMB="20"
+           timeToIdleSeconds="0"
+           timeToLiveSeconds="0"
+           memoryStoreEvictionPolicy="LFU"
+            />
+
+</ehcache>
