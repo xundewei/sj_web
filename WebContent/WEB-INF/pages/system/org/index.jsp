@@ -6,13 +6,12 @@
             loadMsg: "",
             url: 'system/org/list',
             idField: 'orgcode',
-            treeField: 'orgname',
+            treeField: 'orgcode',
             columns: [[
-            	{field: 'pk_sys_org', title: '主键', width: 60, align: 'right', hidden: true},
-                {field: 'orgcode', title: '机构编码', width: 60, align: 'right', hidden: true},
+            	{field: 'pkSysOrg', title: '主键', width: 60, align: 'right', hidden: true},
+                {field: 'orgcode', title: '机构编码', width: 60},
                 {field: 'orgname', title: '机构名称', width: 80},
                 {field: 'displayorder', title: '显示顺序', width: 40, sortable: true},
-
                 {field: 'parentcode', title: '父编码', width: 120, hidden: true},
                 {field: 'duty', title: '职责', width: 120},
 
@@ -24,7 +23,7 @@
                         return "不可用";
                     }
                 }, styler: function (value, row, index) {
-                    if (!value) {
+                    if (value) {
                         return 'color:red;';
                     }
                     return 'color:green;';
@@ -49,7 +48,7 @@
     //右键菜单
     function sys_org_OnContextMenu(e, row) {
         e.preventDefault();
-        $(this).treegrid('select', row.id);
+        $(this).treegrid('select', row.orgcode);
         $('#sys_org_mm').menu('show', {
             left: e.pageX,
             top: e.pageY
@@ -95,16 +94,16 @@
             return;
         }
 
-        var parentid = row.id;
-        var parentname = row.name;
-        sys_org_openAddDialog("child", parentid, parentname);
+        var parentcode = row.orgcode;
+        var parentname = row.orgname;
+        sys_org_openAddDialog("child", parentcode, parentname);
     }
 
     //打开新增对话框
-    function sys_org_openAddDialog(flag, parentid, parentname) {
+    function sys_org_openAddDialog(flag, parentcode, parentname) {
         //清除对话框中的显示值，如果有的话
         sys_org_a_form_reset();
-        sys_org_a_form_init(flag, parentid, parentname);
+        sys_org_a_form_init(flag, parentcode, parentname);
         $('#sys_org_AddDialog').dialog('open');
     }
 
@@ -131,7 +130,7 @@
             return;
         }
 
-        var $rowid = row.id;
+        var $rowid = row.pkSysOrg;
         if ($rowid == null) {
             hlg.dialog.showInfo("请先选择一条记录！");
             return;
@@ -177,7 +176,7 @@
             return;
         }
 
-        var $rowid = row.id;
+        var $rowid = row.pkSysOrg;
         if ($rowid == null) {
             hlg.dialog.showInfo("请先选择一条记录！");
             return;
@@ -270,7 +269,7 @@
 </div>
 
 <div id="sys_org_AddDialog" class="easyui-dialog" title="新增"
-     style="width:600px;height:400px;padding:10px"
+     style="width:800px;height:400px;padding:10px"
      data-options="
                 closed: true,
                 modal: true,
@@ -292,7 +291,7 @@
 </div>
 
 <div id="sys_org_UpdateDialog" class="easyui-dialog" title="修改"
-     style="width:600px;height:400px;padding:10px"
+     style="width:800px;height:400px;padding:10px"
      data-options="
                 closed: true,
                 modal: true,

@@ -105,6 +105,15 @@
 		from SYS_ORG
 		order by DISPLAYORDER
 	</select>
+	
+	
+	<select id="selectByOrgcdoe" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from SYS_ORG  WHERE ORGCODE = #{orgcode,jdbcType=VARCHAR}
+		order by DISPLAYORDER
+	</select>
+	
 
 	<select id="selectByPrimaryKey" parameterType="java.lang.String"
 		resultMap="BaseResultMap">
@@ -127,13 +136,13 @@
 		insert into SYS_ORG (PK_SYS_ORG, ORGCODE, ORGNAME,
 		PARENTCODE, DISPLAYORDER, DUTY,
 		ENABLEFLAG, REMARK, CREATEUSER,
-		TS, DR, ID)
+		TS, DR)
 		values (#{pkSysOrg,jdbcType=VARCHAR}, #{orgcode,jdbcType=VARCHAR},
 		#{orgname,jdbcType=VARCHAR},
 		#{parentcode,jdbcType=VARCHAR}, #{displayorder,jdbcType=DECIMAL}, #{duty,jdbcType=VARCHAR},
 		#{enableflag,jdbcType=CHAR}, #{remark,jdbcType=VARCHAR},
 		#{createuser,jdbcType=VARCHAR},
-		#{ts,jdbcType=VARCHAR}, #{dr,jdbcType=CHAR}, #{id,jdbcType=VARCHAR})
+		#{ts,jdbcType=VARCHAR}, #{dr,jdbcType=CHAR})
 	</insert>
 	<insert id="insertSelective" parameterType="com.sj.web.model.system.SysOrg">
 		insert into SYS_ORG

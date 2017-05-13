@@ -71,7 +71,7 @@ public class TreeBuilder {
     public static List<EzTreeNode> buildByRecursive(List<EzTreeNode> treeNodes) { 
         List<EzTreeNode> trees = new ArrayList<EzTreeNode>();
         for (EzTreeNode treeNode : treeNodes) {
-            if (" ".equals(treeNode.getPid())) {
+            if ("".equals(treeNode.getPid()==null?"":treeNode.getPid().toString())) {
                 trees.add(findChildren(treeNode,treeNodes));  
             }
         }

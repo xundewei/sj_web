@@ -2,6 +2,7 @@ package com.sj.web.services.system;
 
 import java.util.List;
 
+import com.sj.core.utils.web.easyui.EzTreeNode;
 import com.sj.web.model.system.SysOrg;
 
 
@@ -19,6 +20,33 @@ public interface OrgService{
 	 * @return
 	 */
 	public List<SysOrg> getAllOrg();
+	
+	
+	/**
+	 * 取到全部机构
+	 * @return
+	 */
+	public List<EzTreeNode> getAllOrgTree();
+	
+	/**
+	 * 根据ORGCODE找到机构
+	 * @return
+	 */
+	public List<SysOrg> getByOrgcode(String orgcode);
+	
+	
+	/**
+	 * 根据ORGCODE找到机构
+	 * @return
+	 */
+	public SysOrg selectByPrimaryKey(String pk_sys_org);
+	
+	
+	/**
+	 * 新增机构操作
+	 * @return
+	 */
+	public int addSysOrg(SysOrg sysorg);
 	
 
 }

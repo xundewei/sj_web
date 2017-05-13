@@ -26,6 +26,7 @@
 <script type="text/javascript" src="${ctx}/lib/easyui/jquery.easyui.min.js?v=1.4.4"></script>
 <script type="text/javascript" src="${ctx}/lib/easyui/easyui-lang-zh_CN.js?v=1.4.4"></script>
 <script type="text/javascript" src="${ctx}/js/app.js?v=20150608"></script>
+<script type="text/javascript" src="${ctx}/js/reference.js?v=20150608"></script>
 <script type="text/javascript" src="${ctx}/lib/echarts/echarts-all.js?v=2.2.7"></script>
 <script type="text/javascript" src="${ctx}/lib/layer/layer.js?v=1.9.3"></script>
 <script type="text/javascript" src="${ctx}/lib/form/jquery.serializejson.js?v=2.6.1"></script>

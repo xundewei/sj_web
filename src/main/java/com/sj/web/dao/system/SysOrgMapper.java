@@ -19,6 +19,8 @@ public interface SysOrgMapper {
     List<SysOrg> selectByExample(SysOrgExample example);
     
     List<SysOrg> selectAll();
+    
+    List<SysOrg> selectByOrgcdoe(@Param("orgcode") String orgcode);
 
     SysOrg selectByPrimaryKey(String pkSysOrg);
 

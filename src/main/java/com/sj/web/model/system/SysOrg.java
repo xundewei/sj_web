@@ -3,7 +3,7 @@ package com.sj.web.model.system;
 import java.math.BigDecimal;
 
 public class SysOrg {
-    private String pkSysOrg;
+    private String PkSysOrg;
 
     private String orgcode;
 
@@ -15,9 +15,9 @@ public class SysOrg {
 
     private String duty;
 
-    private String enableflag;
+    private boolean enableflag;
 
-    private String remark;
+	private String remark;
 
     private String createuser;
 
@@ -28,11 +28,11 @@ public class SysOrg {
  
 
     public String getPkSysOrg() {
-        return pkSysOrg;
+        return PkSysOrg;
     }
 
-    public void setPkSysOrg(String pkSysOrg) {
-        this.pkSysOrg = pkSysOrg == null ? null : pkSysOrg.trim();
+    public void setPkSysOrg(String PkSysOrg) {
+        this.PkSysOrg = PkSysOrg == null ? null : PkSysOrg.trim();
     }
 
     public String getOrgcode() {
@@ -75,15 +75,23 @@ public class SysOrg {
         this.duty = duty == null ? null : duty.trim();
     }
 
-    public String getEnableflag() {
-        return enableflag;
-    }
+//    public String getEnableflag() {
+//        return enableflag;
+//    }
+//
+//    public void setEnableflag(String enableflag) {
+//        this.enableflag = enableflag == null ? null :  enableflag.trim();
+//    }
 
-    public void setEnableflag(String enableflag) {
-        this.enableflag = enableflag == null ? null : enableflag.trim();
-    }
+    public boolean isEnableflag() {
+		return enableflag;
+	}
 
-    public String getRemark() {
+	public void setEnableflag(boolean enableflag) {
+		this.enableflag = enableflag;
+	}
+
+	public String getRemark() {
         return remark;
     }
 
