@@ -14,7 +14,7 @@
                     text:'取消',
                     iconCls:'icon-cancel',
                     handler:function(){
-                        hlg.dialog.closeorgDialog();
+                        sys.dialog.closeReferenceOrgDialog();
                     }
                 }]
             ">

@@ -34,6 +34,12 @@ public interface OrgService{
 	 */
 	public List<SysOrg> getByOrgcode(String orgcode);
 	
+	/**
+	 * 根据ORGCODE找到是否末级机构
+	 * @return
+	 */
+	public List<SysOrg> getByLastOrg(String orgcode);
+	
 	
 	/**
 	 * 根据ORGCODE找到机构
@@ -47,6 +53,20 @@ public interface OrgService{
 	 * @return
 	 */
 	public int addSysOrg(SysOrg sysorg);
+	
+	
+	/**
+	 * 更新操作
+	 * @return
+	 */
+	public int updateSysOrg(SysOrg sysorg);
+	
+	
+	/**
+	 * 删除机构操作
+	 * @return
+	 */
+	public int deleteSysOrg(String pk_sys_org);
 	
 
 }

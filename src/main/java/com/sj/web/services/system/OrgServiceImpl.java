@@ -63,5 +63,23 @@ public class OrgServiceImpl implements OrgService{
 		return lsit2;
 	}
 
+	@Override
+	public List<SysOrg> getByLastOrg(String orgcode) {
+		List<SysOrg> lsit = orgdao.selectByLastOrg(orgcode);
+		return lsit;
+	}
+
+	@Override
+	public int updateSysOrg(SysOrg sysorg) {
+		int i  = orgdao.updateByPrimaryKey(sysorg);
+		return i;
+	}
+
+	@Override
+	public int deleteSysOrg(String pk_sys_org) {
+		int i = orgdao.deleteByPrimaryKey(pk_sys_org);
+		return i;
+	}
+
    
 }

@@ -114,6 +114,13 @@
 		order by DISPLAYORDER
 	</select>
 	
+	<select id="selectByLastOrg" resultMap="BaseResultMap">
+		select
+		<include refid="Base_Column_List" />
+		from SYS_ORG  WHERE PARENTCODE = #{orgcode,jdbcType=VARCHAR}
+		order by DISPLAYORDER
+	</select>
+	
 
 	<select id="selectByPrimaryKey" parameterType="java.lang.String"
 		resultMap="BaseResultMap">
@@ -323,10 +330,7 @@
 				TS = #{ts,jdbcType=VARCHAR},
 			</if>
 			<if test="dr != null">
-				DR = #{dr,jdbcType=CHAR},
-			</if>
-			<if test="id != null">
-				ID = #{id,jdbcType=VARCHAR},
+				DR = #{dr,jdbcType=CHAR}
 			</if>
 		</set>
 		where PK_SYS_ORG = #{pkSysOrg,jdbcType=VARCHAR}
@@ -342,8 +346,7 @@
 		REMARK = #{remark,jdbcType=VARCHAR},
 		CREATEUSER = #{createuser,jdbcType=VARCHAR},
 		TS = #{ts,jdbcType=VARCHAR},
-		DR = #{dr,jdbcType=CHAR},
-		ID = #{id,jdbcType=VARCHAR}
+		DR = #{dr,jdbcType=CHAR}
 		where PK_SYS_ORG = #{pkSysOrg,jdbcType=VARCHAR}
 	</update>
 

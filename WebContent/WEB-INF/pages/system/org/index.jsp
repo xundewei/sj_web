@@ -207,15 +207,17 @@
             return;
         }
 
-        var $rowid = row.id;
+        var $rowid = row.pkSysOrg;
+       
         if ($rowid == null) {
             hlg.dialog.showInfo("请先选择一条记录！");
             return;
         }
-
+        var $rowcode = row.orgcode;
+        
         var msg = "确定删除机构[" + row.name + "]吗？";
         hlg.dialog.showConfirm(msg, function () {
-            var url = "system/org/delete/" + $rowid;
+            var url = "system/org/delete/id/" + $rowid+"/code/"+$rowcode;
             hlg.ajax.deleteEntity(url, function () {
                 hlg.treegrid.reload("#sys_org_grid");
             });
@@ -313,7 +315,7 @@
 </div>
 
 <div id="sys_org_DetailsDialog" class="easyui-dialog" title="查看"
-     style="width:600px;height:400px;padding:10px"
+     style="width:800px;height:400px;padding:10px"
      data-options="
                 closed: true,
                 modal: true,

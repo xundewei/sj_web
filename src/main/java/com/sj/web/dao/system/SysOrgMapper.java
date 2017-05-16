@@ -21,6 +21,8 @@ public interface SysOrgMapper {
     List<SysOrg> selectAll();
     
     List<SysOrg> selectByOrgcdoe(@Param("orgcode") String orgcode);
+    
+    List<SysOrg> selectByLastOrg(@Param("orgcode") String orgcode);
 
     SysOrg selectByPrimaryKey(String pkSysOrg);
 

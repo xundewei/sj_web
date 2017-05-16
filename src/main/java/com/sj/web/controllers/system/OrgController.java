@@ -115,10 +115,10 @@ public class OrgController extends BaseController {
 		try {
 			SysOrg entity = service.selectByPrimaryKey(pk_sys_org);
 			OrgTreeGridVO vo = convertToVO(entity);
-//			if (!StringUtils.isEmpty(entity.getParentcode())) {
-//				SysOrg parentEntity = service.get(entity.getParentid());
-//				vo.parentname = parentEntity.getName();
-//			}
+			// if (!StringUtils.isEmpty(entity.getParentcode())) {
+			// SysOrg parentEntity = service.get(entity.getParentid());
+			// vo.parentname = parentEntity.getName();
+			// }
 			result = JsonResult.success(vo);
 		} catch (Exception ex) {
 			String message = "获取数据失败";
@@ -168,84 +168,74 @@ public class OrgController extends BaseController {
 		}
 	}
 
-	//
-	// /**
-	// * 5.更新/修改接口 URL：/system/orga/update POST 请求的Body中包含一个City的json数据
-	// *
-	// * @param entity
-	// * @return
-	// */
-	// @RequestMapping(value = "update", method = RequestMethod.POST)
-	// @ResponseBody
-	// public JsonResult update(@RequestBody Sys_Orga entity) {
-	// try {
-	// Sys_Orga entityFromDB = service.get(entity.getId());
-	// if (entityFromDB == null) {
-	// return JsonResult.error("ID=" + entity.getId() + "不存在！");
-	// }
-	//
-	// if (!StringUtils.isEmpty(entity.getName())) {
-	// if (!StringUtils.equals(entity.getName(), entityFromDB.getName())) {
-	// if (service.existName(entity.getName())) {
-	// return JsonResult.error("机构名称[" + entity.getName() + "]已经存在！");
-	// }
-	// }
-	// }
-	//
-	// if (StringUtils.isEmpty(entity.getGroupid())) {
-	// entity.setGroupid(entityFromDB.getGroupid());
-	// }
-	//
-	// service.update(entity);
-	//
-	// // 更新系统权限缓存
-	// appRoleService.evictAllAppRole();
-	//
-	// return JsonResult.success();
-	// } catch (Exception ex) {
-	// // 写日志
-	// // 做异常处理
-	// // 返回错误信息到前台
-	// logger.error("修改失败！", ex);
-	// return JsonResult.error("修改失败！");
-	// }
-	// }
-	//
-	// /**
-	// * 6.删除接口 URL：/system/orga/delete/1 POST 请求的Body中无数据，仅在url中包含需要删除的id
-	// *
-	// * @param id
-	// * @return
-	// */
-	// @RequestMapping(value = "delete/{id}", method = RequestMethod.POST)
-	// @ResponseBody
-	// public JsonResult delete(@PathVariable("id") String id) {
-	// try {
-	// Sys_Orga entityFromDB = service.get(id);
-	// if (entityFromDB == null) {
-	// return JsonResult.error("ID=" + id + "不存在！");
-	// }
-	//
-	// // 删除前，必须进行校验，当前部门下面是否存在用户
-	// boolean isExistUser = userService.existByOrgaId(id);
-	// if (isExistUser) {
-	// return JsonResult.error("当前机构下面存在用户，请先转移用户到其他机构后再进行删除！");
-	// }
-	//
-	// service.delete(id);
-	//
-	// // 更新系统权限缓存
-	// appRoleService.evictAllAppRole();
-	//
-	// return JsonResult.success();
-	// } catch (Exception ex) {
-	// // 写日志
-	// // 做异常处理
-	// // 返回错误信息到前台
-	// logger.error("删除失败！", ex);
-	// return JsonResult.error("删除失败！");
-	// }
-	// }
+	/**
+	 * 5.更新/修改接口 URL：/system/orga/update POST 请求的Body中包含一个City的json数据
+	 *
+	 * @param entity
+	 * @return
+	 */
+	@RequestMapping(value = "update", method = RequestMethod.POST)
+	@ResponseBody
+	public JsonResult update(@RequestBody SysOrg entity) {
+		try {
+			//编码不可以修改直接更新
+			service.updateSysOrg(entity);
+			// 更新系统权限缓存
+//			appRoleService.evictAllAppRole();
+			return JsonResult.success();
+		} catch (Exception ex) {
+			// 写日志
+			// 做异常处理
+			// 返回错误信息到前台
+			logger.error("修改失败！", ex);
+			return JsonResult.error("修改失败！");
+		}
+	}
+
+	/**
+	 * 6.删除接口 URL：/system/orga/delete/1 POST 请求的Body中无数据，仅在url中包含需要删除的id
+	 *  1.删除非末级机构不能删除，需要先删除末级机构
+	 *  2.删除机构需要判断机构以下是否存在相关人员
+	 * @param id
+	 * @return
+	 */
+	@RequestMapping(value = "delete/id/{id}/code/{code}", method = RequestMethod.POST)
+	@ResponseBody
+	public JsonResult delete(@PathVariable("id") String id,@PathVariable("code") String code) {
+		try {
+			SysOrg entityFromDB = service.selectByPrimaryKey(id);
+			
+			List<SysOrg> list = service.getByLastOrg(code);
+			
+			if (entityFromDB == null) {
+				return JsonResult.error("ID=" + id + "不存在！");
+			}
+			
+			if (list.size()>0) {
+				return JsonResult.error("此机构不是末级机构，请先删除此机构一下的机构");
+			}
+
+//			// 删除前，必须进行校验，当前部门下面是否存在用户
+//			boolean isExistUser = userService.existByOrgaId(id);
+//			if (isExistUser) {
+//				return JsonResult.error("当前机构下面存在用户，请先转移用户到其他机构后再进行删除！");
+//			}
+
+			service.deleteSysOrg(id);
+
+			// 更新系统权限缓存
+//			appRoleService.evictAllAppRole();
+
+			return JsonResult.success();
+		} catch (Exception ex) {
+			// 写日志
+			// 做异常处理
+			// 返回错误信息到前台
+			logger.error("删除失败！", ex);
+			return JsonResult.error("删除失败！");
+		}
+	}
+
 	/**
 	 * 获取当前Shiro用户
 	 * 
