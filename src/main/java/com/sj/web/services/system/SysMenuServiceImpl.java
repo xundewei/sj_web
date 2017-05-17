@@ -22,6 +22,24 @@ public class SysMenuServiceImpl implements SysMenuService {
 	private SysMenuMapper sysmenudao;
 
 	/**
+	 * 取到所有菜单
+	 */
+	@Override
+	public List<SysMenu> getAll() {
+		List<SysMenu> sysmenu = sysmenudao.selectAll();
+		return sysmenu;
+	}
+
+	/**
+	 * 增加菜单
+	 */
+	@Override
+	public int addSysMenu(SysMenu sysmenu) {
+		int i = sysmenudao.insert(sysmenu);
+		return i;
+	}
+
+	/**
 	 * 取到用户的一级菜单
 	 */
 	@Override
@@ -34,7 +52,7 @@ public class SysMenuServiceImpl implements SysMenuService {
 	 * 根据角色和父节点编码找到菜单下面所有的菜单
 	 */
 	@Override
-	public List<EzTreeNode> GetMenuByMoreLev2(String pk_sys_user,String menucode) {
+	public List<EzTreeNode> GetMenuByMoreLev2(String pk_sys_user, String menucode) {
 		List<EzTreeNode> list = new ArrayList<EzTreeNode>();
 		List<SysMenu> sysmenulist = sysmenudao.GetMenuByMoreLev2(pk_sys_user);
 		for (SysMenu menu : sysmenulist) {
@@ -45,8 +63,26 @@ public class SysMenuServiceImpl implements SysMenuService {
 			ezTreeNode.setAttributes("{\"url\":\"" + menu.getUrl() + "\", \"key\":\"" + menu.getPkSysMenu() + "\"}");
 			list.add(ezTreeNode);
 		}
-		List<EzTreeNode> lsit2 = TreeBuilder.buildByRecursive(list,menucode);  
+		List<EzTreeNode> lsit2 = TreeBuilder.buildByRecursive(list, menucode);
 		return lsit2;
+	}
+
+	@Override
+	public SysMenu getByPrimaryKey(String pkSysMenu) {
+		SysMenu sysmenu = sysmenudao.selectByPrimaryKey(pkSysMenu);
+		return sysmenu;
+	}
+
+	@Override
+	public int updateByPrimaryKey(SysMenu record) {
+		int i = sysmenudao.updateByPrimaryKey(record);
+		return i;
+	}
+
+	@Override
+	public int deleteByPrimaryKey(String pkSysMenu) {
+		int i = sysmenudao.deleteByPrimaryKey(pkSysMenu);
+		return i;
 	}
 
 }

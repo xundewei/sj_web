@@ -21,7 +21,7 @@ public class SysMenu {
 
     private String url;
 
-    private String enableflag;
+    private boolean enableflag;
 
     private String adminflag;
 
@@ -107,15 +107,17 @@ public class SysMenu {
         this.url = url == null ? null : url.trim();
     }
 
-    public String getEnableflag() {
-        return enableflag;
-    }
+  
 
-    public void setEnableflag(String enableflag) {
-        this.enableflag = enableflag == null ? null : enableflag.trim();
-    }
+    public boolean isEnableflag() {
+		return enableflag;
+	}
 
-    public String getAdminflag() {
+	public void setEnableflag(boolean enableflag) {
+		this.enableflag = enableflag;
+	}
+
+	public String getAdminflag() {
         return adminflag;
     }
 

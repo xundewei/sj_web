@@ -1,105 +1,71 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
-<mapper namespace="com.sj.web.dao.system.SysMenuMapper">
-  <resultMap id="BaseResultMap" type="com.sj.web.model.system.SysMenu">
-    <id column="PK_SYS_MENU" jdbcType="VARCHAR" property="pkSysMenu" />
-    <result column="MENUCODE" jdbcType="VARCHAR" property="menucode" />
-    <result column="MENUNAME" jdbcType="VARCHAR" property="menuname" />
-    <result column="DISPLAYNAME" jdbcType="VARCHAR" property="displayname" />
-    <result column="DISPLAYORDER" jdbcType="DECIMAL" property="displayorder" />
-    <result column="LEV" jdbcType="DECIMAL" property="lev" />
-    <result column="PARENTCODE" jdbcType="VARCHAR" property="parentcode" />
-    <result column="ICON" jdbcType="VARCHAR" property="icon" />
-    <result column="URL" jdbcType="VARCHAR" property="url" />
-    <result column="ENABLEFLAG" jdbcType="CHAR" property="enableflag" />
-    <result column="ADMINFLAG" jdbcType="CHAR" property="adminflag" />
-    <result column="MENUTYPE" jdbcType="CHAR" property="menutype" />
-    <result column="REMAKR" jdbcType="VARCHAR" property="remakr" />
-    <result column="CREATEUSER" jdbcType="VARCHAR" property="createuser" />
-    <result column="TS" jdbcType="VARCHAR" property="ts" />
-    <result column="DR" jdbcType="CHAR" property="dr" />
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sj.web.dao.system.SysMenuMapper" >
+  <resultMap id="BaseResultMap" type="com.sj.web.model.system.SysMenu" >
+    <id column="PK_SYS_MENU" property="pkSysMenu" jdbcType="VARCHAR" />
+    <result column="MENUCODE" property="menucode" jdbcType="VARCHAR" />
+    <result column="MENUNAME" property="menuname" jdbcType="VARCHAR" />
+    <result column="DISPLAYNAME" property="displayname" jdbcType="VARCHAR" />
+    <result column="DISPLAYORDER" property="displayorder" jdbcType="DECIMAL" />
+    <result column="LEV" property="lev" jdbcType="DECIMAL" />
+    <result column="PARENTCODE" property="parentcode" jdbcType="VARCHAR" />
+    <result column="ICON" property="icon" jdbcType="VARCHAR" />
+    <result column="URL" property="url" jdbcType="VARCHAR" />
+    <result column="ENABLEFLAG" property="enableflag" jdbcType="CHAR" />
+    <result column="ADMINFLAG" property="adminflag" jdbcType="CHAR" />
+    <result column="MENUTYPE" property="menutype" jdbcType="CHAR" />
+    <result column="REMAKR" property="remakr" jdbcType="VARCHAR" />
+    <result column="CREATEUSER" property="createuser" jdbcType="VARCHAR" />
+    <result column="TS" property="ts" jdbcType="VARCHAR" />
+    <result column="DR" property="dr" jdbcType="CHAR" />
   </resultMap>
-  <sql id="Example_Where_Clause">
-    <where>
-      <foreach collection="oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Update_By_Example_Where_Clause">
-    <where>
-      <foreach collection="example.oredCriteria" item="criteria" separator="or">
-        <if test="criteria.valid">
-          <trim prefix="(" prefixOverrides="and" suffix=")">
-            <foreach collection="criteria.criteria" item="criterion">
-              <choose>
-                <when test="criterion.noValue">
-                  and ${criterion.condition}
-                </when>
-                <when test="criterion.singleValue">
-                  and ${criterion.condition} #{criterion.value}
-                </when>
-                <when test="criterion.betweenValue">
-                  and ${criterion.condition} #{criterion.value} and #{criterion.secondValue}
-                </when>
-                <when test="criterion.listValue">
-                  and ${criterion.condition}
-                  <foreach close=")" collection="criterion.value" item="listItem" open="(" separator=",">
-                    #{listItem}
-                  </foreach>
-                </when>
-              </choose>
-            </foreach>
-          </trim>
-        </if>
-      </foreach>
-    </where>
-  </sql>
-  <sql id="Base_Column_List">
-    PK_SYS_MENU, MENUCODE, MENUNAME, DISPLAYNAME, DISPLAYORDER, LEV, PARENTCODE, ICON, 
-    URL, ENABLEFLAG, ADMINFLAG, MENUTYPE, REMAKR, CREATEUSER, TS, DR
-  </sql>
-  <select id="selectByExample" parameterType="com.sj.web.model.system.SysMenuExample" resultMap="BaseResultMap">
-    select
-    <if test="distinct">
-      distinct
-    </if>
-    <include refid="Base_Column_List" />
-    from SYS_MENU
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-    <if test="orderByClause != null">
-      order by ${orderByClause}
-    </if>
-  </select>
-  <select id="selectByPrimaryKey" parameterType="java.lang.String" resultMap="BaseResultMap">
-    select 
-    <include refid="Base_Column_List" />
-    from SYS_MENU
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from WM.SYS_MENU
     where PK_SYS_MENU = #{pkSysMenu,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sj.web.model.system.SysMenu" >
+    insert into WM.SYS_MENU (PK_SYS_MENU, MENUCODE, MENUNAME, 
+      DISPLAYNAME, DISPLAYORDER, LEV, 
+      PARENTCODE, ICON, URL, 
+      ENABLEFLAG, ADMINFLAG, MENUTYPE, 
+      REMAKR, CREATEUSER, TS, 
+      DR)
+    values (#{pkSysMenu,jdbcType=VARCHAR}, #{menucode,jdbcType=VARCHAR}, #{menuname,jdbcType=VARCHAR}, 
+      #{displayname,jdbcType=VARCHAR}, #{displayorder,jdbcType=DECIMAL}, #{lev,jdbcType=DECIMAL}, 
+      #{parentcode,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, 
+      #{enableflag,jdbcType=CHAR}, #{adminflag,jdbcType=CHAR}, #{menutype,jdbcType=CHAR}, 
+      #{remakr,jdbcType=VARCHAR}, #{createuser,jdbcType=VARCHAR}, #{ts,jdbcType=VARCHAR}, 
+      #{dr,jdbcType=CHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.sj.web.model.system.SysMenu" >
+    update WM.SYS_MENU
+    set MENUCODE = #{menucode,jdbcType=VARCHAR},
+      MENUNAME = #{menuname,jdbcType=VARCHAR},
+      DISPLAYNAME = #{displayname,jdbcType=VARCHAR},
+      DISPLAYORDER = #{displayorder,jdbcType=DECIMAL},
+      LEV = #{lev,jdbcType=DECIMAL},
+      PARENTCODE = #{parentcode,jdbcType=VARCHAR},
+      ICON = #{icon,jdbcType=VARCHAR},
+      URL = #{url,jdbcType=VARCHAR},
+      ENABLEFLAG = #{enableflag,jdbcType=CHAR},
+      ADMINFLAG = #{adminflag,jdbcType=CHAR},
+      MENUTYPE = #{menutype,jdbcType=CHAR},
+      REMAKR = #{remakr,jdbcType=VARCHAR},
+      CREATEUSER = #{createuser,jdbcType=VARCHAR},
+      TS = #{ts,jdbcType=VARCHAR},
+      DR = #{dr,jdbcType=CHAR}
+    where PK_SYS_MENU = #{pkSysMenu,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select PK_SYS_MENU, MENUCODE, MENUNAME, DISPLAYNAME, DISPLAYORDER, LEV, PARENTCODE, 
+    ICON, URL, ENABLEFLAG, ADMINFLAG, MENUTYPE, REMAKR, CREATEUSER, TS, DR
+    from WM.SYS_MENU
+    where PK_SYS_MENU = #{pkSysMenu,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select PK_SYS_MENU, MENUCODE, MENUNAME, DISPLAYNAME, DISPLAYORDER, LEV, PARENTCODE, 
+    ICON, URL, ENABLEFLAG, ADMINFLAG, MENUTYPE, REMAKR, CREATEUSER, TS, DR
+    from WM.SYS_MENU
   </select>
   
    <select id="selectBylev1" parameterType="java.lang.String" resultMap="BaseResultMap">
@@ -122,286 +88,4 @@
                           WHERE 1=1 AND A.LEV>1 AND E.PK_SYS_USER = #{pk_sys_user,jdbcType=VARCHAR} ORDER BY A.DISPLAYORDER
   </select>
   
-  <delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-    delete from SYS_MENU
-    where PK_SYS_MENU = #{pkSysMenu,jdbcType=VARCHAR}
-  </delete>
-  <delete id="deleteByExample" parameterType="com.sj.web.model.system.SysMenuExample">
-    delete from SYS_MENU
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </delete>
-  <insert id="insert" parameterType="com.sj.web.model.system.SysMenu">
-    insert into SYS_MENU (PK_SYS_MENU, MENUCODE, MENUNAME, 
-      DISPLAYNAME, DISPLAYORDER, LEV, 
-      PARENTCODE, ICON, URL, 
-      ENABLEFLAG, ADMINFLAG, MENUTYPE, 
-      REMAKR, CREATEUSER, TS, 
-      DR)
-    values (#{pkSysMenu,jdbcType=VARCHAR}, #{menucode,jdbcType=VARCHAR}, #{menuname,jdbcType=VARCHAR}, 
-      #{displayname,jdbcType=VARCHAR}, #{displayorder,jdbcType=DECIMAL}, #{lev,jdbcType=DECIMAL}, 
-      #{parentcode,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, 
-      #{enableflag,jdbcType=CHAR}, #{adminflag,jdbcType=CHAR}, #{menutype,jdbcType=CHAR}, 
-      #{remakr,jdbcType=VARCHAR}, #{createuser,jdbcType=VARCHAR}, #{ts,jdbcType=VARCHAR}, 
-      #{dr,jdbcType=CHAR})
-  </insert>
-  <insert id="insertSelective" parameterType="com.sj.web.model.system.SysMenu">
-    insert into SYS_MENU
-    <trim prefix="(" suffix=")" suffixOverrides=",">
-      <if test="pkSysMenu != null">
-        PK_SYS_MENU,
-      </if>
-      <if test="menucode != null">
-        MENUCODE,
-      </if>
-      <if test="menuname != null">
-        MENUNAME,
-      </if>
-      <if test="displayname != null">
-        DISPLAYNAME,
-      </if>
-      <if test="displayorder != null">
-        DISPLAYORDER,
-      </if>
-      <if test="lev != null">
-        LEV,
-      </if>
-      <if test="parentcode != null">
-        PARENTCODE,
-      </if>
-      <if test="icon != null">
-        ICON,
-      </if>
-      <if test="url != null">
-        URL,
-      </if>
-      <if test="enableflag != null">
-        ENABLEFLAG,
-      </if>
-      <if test="adminflag != null">
-        ADMINFLAG,
-      </if>
-      <if test="menutype != null">
-        MENUTYPE,
-      </if>
-      <if test="remakr != null">
-        REMAKR,
-      </if>
-      <if test="createuser != null">
-        CREATEUSER,
-      </if>
-      <if test="ts != null">
-        TS,
-      </if>
-      <if test="dr != null">
-        DR,
-      </if>
-    </trim>
-    <trim prefix="values (" suffix=")" suffixOverrides=",">
-      <if test="pkSysMenu != null">
-        #{pkSysMenu,jdbcType=VARCHAR},
-      </if>
-      <if test="menucode != null">
-        #{menucode,jdbcType=VARCHAR},
-      </if>
-      <if test="menuname != null">
-        #{menuname,jdbcType=VARCHAR},
-      </if>
-      <if test="displayname != null">
-        #{displayname,jdbcType=VARCHAR},
-      </if>
-      <if test="displayorder != null">
-        #{displayorder,jdbcType=DECIMAL},
-      </if>
-      <if test="lev != null">
-        #{lev,jdbcType=DECIMAL},
-      </if>
-      <if test="parentcode != null">
-        #{parentcode,jdbcType=VARCHAR},
-      </if>
-      <if test="icon != null">
-        #{icon,jdbcType=VARCHAR},
-      </if>
-      <if test="url != null">
-        #{url,jdbcType=VARCHAR},
-      </if>
-      <if test="enableflag != null">
-        #{enableflag,jdbcType=CHAR},
-      </if>
-      <if test="adminflag != null">
-        #{adminflag,jdbcType=CHAR},
-      </if>
-      <if test="menutype != null">
-        #{menutype,jdbcType=CHAR},
-      </if>
-      <if test="remakr != null">
-        #{remakr,jdbcType=VARCHAR},
-      </if>
-      <if test="createuser != null">
-        #{createuser,jdbcType=VARCHAR},
-      </if>
-      <if test="ts != null">
-        #{ts,jdbcType=VARCHAR},
-      </if>
-      <if test="dr != null">
-        #{dr,jdbcType=CHAR},
-      </if>
-    </trim>
-  </insert>
-  <select id="countByExample" parameterType="com.sj.web.model.system.SysMenuExample" resultType="java.lang.Integer">
-    select count(*) from SYS_MENU
-    <if test="_parameter != null">
-      <include refid="Example_Where_Clause" />
-    </if>
-  </select>
-  <update id="updateByExampleSelective" parameterType="map">
-    update SYS_MENU
-    <set>
-      <if test="record.pkSysMenu != null">
-        PK_SYS_MENU = #{record.pkSysMenu,jdbcType=VARCHAR},
-      </if>
-      <if test="record.menucode != null">
-        MENUCODE = #{record.menucode,jdbcType=VARCHAR},
-      </if>
-      <if test="record.menuname != null">
-        MENUNAME = #{record.menuname,jdbcType=VARCHAR},
-      </if>
-      <if test="record.displayname != null">
-        DISPLAYNAME = #{record.displayname,jdbcType=VARCHAR},
-      </if>
-      <if test="record.displayorder != null">
-        DISPLAYORDER = #{record.displayorder,jdbcType=DECIMAL},
-      </if>
-      <if test="record.lev != null">
-        LEV = #{record.lev,jdbcType=DECIMAL},
-      </if>
-      <if test="record.parentcode != null">
-        PARENTCODE = #{record.parentcode,jdbcType=VARCHAR},
-      </if>
-      <if test="record.icon != null">
-        ICON = #{record.icon,jdbcType=VARCHAR},
-      </if>
-      <if test="record.url != null">
-        URL = #{record.url,jdbcType=VARCHAR},
-      </if>
-      <if test="record.enableflag != null">
-        ENABLEFLAG = #{record.enableflag,jdbcType=CHAR},
-      </if>
-      <if test="record.adminflag != null">
-        ADMINFLAG = #{record.adminflag,jdbcType=CHAR},
-      </if>
-      <if test="record.menutype != null">
-        MENUTYPE = #{record.menutype,jdbcType=CHAR},
-      </if>
-      <if test="record.remakr != null">
-        REMAKR = #{record.remakr,jdbcType=VARCHAR},
-      </if>
-      <if test="record.createuser != null">
-        CREATEUSER = #{record.createuser,jdbcType=VARCHAR},
-      </if>
-      <if test="record.ts != null">
-        TS = #{record.ts,jdbcType=VARCHAR},
-      </if>
-      <if test="record.dr != null">
-        DR = #{record.dr,jdbcType=CHAR},
-      </if>
-    </set>
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByExample" parameterType="map">
-    update SYS_MENU
-    set PK_SYS_MENU = #{record.pkSysMenu,jdbcType=VARCHAR},
-      MENUCODE = #{record.menucode,jdbcType=VARCHAR},
-      MENUNAME = #{record.menuname,jdbcType=VARCHAR},
-      DISPLAYNAME = #{record.displayname,jdbcType=VARCHAR},
-      DISPLAYORDER = #{record.displayorder,jdbcType=DECIMAL},
-      LEV = #{record.lev,jdbcType=DECIMAL},
-      PARENTCODE = #{record.parentcode,jdbcType=VARCHAR},
-      ICON = #{record.icon,jdbcType=VARCHAR},
-      URL = #{record.url,jdbcType=VARCHAR},
-      ENABLEFLAG = #{record.enableflag,jdbcType=CHAR},
-      ADMINFLAG = #{record.adminflag,jdbcType=CHAR},
-      MENUTYPE = #{record.menutype,jdbcType=CHAR},
-      REMAKR = #{record.remakr,jdbcType=VARCHAR},
-      CREATEUSER = #{record.createuser,jdbcType=VARCHAR},
-      TS = #{record.ts,jdbcType=VARCHAR},
-      DR = #{record.dr,jdbcType=CHAR}
-    <if test="_parameter != null">
-      <include refid="Update_By_Example_Where_Clause" />
-    </if>
-  </update>
-  <update id="updateByPrimaryKeySelective" parameterType="com.sj.web.model.system.SysMenu">
-    update SYS_MENU
-    <set>
-      <if test="menucode != null">
-        MENUCODE = #{menucode,jdbcType=VARCHAR},
-      </if>
-      <if test="menuname != null">
-        MENUNAME = #{menuname,jdbcType=VARCHAR},
-      </if>
-      <if test="displayname != null">
-        DISPLAYNAME = #{displayname,jdbcType=VARCHAR},
-      </if>
-      <if test="displayorder != null">
-        DISPLAYORDER = #{displayorder,jdbcType=DECIMAL},
-      </if>
-      <if test="lev != null">
-        LEV = #{lev,jdbcType=DECIMAL},
-      </if>
-      <if test="parentcode != null">
-        PARENTCODE = #{parentcode,jdbcType=VARCHAR},
-      </if>
-      <if test="icon != null">
-        ICON = #{icon,jdbcType=VARCHAR},
-      </if>
-      <if test="url != null">
-        URL = #{url,jdbcType=VARCHAR},
-      </if>
-      <if test="enableflag != null">
-        ENABLEFLAG = #{enableflag,jdbcType=CHAR},
-      </if>
-      <if test="adminflag != null">
-        ADMINFLAG = #{adminflag,jdbcType=CHAR},
-      </if>
-      <if test="menutype != null">
-        MENUTYPE = #{menutype,jdbcType=CHAR},
-      </if>
-      <if test="remakr != null">
-        REMAKR = #{remakr,jdbcType=VARCHAR},
-      </if>
-      <if test="createuser != null">
-        CREATEUSER = #{createuser,jdbcType=VARCHAR},
-      </if>
-      <if test="ts != null">
-        TS = #{ts,jdbcType=VARCHAR},
-      </if>
-      <if test="dr != null">
-        DR = #{dr,jdbcType=CHAR},
-      </if>
-    </set>
-    where PK_SYS_MENU = #{pkSysMenu,jdbcType=VARCHAR}
-  </update>
-  <update id="updateByPrimaryKey" parameterType="com.sj.web.model.system.SysMenu">
-    update SYS_MENU
-    set MENUCODE = #{menucode,jdbcType=VARCHAR},
-      MENUNAME = #{menuname,jdbcType=VARCHAR},
-      DISPLAYNAME = #{displayname,jdbcType=VARCHAR},
-      DISPLAYORDER = #{displayorder,jdbcType=DECIMAL},
-      LEV = #{lev,jdbcType=DECIMAL},
-      PARENTCODE = #{parentcode,jdbcType=VARCHAR},
-      ICON = #{icon,jdbcType=VARCHAR},
-      URL = #{url,jdbcType=VARCHAR},
-      ENABLEFLAG = #{enableflag,jdbcType=CHAR},
-      ADMINFLAG = #{adminflag,jdbcType=CHAR},
-      MENUTYPE = #{menutype,jdbcType=CHAR},
-      REMAKR = #{remakr,jdbcType=VARCHAR},
-      CREATEUSER = #{createuser,jdbcType=VARCHAR},
-      TS = #{ts,jdbcType=VARCHAR},
-      DR = #{dr,jdbcType=CHAR}
-    where PK_SYS_MENU = #{pkSysMenu,jdbcType=VARCHAR}
-  </update>
- 
 </mapper>

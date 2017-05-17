@@ -14,6 +14,51 @@ import com.sj.web.model.system.SysMenu;
  */
 public interface SysMenuService{
 	
+	
+	 /**
+     * 找到所有菜单
+     * @return
+     */
+    public List<SysMenu> getAll();
+    
+    
+  
+    /**
+     * 根据主键找到菜单
+     * @param 
+     * 		pkSysMenu 主键
+     * @return
+     */
+    public SysMenu getByPrimaryKey(String pkSysMenu);
+	
+
+    /**
+     * 新增菜单数据
+     * @param 
+     * 		sysmenu 新增的数据
+     * @return
+     */
+    public  int addSysMenu(SysMenu sysmenu);
+    
+    /**
+     * 通过主键修改菜单数据
+     * @param 
+     * 		record 修改的数据
+     * @return
+     */
+    public int updateByPrimaryKey(SysMenu record);
+    
+    
+  
+    /**
+     * 通过主键删除记录
+     * @param 
+     * 		pkSysMenu 菜单主键
+     * @return
+     */
+    public int deleteByPrimaryKey(String pkSysMenu);
+    
+    
     /**
      * 根据角色找到此角色下面的所有的一级菜单
      * @param 
