@@ -3,7 +3,7 @@ package com.sj.web.model.system;
 import java.math.BigDecimal;
 
 public class SysOrg {
-    private String PkSysOrg;
+    private String pkSysOrg;
 
     private String orgcode;
 
@@ -25,17 +25,27 @@ public class SysOrg {
 
     private String dr;
 
+    
+    
  
+//
+//    public String getpkSysOrg() {
+//        return pkSysOrg;
+//    }
+//
+//    public void setpkSysOrg(String pkSysOrg) {
+//        this.PkSysOrg = PkSysOrg == null ? null : PkSysOrg.trim();
+//    }
 
     public String getPkSysOrg() {
-        return PkSysOrg;
-    }
+		return pkSysOrg;
+	}
 
-    public void setPkSysOrg(String PkSysOrg) {
-        this.PkSysOrg = PkSysOrg == null ? null : PkSysOrg.trim();
-    }
+	public void setPkSysOrg(String pkSysOrg) {
+		this.pkSysOrg = pkSysOrg;
+	}
 
-    public String getOrgcode() {
+	public String getOrgcode() {
         return orgcode;
     }
 

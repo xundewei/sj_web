@@ -63,11 +63,11 @@
     //从Form获取数据后，返回数据对象
     function sys_org_u_form_getValues(data) {
         var entity = {};
-        entity.id = $("#sys_org_u_pksysorg").val();
-        entity.groupid = $("#sys_org_u_groupid").val();
+        entity.pkSysOrg = $("#sys_org_u_pksysorg").val();
+        entity.orgcode = $("#sys_org_u_orgcode").val();
         entity.name = $("#sys_org_u_orgname").val();
         entity.displayorder = $("#sys_org_u_displayorder").val();
-        entity.parentid = $("#sys_org_u_parentcode").val();
+        entity.parentcode = $("#sys_org_u_parentcode").val();
         entity.duty = $("#sys_org_u_duty").val();
         entity.enableflag = $("#sys_org_u_enableflag").prop("checked");
         entity.remark = $("#sys_org_u_remark").val();

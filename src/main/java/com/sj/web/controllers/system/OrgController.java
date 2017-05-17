@@ -26,7 +26,7 @@ import com.sj.web.model.system.SysOrg;
 import com.sj.web.services.system.OrgService;
 
 /**
- * 
+ * BUG:本级以下的机构修改的时候不显示
  * @Description: 组织机构控制器
  * @author tody
  * @date 2017年5月4日下午8:46:27
