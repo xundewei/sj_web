@@ -39,7 +39,7 @@
         </javaClientGenerator>
 
         <!-- 指定表 -->
-        <table schema="WM" tableName="SYS_MENU"/>
+        <table schema="WM" tableName="SYS_ROLE"/>
         
 
     </context>
