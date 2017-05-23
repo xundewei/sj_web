@@ -5,6 +5,7 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
+import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -29,8 +30,6 @@ import com.sj.web.services.system.SysMenuService;
 @RequestMapping("/system/menu")
 public class MenuController extends BaseController {
 
-	// @Autowired
-	// private AppRoleService appRoleService;
 
 	@Autowired
 	private SysMenuService service;
@@ -128,16 +127,11 @@ public class MenuController extends BaseController {
 	public JsonResult add(@RequestBody SysMenu entity) {
 		try {
 
-			// if(StringUtils.isEmpty(entity.getMenukey())){
-			// return JsonResult.error("菜单标识不能为空！");
-			// }
-			//
-			// if(!StringUtils.isEmpty(entity.getMenukey())){
-			// if(service.existByMenukey(entity.getMenukey()))
-			// return JsonResult.error("菜单标识[" + entity.getMenukey() +
-			// "]已经被使用，请修改！");
-			// }
-
+			//判断编码是否已经存在
+			SysMenu sysmenu = service.SelectByMenuCode(entity.getMenucode());
+			if(!(sysmenu==null)){
+				return JsonResult.error("菜单编码[" + entity.getMenucode() +"]已经被使用，请修改！");
+			}
 			// 以随机数作为ID
 			entity.setPkSysMenu(UUID.randomUUID().toString());
 			service.addSysMenu(entity);

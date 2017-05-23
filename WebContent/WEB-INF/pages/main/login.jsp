@@ -61,7 +61,7 @@
 
 </div>
 
-<div class="loginbm">版权所有 2017 <a href="http://www.ihuolong.com/">欢迎登录三伽财团管理系统</a></div>
+<div class="loginbm">版权所有 2017 <a href="http://www.sanjiacaituan.com/">欢迎登录三伽财团管理系统</a></div>
 <script type="text/javascript">
     var txtUser = document.getElementById("usercode");
     var txtPass = document.getElementById("password");

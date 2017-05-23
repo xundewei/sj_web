@@ -19,10 +19,10 @@
         color: #000000;
     }
 
-    .tree-file {
+  /*   .tree-file {
         background: url(images/main/Menu2.png) no-repeat 2px 1px;
         background-size: 12px;
-    }
+    }*/
     .tree-folder {
         background: url(images/main/file_close.png);
         background-size: cover;
@@ -30,7 +30,7 @@
     .tree-folder-open {
         background: url(images/main/file_open.png);
         background-size: cover;
-    }
+    } 
 
 
 </style>

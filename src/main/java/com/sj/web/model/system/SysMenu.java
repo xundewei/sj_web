@@ -17,7 +17,7 @@ public class SysMenu {
 
     private String parentcode;
 
-    private String icon;
+    private String iconCls;
 
     private String url;
 
@@ -91,15 +91,25 @@ public class SysMenu {
         this.parentcode = parentcode == null ? null : parentcode.trim();
     }
 
-    public String getIcon() {
-        return icon;
-    }
+//    public String getIcon() {
+//        return icon;
+//    }
+//
+//    public void setIcon(String icon) {
+//        this.icon = icon == null ? null : icon.trim();
+//    }
 
-    public void setIcon(String icon) {
-        this.icon = icon == null ? null : icon.trim();
-    }
+    
+    public String getIconCls() {
+		return iconCls;
+	}
 
-    public String getUrl() {
+	public void setIconCls(String iconCls) {
+		this.iconCls = iconCls == null ? null : iconCls.trim();
+	}
+	
+
+	public String getUrl() {
         return url;
     }
 

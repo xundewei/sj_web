@@ -5,39 +5,30 @@
     <input type="hidden" id="sys_menu_a_parentcode"/>
     <table style="width: 100%; border-collapse: collapse; padding: 10px;">
         <tr>
+            <td style="text-align: right; width: 15%">菜单编码：</td>
+            <td><input id="sys_menu_a_code" class="easyui-validatebox" data-options="required:true"/></td>
             <td style="text-align: right; width: 15%">菜单名称：</td>
             <td><input id="sys_menu_a_name" class="easyui-validatebox" data-options="required:true"/></td>
-             <td style="text-align: right; width: 15%">菜单编码：</td>
-            <td><input id="sys_menu_a_code" class="easyui-validatebox" data-options="required:true"/></td>
+            <td style="text-align: right; width: 15%">显示菜单名称：</td>
+            <td><input id="sys_menu_a_displayname" class="easyui-validatebox" data-options="required:true"/></td>
         </tr>
         <tr>
-        	<td style="text-align: right; width: 15%">菜单类型：</td>
-            <td>
-                <select id="sys_menu_a_menutype">
-                    <option value="0">物业专用</option>
-                    <option value="1">平台专用</option>
-                    <option value="2">共用</option>
-                </select>
-            </td>
-            <td style="text-align: right; width: 15%">菜单标识：</td>
-            <td><input id="sys_menu_a_menukey"/></td>
-        </tr>
-        <tr>
+            <td style="text-align: right; width: 15%">父节点名称：</td>
+            <td><input id="sys_menu_a_parentname" class="easyui-validatebox" data-options="required:true"/></td>
             <td style="text-align: right;">显示顺序：</td>
             <td><input id="sys_menu_a_displayorder" class="easyui-validatebox" data-options="required:true"/></td>
-            <td style="text-align: right;">上级菜单：</td>
-            <td><input id="sys_menu_a_parentname" readonly="readonly"/></td>
+             <td style="text-align: right;">URL：</td>
+            <td><input id="sys_menu_a_url"/></td>
+           
         </tr>
         <tr>
-            <td style="text-align: right;">URL：</td>
-            <td><input id="sys_menu_a_url"/>
-            </td>
             <td style="text-align: right;">是否可用：</td>
             <td><input type="checkbox" id="sys_menu_a_enableflag" checked="checked"/></td>
-        </tr>
-        <tr>
             <td style="text-align: right; vertical-align: top;">备注：</td>
             <td colspan="3"><textarea id="sys_menu_a_remark" rows="3" cols="40%"/></td>
+        </tr>
+        <tr>
+            
         </tr>
     </table>
 </form>
@@ -70,13 +61,13 @@
         var entity = {};
         entity.menuname = $("#sys_menu_a_name").val();
         entity.menucode = $("#sys_menu_a_code").val();
+        entity.displayname = $("#sys_menu_a_displayname").val();
         entity.displayorder = $("#sys_menu_a_displayorder").val();
         entity.lev = $("#sys_menu_a_level").val();
         entity.parentcode = $("#sys_menu_a_parentcode").val();
         entity.url = $("#sys_menu_a_url").val();
         entity.enableflag = $("#sys_menu_a_enableflag").prop("checked");
         entity.remark = $("#sys_menu_a_remark").val();
-
         return entity;
     }
 </script>

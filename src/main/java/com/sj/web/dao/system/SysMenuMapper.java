@@ -10,6 +10,8 @@ public interface SysMenuMapper {
     int insert(SysMenu record);
 
     SysMenu selectByPrimaryKey(String pkSysMenu);
+    
+    SysMenu selectByMenuCode(String menucode);
 
     List<SysMenu> selectAll();
     

@@ -9,7 +9,7 @@
     <result column="DISPLAYORDER" property="displayorder" jdbcType="DECIMAL" />
     <result column="LEV" property="lev" jdbcType="DECIMAL" />
     <result column="PARENTCODE" property="parentcode" jdbcType="VARCHAR" />
-    <result column="ICON" property="icon" jdbcType="VARCHAR" />
+    <result column="ICONCLS" property="iconCls" jdbcType="VARCHAR" />
     <result column="URL" property="url" jdbcType="VARCHAR" />
     <result column="ENABLEFLAG" property="enableflag" jdbcType="CHAR" />
     <result column="ADMINFLAG" property="adminflag" jdbcType="CHAR" />
@@ -26,13 +26,13 @@
   <insert id="insert" parameterType="com.sj.web.model.system.SysMenu" >
     insert into WM.SYS_MENU (PK_SYS_MENU, MENUCODE, MENUNAME, 
       DISPLAYNAME, DISPLAYORDER, LEV, 
-      PARENTCODE, ICON, URL, 
+      PARENTCODE, iconCls, URL, 
       ENABLEFLAG, ADMINFLAG, MENUTYPE, 
       REMAKR, CREATEUSER, TS, 
       DR)
     values (#{pkSysMenu,jdbcType=VARCHAR}, #{menucode,jdbcType=VARCHAR}, #{menuname,jdbcType=VARCHAR}, 
       #{displayname,jdbcType=VARCHAR}, #{displayorder,jdbcType=DECIMAL}, #{lev,jdbcType=DECIMAL}, 
-      #{parentcode,jdbcType=VARCHAR}, #{icon,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, 
+      #{parentcode,jdbcType=VARCHAR}, #{iconCls,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, 
       #{enableflag,jdbcType=CHAR}, #{adminflag,jdbcType=CHAR}, #{menutype,jdbcType=CHAR}, 
       #{remakr,jdbcType=VARCHAR}, #{createuser,jdbcType=VARCHAR}, #{ts,jdbcType=VARCHAR}, 
       #{dr,jdbcType=CHAR})
@@ -45,7 +45,7 @@
       DISPLAYORDER = #{displayorder,jdbcType=DECIMAL},
       LEV = #{lev,jdbcType=DECIMAL},
       PARENTCODE = #{parentcode,jdbcType=VARCHAR},
-      ICON = #{icon,jdbcType=VARCHAR},
+      iconCls = #{iconCls,jdbcType=VARCHAR},
       URL = #{url,jdbcType=VARCHAR},
       ENABLEFLAG = #{enableflag,jdbcType=CHAR},
       ADMINFLAG = #{adminflag,jdbcType=CHAR},
@@ -58,18 +58,26 @@
   </update>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select PK_SYS_MENU, MENUCODE, MENUNAME, DISPLAYNAME, DISPLAYORDER, LEV, PARENTCODE, 
-    ICON, URL, ENABLEFLAG, ADMINFLAG, MENUTYPE, REMAKR, CREATEUSER, TS, DR
+    iconCls, URL, ENABLEFLAG, ADMINFLAG, MENUTYPE, REMAKR, CREATEUSER, TS, DR
     from WM.SYS_MENU
     where PK_SYS_MENU = #{pkSysMenu,jdbcType=VARCHAR}
   </select>
+  
+   <select id="selectByMenuCode" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select PK_SYS_MENU, MENUCODE, MENUNAME, DISPLAYNAME, DISPLAYORDER, LEV, PARENTCODE, 
+    iconCls, URL, ENABLEFLAG, ADMINFLAG, MENUTYPE, REMAKR, CREATEUSER, TS, DR
+    from WM.SYS_MENU
+    where MENUCODE = #{menucode,jdbcType=VARCHAR}
+  </select>
+  
   <select id="selectAll" resultMap="BaseResultMap" >
     select PK_SYS_MENU, MENUCODE, MENUNAME, DISPLAYNAME, DISPLAYORDER, LEV, PARENTCODE, 
-    ICON, URL, ENABLEFLAG, ADMINFLAG, MENUTYPE, REMAKR, CREATEUSER, TS, DR
+    iconCls, URL, ENABLEFLAG, ADMINFLAG, MENUTYPE, REMAKR, CREATEUSER, TS, DR
     from WM.SYS_MENU
   </select>
   
    <select id="selectBylev1" parameterType="java.lang.String" resultMap="BaseResultMap">
-   SELECT DISTINCT A.PK_SYS_MENU, A.MENUCODE, A.MENUNAME, A.DISPLAYNAME, A.DISPLAYORDER, A.LEV, A.PARENTCODE, A.ICON, 
+   SELECT DISTINCT A.PK_SYS_MENU, A.MENUCODE, A.MENUNAME, A.DISPLAYNAME, A.DISPLAYORDER, A.LEV, A.PARENTCODE, A.iconCls, 
     A.URL,A. ENABLEFLAG, A.ADMINFLAG, A.MENUTYPE, A.REMAKR, A.CREATEUSER, A.TS, A.DR
      FROM SYS_MENU  A JOIN SYS_ROLE_MENU B  ON A.PK_SYS_MENU=B.PK_SYS_MENU  AND NVL(A.DR,0)=0
                           JOIN SYS_ROLE C ON B.PK_SYS_ROLE=C.PK_SYS_ROLE  AND NVL(C.DR,0)=0
@@ -79,7 +87,7 @@
   </select>
   
    <select id="GetMenuByMoreLev2" parameterType="java.lang.String" resultMap="BaseResultMap">
-   SELECT DISTINCT A.PK_SYS_MENU, A.MENUCODE, A.MENUNAME, A.DISPLAYNAME, A.DISPLAYORDER, A.LEV, A.PARENTCODE, A.ICON, 
+   SELECT DISTINCT A.PK_SYS_MENU, A.MENUCODE, A.MENUNAME, A.DISPLAYNAME, A.DISPLAYORDER, A.LEV, A.PARENTCODE, A.iconCls, 
     A.URL,A. ENABLEFLAG, A.ADMINFLAG, A.MENUTYPE, A.REMAKR, A.CREATEUSER, A.TS, A.DR
      FROM SYS_MENU  A JOIN SYS_ROLE_MENU B  ON A.PK_SYS_MENU=B.PK_SYS_MENU  AND NVL(A.DR,0)=0
                           JOIN SYS_ROLE C ON B.PK_SYS_ROLE=C.PK_SYS_ROLE  AND NVL(C.DR,0)=0

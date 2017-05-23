@@ -31,7 +31,15 @@ public interface SysMenuService{
      */
     public SysMenu getByPrimaryKey(String pkSysMenu);
 	
-
+    /**
+     * 根据编码找到菜单
+     * @param 
+     * 		menucode 菜单编码
+     * @return 
+     * 		菜单记录
+     */
+    public SysMenu SelectByMenuCode(String menucode);
+	
     /**
      * 新增菜单数据
      * @param 

@@ -11,7 +11,7 @@
                 {field: 'pkSysMenu', title: '菜单ID', width: 60, align: 'right', hidden: true},
                 {field: 'menucode', title: '菜单编码', width: 80},
                 {field: 'menuname', title: '菜单名称', width: 80},
-                {field: 'menukey', title: '菜单标识', width: 40, sortable: true},
+                {field: 'displayname', title: '显示菜单名称', width: 80},
                 {field: 'displayorder', title: '显示顺序', width: 40, sortable: true},
                 {
                     field: 'lev', title: '菜单级别', width: 40, formatter: function (value, row, index) {
@@ -23,6 +23,7 @@
                 }
                 },
                 {field: 'url', title: 'URL', width: 120},
+                {field: 'iconCls', title: '图标', width: 120},
                 {field: 'parentcode', title: 'parentcode', width: 120, hidden: true},
                 {
                     field: 'enableflag', title: '是否可用', width: 80, formatter: function (value, row, index) {
@@ -37,25 +38,6 @@
                     }
                     return 'color:green;';
                 }
-                },
-                {
-                    field: 'menutype', title: '菜单类型', width: 80, formatter: function (value, row, index) {
-                        if (value==0) {
-                            return "物业专用";
-                        }else if(value==1){
-                            return "平台专用"
-                        }else{
-                            return ""
-                        }
-                    }, styler: function (value, row, index) {
-                        if (value==0) {
-                            return 'color:green;';
-                        }else if(value==1){
-                            return 'color:red';
-                        }else{
-                            return '';
-                        }
-                    }
                 }
             ]],
             fitColumns: true,
@@ -122,17 +104,9 @@
             return;
         }
 
-        var parentcode = row.id;
+        var parentcode = row.menucode;
         var parentname = row.displayname;
-        var parentlevel = row.level;
-//        if (row.level == 0) {
-//            parentcode = row.id;
-//            parentname = row.displayname;
-//        } else {
-//            hlg.dialog.showInfo("请先选择主菜单！");
-//            return;
-//        }
-
+        var parentlevel = row.lev;
         sys_menu_openAddDialog("child", parentcode, parentname, parentlevel);
     }
 
@@ -150,7 +124,6 @@
         var isValid = $("#sys_menu_a_form").form('validate');
         if (!isValid)
             return;
-
         //验证通过后保存数据到后台
         var url = "system/menu/add";
         var entity = sys_menu_a_form_getValues();
@@ -306,7 +279,7 @@
 </div>
 
 <div id="sys_menu_AddDialog" class="easyui-dialog" title="新增"
-     style="width:800px;height:400px;padding:10px"
+     style="width:850px;height:400px;padding:10px"
      data-options="
                 closed: true,
                 modal: true,

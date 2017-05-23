@@ -59,6 +59,7 @@ public class SysMenuServiceImpl implements SysMenuService {
 			EzTreeNode ezTreeNode = new EzTreeNode();
 			ezTreeNode.setId(menu.getMenucode());
 			ezTreeNode.setPid(menu.getParentcode());
+			ezTreeNode.setIconCls(menu.getIconCls());
 			ezTreeNode.setText(menu.getDisplayname());
 			ezTreeNode.setAttributes("{\"url\":\"" + menu.getUrl() + "\", \"key\":\"" + menu.getPkSysMenu() + "\"}");
 			list.add(ezTreeNode);
@@ -83,6 +84,12 @@ public class SysMenuServiceImpl implements SysMenuService {
 	public int deleteByPrimaryKey(String pkSysMenu) {
 		int i = sysmenudao.deleteByPrimaryKey(pkSysMenu);
 		return i;
+	}
+
+	@Override
+	public SysMenu SelectByMenuCode(String menucode) {
+		SysMenu sysmenu = sysmenudao.selectByMenuCode(menucode);
+		return sysmenu;
 	}
 
 }
