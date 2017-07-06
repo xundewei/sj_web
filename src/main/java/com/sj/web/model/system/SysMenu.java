@@ -27,7 +27,7 @@ public class SysMenu {
 
     private String menutype;
 
-    private String remakr;
+    private String remark;
 
     private String createuser;
 
@@ -143,15 +143,18 @@ public class SysMenu {
         this.menutype = menutype == null ? null : menutype.trim();
     }
 
-    public String getRemakr() {
-        return remakr;
-    }
 
-    public void setRemakr(String remakr) {
-        this.remakr = remakr == null ? null : remakr.trim();
-    }
+    
 
-    public String getCreateuser() {
+    public String getRemark() {
+		return remark;
+	}
+
+	public void setRemark(String remark) {
+		this.remark = remark == null ? null : remark.trim();
+	}
+
+	public String getCreateuser() {
         return createuser;
     }
 

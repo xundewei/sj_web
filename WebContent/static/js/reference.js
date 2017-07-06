@@ -12,6 +12,13 @@ sys.dialog = {};
 sys.dialog.openReferenceOrgDialog = function (multiSelect, callback) {
     sys.dialog.open_RemoteDialog("pub_select_org_Dialog", "system/reference/showorgdialog?multi=" + multiSelect, true, callback);
 };
+sys.dialog.openReferenceMenuDialog = function (multiSelect, callback) {
+    sys.dialog.open_RemoteDialog("pub_select_menu_Dialog", "system/reference/showorgdialog?multi=" + multiSelect, true, callback);
+};
+
+sys.dialog.openReferenceDialog = function (dId, dUrl, callback) {
+    sys.dialog.open_RemoteDialog(dId, dUrl, true, callback);
+};
 
 
 //关闭组织机构选择对话框，并传回数据（没有数据，不传即可）

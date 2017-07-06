@@ -14,7 +14,7 @@
         </tr>
         <tr>
             <td style="text-align: right; width: 15%">父节点名称：</td>
-            <td><input id="sys_menu_a_parentname" class="easyui-validatebox" data-options="required:true"/></td>
+            <td><input id="sys_menu_a_parentname"  readonly="readonly"/></td>
             <td style="text-align: right;">显示顺序：</td>
             <td><input id="sys_menu_a_displayorder" class="easyui-validatebox" data-options="required:true"/></td>
              <td style="text-align: right;">URL：</td>

@@ -58,7 +58,7 @@
     //右键菜单
     function sys_menu_OnContextMenu(e, row) {
         e.preventDefault();
-        $(this).treegrid('select', row.id);
+        $(this).treegrid('select', row.pkSysMenu);
         $('#sys_menu_mm').menu('show', {
             left: e.pageX,
             top: e.pageY
@@ -140,7 +140,7 @@
             return;
         }
 
-        var $rowid = row.id;
+        var $rowid = row.pkSysMenu;
         if ($rowid == null) {
             hlg.dialog.showInfo("请先选择一条记录！");
             return;
@@ -186,7 +186,7 @@
             return;
         }
 
-        var $rowid = row.id;
+        var $rowid = row.pkSysMenu;
         if ($rowid == null) {
             hlg.dialog.showInfo("请先选择一条记录！");
             return;
@@ -217,7 +217,7 @@
             return;
         }
 
-        var $rowid = row.id;
+        var $rowid = row.pkSysMenu;
         if ($rowid == null) {
             hlg.dialog.showInfo("请先选择一条记录！");
             return;
