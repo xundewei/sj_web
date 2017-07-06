@@ -19,7 +19,7 @@ public class GeneratorSqlmap {
         boolean overwrite = true;
         //指定逆向工程配置文件
 //        Configuration config = new Configuration();
-        File configFile = new File("src/main/resources/generatorConfig-base.xml");
+        File configFile = new File("src/main/resources/mybatis/generatorConfig-base.xml");
         ConfigurationParser cp = new ConfigurationParser(warnings);
         Configuration config = cp.parseConfiguration(configFile);
         DefaultShellCallback callback = new DefaultShellCallback(overwrite);
