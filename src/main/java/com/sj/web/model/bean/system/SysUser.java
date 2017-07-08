@@ -1,9 +1,12 @@
-package com.sj.web.model.system;
+package com.sj.web.model.bean.system;
 
 import java.io.Serializable;
 
-public class SysUser implements Serializable {
-    private String pkSysUser;
+public class SysUser implements Serializable{
+
+	private static final long serialVersionUID = 1L;
+
+	private String pkSysUser;
 
     private String usercode;
 
@@ -11,9 +14,11 @@ public class SysUser implements Serializable {
 
     private String pwd;
 
-    private String flag;
+    private String tabmode;
 
-    private String remark;
+    private String theme;
+
+    private String flag;
 
     private String createuser;
 
@@ -21,9 +26,7 @@ public class SysUser implements Serializable {
 
     private String ts;
 
-    private String tabmode;
-
-    private String theme;
+    private String remark;
 
     public String getPkSysUser() {
         return pkSysUser;
@@ -57,20 +60,28 @@ public class SysUser implements Serializable {
         this.pwd = pwd == null ? null : pwd.trim();
     }
 
+    public String getTabmode() {
+        return tabmode;
+    }
+
+    public void setTabmode(String tabmode) {
+        this.tabmode = tabmode == null ? null : tabmode.trim();
+    }
+
+    public String getTheme() {
+        return theme;
+    }
+
+    public void setTheme(String theme) {
+        this.theme = theme == null ? null : theme.trim();
+    }
+
     public String getFlag() {
         return flag;
     }
 
     public void setFlag(String flag) {
         this.flag = flag == null ? null : flag.trim();
-    }
-
-    public String getRemark() {
-        return remark;
-    }
-
-    public void setRemark(String remark) {
-        this.remark = remark == null ? null : remark.trim();
     }
 
     public String getCreateuser() {
@@ -97,19 +108,11 @@ public class SysUser implements Serializable {
         this.ts = ts == null ? null : ts.trim();
     }
 
-    public String getTabmode() {
-        return tabmode;
+    public String getRemark() {
+        return remark;
     }
 
-    public void setTabmode(String tabmode) {
-        this.tabmode = tabmode == null ? null : tabmode.trim();
-    }
-
-    public String getTheme() {
-        return theme;
-    }
-
-    public void setTheme(String theme) {
-        this.theme = theme == null ? null : theme.trim();
+    public void setRemark(String remark) {
+        this.remark = remark == null ? null : remark.trim();
     }
 }

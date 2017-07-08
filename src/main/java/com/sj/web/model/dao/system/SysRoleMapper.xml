@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.sj.web.dao.system.SysRoleMapper" >
-  <resultMap id="BaseResultMap" type="com.sj.web.model.system.SysRole" >
+<mapper namespace="com.sj.web.model.dao.system.SysRoleMapper" >
+  <resultMap id="BaseResultMap" type="com.sj.web.model.bean.system.SysRole" >
     <id column="PK_SYS_ROLE" property="pkSysRole" jdbcType="VARCHAR" />
     <result column="ROLECODE" property="rolecode" jdbcType="VARCHAR" />
     <result column="ROLENAME" property="rolename" jdbcType="VARCHAR" />
@@ -11,19 +11,19 @@
     <result column="REMARK" property="remark" jdbcType="VARCHAR" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
-    delete from WM.SYS_ROLE
+    delete from SYS_ROLE
     where PK_SYS_ROLE = #{pkSysRole,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.sj.web.model.system.SysRole" >
-    insert into WM.SYS_ROLE (PK_SYS_ROLE, ROLECODE, ROLENAME, 
+  <insert id="insert" parameterType="com.sj.web.model.bean.system.SysRole" >
+    insert into SYS_ROLE (PK_SYS_ROLE, ROLECODE, ROLENAME, 
       CREATEUSER, DR, TS, REMARK
       )
     values (#{pkSysRole,jdbcType=VARCHAR}, #{rolecode,jdbcType=VARCHAR}, #{rolename,jdbcType=VARCHAR}, 
       #{createuser,jdbcType=VARCHAR}, #{dr,jdbcType=CHAR}, #{ts,jdbcType=VARCHAR}, #{remark,jdbcType=VARCHAR}
       )
   </insert>
-  <update id="updateByPrimaryKey" parameterType="com.sj.web.model.system.SysRole" >
-    update WM.SYS_ROLE
+  <update id="updateByPrimaryKey" parameterType="com.sj.web.model.bean.system.SysRole" >
+    update SYS_ROLE
     set ROLECODE = #{rolecode,jdbcType=VARCHAR},
       ROLENAME = #{rolename,jdbcType=VARCHAR},
       CREATEUSER = #{createuser,jdbcType=VARCHAR},
@@ -34,19 +34,12 @@
   </update>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select PK_SYS_ROLE, ROLECODE, ROLENAME, CREATEUSER, DR, TS, REMARK
-    from WM.SYS_ROLE
+    from SYS_ROLE
     where PK_SYS_ROLE = #{pkSysRole,jdbcType=VARCHAR}
   </select>
   <select id="selectAll" resultMap="BaseResultMap" >
     select PK_SYS_ROLE, ROLECODE, ROLENAME, CREATEUSER, DR, TS, REMARK
-    from WM.SYS_ROLE
+    from SYS_ROLE
+    order by age desc,username asc
   </select>
-   <select id="selectByPkSysUser"  resultMap="BaseResultMap">
-    select 
-    	A.PK_SYS_ROLE, A.ROLECODE, A.ROLENAME, A.CREATEUSER, A.DR, A.TS, A.REMARK
-    from FROM SYS_ROLE A 
-         LEFT JOIN SYS_USER_ROLE B ON A.PK_SYS_ROLE=B.PK_SYS_ROLE  
-         LEFT JOIN SYS_USER C ON B.PK_SYS_USER=C.PK_SYS_USER 
-         WHERE NVL(A.DR,0)=0 AND NVL(C.DR,0)=0 C.PK_SYS_USER=#{pkSysUser,jdbcType=VARCHAR} 
-   </select>
 </mapper>

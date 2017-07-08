@@ -8,7 +8,6 @@ import java.util.UUID;
 import org.apache.shiro.SecurityUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.util.StringUtils;
 import org.springframework.web.bind.annotation.PathVariable;
 import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
@@ -21,8 +20,8 @@ import com.sj.core.utils.web.JsonResult;
 import com.sj.core.utils.web.easyui.EzPageResult;
 import com.sj.web.common.security.ShiroUser;
 import com.sj.web.controllers.BaseController;
-import com.sj.web.model.system.OrgTreeGridVO;
-import com.sj.web.model.system.SysOrg;
+import com.sj.web.model.bean.system.SysOrg;
+import com.sj.web.model.vo.system.OrgTreeGridVO;
 import com.sj.web.services.system.OrgService;
 
 /**

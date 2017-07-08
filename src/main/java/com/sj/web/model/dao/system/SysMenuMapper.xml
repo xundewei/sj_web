@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="UTF-8" ?>
 <!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
-<mapper namespace="com.sj.web.dao.system.SysMenuMapper" >
-  <resultMap id="BaseResultMap" type="com.sj.web.model.system.SysMenu" >
+<mapper namespace="com.sj.web.model.dao.system.SysMenuMapper" >
+  <resultMap id="BaseResultMap" type="com.sj.web.model.bean.system.SysMenu" >
     <id column="PK_SYS_MENU" property="pkSysMenu" jdbcType="VARCHAR" />
     <result column="MENUCODE" property="menucode" jdbcType="VARCHAR" />
     <result column="MENUNAME" property="menuname" jdbcType="VARCHAR" />
@@ -9,7 +9,7 @@
     <result column="DISPLAYORDER" property="displayorder" jdbcType="DECIMAL" />
     <result column="LEV" property="lev" jdbcType="DECIMAL" />
     <result column="PARENTCODE" property="parentcode" jdbcType="VARCHAR" />
-    <result column="ICONCLS" property="iconCls" jdbcType="VARCHAR" />
+    <result column="ICONCLS" property="iconcls" jdbcType="VARCHAR" />
     <result column="URL" property="url" jdbcType="VARCHAR" />
     <result column="ENABLEFLAG" property="enableflag" jdbcType="CHAR" />
     <result column="ADMINFLAG" property="adminflag" jdbcType="CHAR" />
@@ -20,32 +20,32 @@
     <result column="DR" property="dr" jdbcType="CHAR" />
   </resultMap>
   <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
-    delete from WM.SYS_MENU
+    delete from SYS_MENU
     where PK_SYS_MENU = #{pkSysMenu,jdbcType=VARCHAR}
   </delete>
-  <insert id="insert" parameterType="com.sj.web.model.system.SysMenu" >
-    insert into WM.SYS_MENU (PK_SYS_MENU, MENUCODE, MENUNAME, 
+  <insert id="insert" parameterType="com.sj.web.model.bean.system.SysMenu" >
+    insert into SYS_MENU (PK_SYS_MENU, MENUCODE, MENUNAME, 
       DISPLAYNAME, DISPLAYORDER, LEV, 
-      PARENTCODE, iconCls, URL, 
+      PARENTCODE, ICONCLS, URL, 
       ENABLEFLAG, ADMINFLAG, MENUTYPE, 
       REMARK, CREATEUSER, TS, 
       DR)
     values (#{pkSysMenu,jdbcType=VARCHAR}, #{menucode,jdbcType=VARCHAR}, #{menuname,jdbcType=VARCHAR}, 
       #{displayname,jdbcType=VARCHAR}, #{displayorder,jdbcType=DECIMAL}, #{lev,jdbcType=DECIMAL}, 
-      #{parentcode,jdbcType=VARCHAR}, #{iconCls,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, 
+      #{parentcode,jdbcType=VARCHAR}, #{iconcls,jdbcType=VARCHAR}, #{url,jdbcType=VARCHAR}, 
       #{enableflag,jdbcType=CHAR}, #{adminflag,jdbcType=CHAR}, #{menutype,jdbcType=CHAR}, 
       #{remark,jdbcType=VARCHAR}, #{createuser,jdbcType=VARCHAR}, #{ts,jdbcType=VARCHAR}, 
       #{dr,jdbcType=CHAR})
   </insert>
-  <update id="updateByPrimaryKey" parameterType="com.sj.web.model.system.SysMenu" >
-    update WM.SYS_MENU
+  <update id="updateByPrimaryKey" parameterType="com.sj.web.model.bean.system.SysMenu" >
+    update SYS_MENU
     set MENUCODE = #{menucode,jdbcType=VARCHAR},
       MENUNAME = #{menuname,jdbcType=VARCHAR},
       DISPLAYNAME = #{displayname,jdbcType=VARCHAR},
       DISPLAYORDER = #{displayorder,jdbcType=DECIMAL},
       LEV = #{lev,jdbcType=DECIMAL},
       PARENTCODE = #{parentcode,jdbcType=VARCHAR},
-      iconCls = #{iconCls,jdbcType=VARCHAR},
+      ICONCLS = #{iconcls,jdbcType=VARCHAR},
       URL = #{url,jdbcType=VARCHAR},
       ENABLEFLAG = #{enableflag,jdbcType=CHAR},
       ADMINFLAG = #{adminflag,jdbcType=CHAR},
@@ -58,42 +58,14 @@
   </update>
   <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
     select PK_SYS_MENU, MENUCODE, MENUNAME, DISPLAYNAME, DISPLAYORDER, LEV, PARENTCODE, 
-    iconCls, URL, ENABLEFLAG, ADMINFLAG, MENUTYPE, REMARK, CREATEUSER, TS, DR
-    from WM.SYS_MENU
+    ICONCLS, URL, ENABLEFLAG, ADMINFLAG, MENUTYPE, REMARK, CREATEUSER, TS, DR
+    from SYS_MENU
     where PK_SYS_MENU = #{pkSysMenu,jdbcType=VARCHAR}
   </select>
-  
-   <select id="selectByMenuCode" resultMap="BaseResultMap" parameterType="java.lang.String" >
-    select PK_SYS_MENU, MENUCODE, MENUNAME, DISPLAYNAME, DISPLAYORDER, LEV, PARENTCODE, 
-    iconCls, URL, ENABLEFLAG, ADMINFLAG, MENUTYPE, REMARK, CREATEUSER, TS, DR
-    from WM.SYS_MENU
-    where MENUCODE = #{menucode,jdbcType=VARCHAR}
-  </select>
-  
   <select id="selectAll" resultMap="BaseResultMap" >
     select PK_SYS_MENU, MENUCODE, MENUNAME, DISPLAYNAME, DISPLAYORDER, LEV, PARENTCODE, 
-    iconCls, URL, ENABLEFLAG, ADMINFLAG, MENUTYPE, REMARK, CREATEUSER, TS, DR
-    from WM.SYS_MENU
+    ICONCLS, URL, ENABLEFLAG, ADMINFLAG, MENUTYPE, REMARK, CREATEUSER, TS, DR
+    from SYS_MENU
+    order by age desc,username asc
   </select>
-  
-   <select id="selectBylev1" parameterType="java.lang.String" resultMap="BaseResultMap">
-   SELECT DISTINCT A.PK_SYS_MENU, A.MENUCODE, A.MENUNAME, A.DISPLAYNAME, A.DISPLAYORDER, A.LEV, A.PARENTCODE, A.iconCls, 
-    A.URL,A. ENABLEFLAG, A.ADMINFLAG, A.MENUTYPE, A.REMARK, A.CREATEUSER, A.TS, A.DR
-     FROM SYS_MENU  A JOIN SYS_ROLE_MENU B  ON A.PK_SYS_MENU=B.PK_SYS_MENU  AND NVL(A.DR,0)=0
-                          JOIN SYS_ROLE C ON B.PK_SYS_ROLE=C.PK_SYS_ROLE  AND NVL(C.DR,0)=0
-                          JOIN SYS_USER_ROLE D ON C.PK_SYS_ROLE = D.PK_SYS_ROLE
-                          JOIN SYS_USER E ON D.PK_SYS_USER = E.PK_SYS_USER AND NVL(E.FLAG,0)=0 AND NVL(E.DR,0)=0
-                          WHERE 1=1 AND A.LEV=1 AND E.PK_SYS_USER = #{pk_sys_user,jdbcType=VARCHAR} ORDER BY A.DISPLAYORDER
-  </select>
-  
-   <select id="GetMenuByMoreLev2" parameterType="java.lang.String" resultMap="BaseResultMap">
-   SELECT DISTINCT A.PK_SYS_MENU, A.MENUCODE, A.MENUNAME, A.DISPLAYNAME, A.DISPLAYORDER, A.LEV, A.PARENTCODE, A.iconCls, 
-    A.URL,A. ENABLEFLAG, A.ADMINFLAG, A.MENUTYPE, A.REMARK, A.CREATEUSER, A.TS, A.DR
-     FROM SYS_MENU  A JOIN SYS_ROLE_MENU B  ON A.PK_SYS_MENU=B.PK_SYS_MENU  AND NVL(A.DR,0)=0
-                          JOIN SYS_ROLE C ON B.PK_SYS_ROLE=C.PK_SYS_ROLE  AND NVL(C.DR,0)=0
-                          JOIN SYS_USER_ROLE D ON C.PK_SYS_ROLE = D.PK_SYS_ROLE
-                          JOIN SYS_USER E ON D.PK_SYS_USER = E.PK_SYS_USER AND NVL(E.FLAG,0)=0 AND NVL(E.DR,0)=0
-                          WHERE 1=1 AND A.LEV>1 AND E.PK_SYS_USER = #{pk_sys_user,jdbcType=VARCHAR} ORDER BY A.DISPLAYORDER
-  </select>
-  
 </mapper>

@@ -5,7 +5,6 @@ import java.util.List;
 import java.util.Map;
 import java.util.UUID;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.PathVariable;
@@ -19,8 +18,8 @@ import com.sj.core.utils.BeanMapper;
 import com.sj.core.utils.web.JsonResult;
 import com.sj.core.utils.web.easyui.EzPageResult;
 import com.sj.web.controllers.BaseController;
-import com.sj.web.model.system.MenuTreeGridVO;
-import com.sj.web.model.system.SysMenu;
+import com.sj.web.model.bean.system.SysMenu;
+import com.sj.web.model.vo.system.MenuTreeGridVO;
 import com.sj.web.services.system.SysMenuService;
 
 /**

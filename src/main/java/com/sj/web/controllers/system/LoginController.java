@@ -13,7 +13,7 @@ import org.springframework.web.bind.annotation.RequestParam;
 
 import com.sj.web.common.security.ShiroRealm;
 import com.sj.web.controllers.BaseController;
-import com.sj.web.model.system.SysUser;
+import com.sj.web.model.bean.system.SysUser;
 import com.sj.web.services.system.UserService;
 
 /**

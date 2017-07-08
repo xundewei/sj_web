@@ -14,7 +14,7 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.sj.core.utils.web.easyui.EzPage;
 import com.sj.core.utils.web.easyui.EzPageResult;
 import com.sj.web.controllers.BaseController;
-import com.sj.web.model.system.SysUser;
+import com.sj.web.model.bean.system.SysUser;
 import com.sj.web.services.system.UserService;
 
 /**

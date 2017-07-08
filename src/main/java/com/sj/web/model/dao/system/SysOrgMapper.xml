@@ -1,0 +1,57 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sj.web.model.dao.system.SysOrgMapper" >
+  <resultMap id="BaseResultMap" type="com.sj.web.model.bean.system.SysOrg" >
+    <id column="PK_SYS_ORG" property="pkSysOrg" jdbcType="VARCHAR" />
+    <result column="ORGCODE" property="orgcode" jdbcType="VARCHAR" />
+    <result column="ORGNAME" property="orgname" jdbcType="VARCHAR" />
+    <result column="PARENTCODE" property="parentcode" jdbcType="VARCHAR" />
+    <result column="DISPLAYORDER" property="displayorder" jdbcType="DECIMAL" />
+    <result column="DUTY" property="duty" jdbcType="VARCHAR" />
+    <result column="ENABLEFLAG" property="enableflag" jdbcType="CHAR" />
+    <result column="REMARK" property="remark" jdbcType="VARCHAR" />
+    <result column="CREATEUSER" property="createuser" jdbcType="VARCHAR" />
+    <result column="TS" property="ts" jdbcType="VARCHAR" />
+    <result column="DR" property="dr" jdbcType="CHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from SYS_ORG
+    where PK_SYS_ORG = #{pkSysOrg,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sj.web.model.bean.system.SysOrg" >
+    insert into SYS_ORG (PK_SYS_ORG, ORGCODE, ORGNAME, 
+      PARENTCODE, DISPLAYORDER, DUTY, 
+      ENABLEFLAG, REMARK, CREATEUSER, 
+      TS, DR)
+    values (#{pkSysOrg,jdbcType=VARCHAR}, #{orgcode,jdbcType=VARCHAR}, #{orgname,jdbcType=VARCHAR}, 
+      #{parentcode,jdbcType=VARCHAR}, #{displayorder,jdbcType=DECIMAL}, #{duty,jdbcType=VARCHAR}, 
+      #{enableflag,jdbcType=CHAR}, #{remark,jdbcType=VARCHAR}, #{createuser,jdbcType=VARCHAR}, 
+      #{ts,jdbcType=VARCHAR}, #{dr,jdbcType=CHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.sj.web.model.bean.system.SysOrg" >
+    update SYS_ORG
+    set ORGCODE = #{orgcode,jdbcType=VARCHAR},
+      ORGNAME = #{orgname,jdbcType=VARCHAR},
+      PARENTCODE = #{parentcode,jdbcType=VARCHAR},
+      DISPLAYORDER = #{displayorder,jdbcType=DECIMAL},
+      DUTY = #{duty,jdbcType=VARCHAR},
+      ENABLEFLAG = #{enableflag,jdbcType=CHAR},
+      REMARK = #{remark,jdbcType=VARCHAR},
+      CREATEUSER = #{createuser,jdbcType=VARCHAR},
+      TS = #{ts,jdbcType=VARCHAR},
+      DR = #{dr,jdbcType=CHAR}
+    where PK_SYS_ORG = #{pkSysOrg,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select PK_SYS_ORG, ORGCODE, ORGNAME, PARENTCODE, DISPLAYORDER, DUTY, ENABLEFLAG, 
+    REMARK, CREATEUSER, TS, DR
+    from SYS_ORG
+    where PK_SYS_ORG = #{pkSysOrg,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select PK_SYS_ORG, ORGCODE, ORGNAME, PARENTCODE, DISPLAYORDER, DUTY, ENABLEFLAG, 
+    REMARK, CREATEUSER, TS, DR
+    from SYS_ORG
+    order by age desc,username asc
+  </select>
+</mapper>

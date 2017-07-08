@@ -26,7 +26,7 @@
 	<import resource="classpath:shiro/shiro-context.xml" />
 	
 	
-	<!--shiro配置 -->
+	<!--mybatis-jdbc配置 -->
 	<import resource="classpath:mybatis/mybatis-jdbc.xml" />
 	
 	

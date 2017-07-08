@@ -1,9 +1,13 @@
-package com.sj.web.model.system;
+package com.sj.web.model.bean.system;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class SysMenu {
-    private String pkSysMenu;
+public class SysMenu implements Serializable {
+   
+	private static final long serialVersionUID = 1L;
+
+	private String pkSysMenu;
 
     private String menucode;
 
@@ -17,11 +21,11 @@ public class SysMenu {
 
     private String parentcode;
 
-    private String iconCls;
+    private String iconcls;
 
     private String url;
 
-    private boolean enableflag;
+    private String enableflag;
 
     private String adminflag;
 
@@ -91,25 +95,15 @@ public class SysMenu {
         this.parentcode = parentcode == null ? null : parentcode.trim();
     }
 
-//    public String getIcon() {
-//        return icon;
-//    }
-//
-//    public void setIcon(String icon) {
-//        this.icon = icon == null ? null : icon.trim();
-//    }
+    public String getIconcls() {
+        return iconcls;
+    }
 
-    
-    public String getIconCls() {
-		return iconCls;
-	}
+    public void setIconcls(String iconcls) {
+        this.iconcls = iconcls == null ? null : iconcls.trim();
+    }
 
-	public void setIconCls(String iconCls) {
-		this.iconCls = iconCls == null ? null : iconCls.trim();
-	}
-	
-
-	public String getUrl() {
+    public String getUrl() {
         return url;
     }
 
@@ -117,17 +111,15 @@ public class SysMenu {
         this.url = url == null ? null : url.trim();
     }
 
-  
+    public String getEnableflag() {
+        return enableflag;
+    }
 
-    public boolean isEnableflag() {
-		return enableflag;
-	}
+    public void setEnableflag(String enableflag) {
+        this.enableflag = enableflag == null ? null : enableflag.trim();
+    }
 
-	public void setEnableflag(boolean enableflag) {
-		this.enableflag = enableflag;
-	}
-
-	public String getAdminflag() {
+    public String getAdminflag() {
         return adminflag;
     }
 
@@ -143,18 +135,15 @@ public class SysMenu {
         this.menutype = menutype == null ? null : menutype.trim();
     }
 
-
-    
-
     public String getRemark() {
-		return remark;
-	}
+        return remark;
+    }
 
-	public void setRemark(String remark) {
-		this.remark = remark == null ? null : remark.trim();
-	}
+    public void setRemark(String remark) {
+        this.remark = remark == null ? null : remark.trim();
+    }
 
-	public String getCreateuser() {
+    public String getCreateuser() {
         return createuser;
     }
 

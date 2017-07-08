@@ -1,9 +1,12 @@
-package com.sj.web.model.system;
+package com.sj.web.model.bean.system;
 
+import java.io.Serializable;
 import java.math.BigDecimal;
 
-public class SysOrg {
-    private String pkSysOrg;
+public class SysOrg implements Serializable{
+	private static final long serialVersionUID = 1L;
+
+	private String pkSysOrg;
 
     private String orgcode;
 
@@ -15,9 +18,9 @@ public class SysOrg {
 
     private String duty;
 
-    private boolean enableflag;
+    private String enableflag;
 
-	private String remark;
+    private String remark;
 
     private String createuser;
 
@@ -25,27 +28,15 @@ public class SysOrg {
 
     private String dr;
 
-    
-    
- 
-//
-//    public String getpkSysOrg() {
-//        return pkSysOrg;
-//    }
-//
-//    public void setpkSysOrg(String pkSysOrg) {
-//        this.PkSysOrg = PkSysOrg == null ? null : PkSysOrg.trim();
-//    }
-
     public String getPkSysOrg() {
-		return pkSysOrg;
-	}
+        return pkSysOrg;
+    }
 
-	public void setPkSysOrg(String pkSysOrg) {
-		this.pkSysOrg = pkSysOrg;
-	}
+    public void setPkSysOrg(String pkSysOrg) {
+        this.pkSysOrg = pkSysOrg == null ? null : pkSysOrg.trim();
+    }
 
-	public String getOrgcode() {
+    public String getOrgcode() {
         return orgcode;
     }
 
@@ -85,23 +76,15 @@ public class SysOrg {
         this.duty = duty == null ? null : duty.trim();
     }
 
-//    public String getEnableflag() {
-//        return enableflag;
-//    }
-//
-//    public void setEnableflag(String enableflag) {
-//        this.enableflag = enableflag == null ? null :  enableflag.trim();
-//    }
+    public String getEnableflag() {
+        return enableflag;
+    }
 
-    public boolean isEnableflag() {
-		return enableflag;
-	}
+    public void setEnableflag(String enableflag) {
+        this.enableflag = enableflag == null ? null : enableflag.trim();
+    }
 
-	public void setEnableflag(boolean enableflag) {
-		this.enableflag = enableflag;
-	}
-
-	public String getRemark() {
+    public String getRemark() {
         return remark;
     }
 
@@ -132,6 +115,4 @@ public class SysOrg {
     public void setDr(String dr) {
         this.dr = dr == null ? null : dr.trim();
     }
-
- 
 }

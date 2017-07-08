@@ -7,8 +7,6 @@ import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpServletResponse;
 
 import org.apache.shiro.SecurityUtils;
-import org.apache.shiro.authz.annotation.RequiresAuthentication;
-import org.apache.shiro.authz.annotation.RequiresRoles;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -21,11 +19,10 @@ import org.springframework.web.bind.annotation.ResponseBody;
 
 import com.sj.core.utils.web.easyui.EzTreeNode;
 import com.sj.web.common.Consts;
-import com.sj.web.common.security.ShiroRealm;
 import com.sj.web.common.security.ShiroUser;
 import com.sj.web.controllers.BaseController;
-import com.sj.web.model.system.SysMenu;
-import com.sj.web.model.system.SysUser;
+import com.sj.web.model.bean.system.SysMenu;
+import com.sj.web.model.bean.system.SysUser;
 import com.sj.web.services.system.SysMenuService;
 
 
