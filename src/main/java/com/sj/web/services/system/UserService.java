@@ -2,7 +2,7 @@ package com.sj.web.services.system;
 
 import java.util.Map;
 
-import com.sj.web.model.system.SysUser;
+import com.sj.web.model.bean.system.SysUser;
 
 
 

@@ -25,7 +25,7 @@ import com.sj.web.services.system.UserService;
 @RequestMapping(value = "/login")
 public class LoginController extends BaseController {
 	@Autowired
-	private UserService service;
+	private UserService userService;
 
 	@Autowired
 	private ShiroRealm appRealm;
@@ -70,7 +70,7 @@ public class LoginController extends BaseController {
 
 		UsernamePasswordToken token = null;
 		try {
-			SysUser user = service.getByLogin(usercode, password);
+			SysUser user = userService.getByLogin(usercode, password);
 
 			if (user == null) {
 				errorMsg = "提示信息：用户名或密码不正确，请重新输入！";

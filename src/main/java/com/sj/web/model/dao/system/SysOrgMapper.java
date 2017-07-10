@@ -42,6 +42,28 @@ public interface SysOrgMapper {
     * @throws
      */
     SysOrg selectByPrimaryKey(String pkSysOrg);
+    
+    
+  
+    /**
+     * 
+    * @Title: selectByOrgcdoe
+    * @Description: 根据机构编码查找机构
+    * @param pkSysOrg
+    * @return
+    * @throws
+     */
+    List<SysOrg> selectByOrgcode(String pkSysOrg);
+    
+    /**
+     * 
+    * @Title: selectEndOrg
+    * @Description: 取到
+    * @param orgcode
+    * @return
+    * @throws
+     */
+    List<SysOrg> selectEndOrg (String orgcode);
 
     /**
      * 

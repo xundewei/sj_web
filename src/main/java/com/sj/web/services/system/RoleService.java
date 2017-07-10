@@ -2,8 +2,7 @@ package com.sj.web.services.system;
 
 import java.util.List;
 
-import com.sj.web.model.system.SysRole;
-import com.sj.web.model.system.SysUser;
+import com.sj.web.model.bean.system.SysRole;
 
 
 
@@ -58,7 +57,7 @@ public interface RoleService{
      * 		pkSysUser 用户主键
      * @return
      */
-    public List<SysRole> getRolesByUserPk(String pkSysUser);
+//    public List<SysRole> getRolesByUserPk(String pkSysUser);
     
    
 

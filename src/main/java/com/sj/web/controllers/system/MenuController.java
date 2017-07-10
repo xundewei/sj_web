@@ -3,7 +3,6 @@ package com.sj.web.controllers.system;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Map;
-import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -14,7 +13,6 @@ import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
-import com.sj.core.utils.BeanMapper;
 import com.sj.core.utils.web.JsonResult;
 import com.sj.core.utils.web.easyui.EzPageResult;
 import com.sj.web.controllers.BaseController;
@@ -22,8 +20,19 @@ import com.sj.web.model.bean.system.SysMenu;
 import com.sj.web.model.vo.system.MenuTreeGridVO;
 import com.sj.web.services.system.SysMenuService;
 
+
 /**
- * 菜单控制器
+ * 
+* @ClassName: MenuController
+* @Description: 菜单控制器<br>
+* {
+* 	1.默认的Action，返回菜单功能主页面 URL: /system/menu GET <br>
+* 	2.获取Grid数据的接口 URL: /system/menu/list GET <br>
+* 	3.获取指定ID对象的接口 URL: /system/menu/1 GET 
+*  }
+* @author TODY happyming886@126.com
+* @date 2017年7月8日 下午3:38:06
+*
  */
 @Controller
 @RequestMapping("/system/menu")
@@ -31,26 +40,37 @@ public class MenuController extends BaseController {
 
 
 	@Autowired
-	private SysMenuService service;
+	private SysMenuService sysMenuService;
+	
 
 	/**
-	 * 1.默认的Action，返回菜单功能主页面 URL: /system/menu GET
+	 * 
+	* @Title: index
+	* @Description: 1.默认的Action，返回菜单功能主页面 URL: /system/menu GET
+	* @return
+	* @throws
 	 */
 	@RequestMapping(method = RequestMethod.GET)
 	public String index() {
 		return "system/menu/index";
 	}
 
+
 	/**
-	 * 2.获取Grid数据的接口 URL: /system/menu/list GET
+	 * 
+	* @Title: list
+	* @Description: 2.获取Grid数据的接口 URL: /system/menu/list GET
+	* @param sort
+	* @param order
+	* @return
+	* @throws
 	 */
 	@RequestMapping("list")
 	@ResponseBody
 	public Map<String, Object> list(@RequestParam(value = "sort", required = false) String sort,
 			@RequestParam(value = "order", required = false) String order) {
 		try {
-			List<SysMenu> list = service.getAll();
-			List<MenuTreeGridVO> voList = convertToVOList(list);
+			List<MenuTreeGridVO> voList = sysMenuService.getAll();
 			return EzPageResult.build(voList.size(), voList);
 		} catch (Exception ex) {
 			logger.error("获取菜单数据失败！", ex);
@@ -58,95 +78,66 @@ public class MenuController extends BaseController {
 		}
 	}
 
+	
+	
 	/**
-	 * 处理_parentId字段，转换VO LIST<BEAN>-->LIST<VO>
 	 * 
-	 * @param content
-	 * @return
-	 */
-	private List<MenuTreeGridVO> convertToVOList(List<SysMenu> content) {
-		List<MenuTreeGridVO> list = new ArrayList<MenuTreeGridVO>();
-		for (SysMenu org : content) {
-			MenuTreeGridVO vo = BeanMapper.map(org, MenuTreeGridVO.class);
-			// EasyUI的TreeGrid需要一个_parentId的隐藏字段，来确认每个项的父ID
-			vo._parentId = org.getParentcode();
-
-			list.add(vo);
-		}
-		return list;
-	}
-
-	/**
-	 * 3.获取指定ID对象的接口 URL: /system/menu/1 GET
-	 * 
-	 * @param id 主键
-	 * @return
+	* @Title: get
+	* @Description: 3.获取指定ID对象的接口 URL: /system/menu/1 GET
+	* @param id 菜单主键
+	* @return
+	* @throws
 	 */
 	@RequestMapping("{id}")
 	@ResponseBody
 	public JsonResult get(@PathVariable("id") String id) {
 		JsonResult result;
 		try {
-			SysMenu entity = service.getByPrimaryKey(id);
-			MenuTreeGridVO vo = convertToVO(entity);
-			result = JsonResult.success(vo);
+			result = JsonResult.success(sysMenuService.getByPrimaryKey(id));
 		} catch (Exception ex) {
 			String message = "获取数据失败";
 			logger.error(message, ex);
 			result = JsonResult.error(message);
 		}
-
 		return result;
 	}
 
 	
-	/**
-	 * 处理_parentId字段，转换VO BEAN-->VO
-	 * 
-	 * @param content
-	 * @return
-	 */
-	private MenuTreeGridVO convertToVO(SysMenu content) {
-
-		MenuTreeGridVO vo = BeanMapper.map(content, MenuTreeGridVO.class);
-		// EasyUI的TreeGrid需要一个_parentId的隐藏字段，来确认每个项的父ID
-		vo._parentId = content.getParentcode();
-		return vo;
-	}
 	
+	
+
 	/**
-	 * 4.新增接口 URL：/system/menu/add POST
-	 * 请求的Body中包含一个City的json数据(或者对应的视图对象，收到后再进行转换)
 	 * 
-	 * @param entity
-	 * @return
+	* @Title: add
+	* @Description: 4.新增接口 URL：/system/menu/add POST
+	* 				     请求的Body中包含一个City的json数据(或者对应的视图对象，收到后再进行转换)
+	* @param entity 菜单对象
+	* @return
+	* @throws
 	 */
 	@RequestMapping(value = "add", method = RequestMethod.POST)
 	@ResponseBody
 	public JsonResult add(@RequestBody SysMenu entity) {
-		try {
-
-			//判断编码是否已经存在
-			SysMenu sysmenu = service.SelectByMenuCode(entity.getMenucode());
-			if(!(sysmenu==null)){
-				return JsonResult.error("菜单编码[" + entity.getMenucode() +"]已经被使用，请修改！");
-			}
-			// 以随机数作为ID
-			entity.setPkSysMenu(UUID.randomUUID().toString());
-			service.addSysMenu(entity);
-
-			// 更新系统权限缓存
-			// appRoleService.evictAllAppRole();
-
+		String msg=sysMenuService.addSysMenu(entity);
+		if(msg.equals("成功")){
 			return JsonResult.success();
-		} catch (Exception ex) {
-			// 写日志
-			// 做异常处理
-			// 返回错误信息到前台
-			logger.error("新增失败！", ex);
+		}else if(msg.equals("失败")){
 			return JsonResult.error("新增失败！");
+		}else{
+			return JsonResult.error("菜单编码[" + entity.getMenucode() +"]已经被使用，请修改！");	
 		}
 	}
+	
+	
+	
+
+
+	
+	
+	
+
+	
+	
 	//
 	// /**
 	// * 5.更新/修改接口

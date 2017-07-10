@@ -3,10 +3,9 @@ package com.sj.web.common.security;
 import java.io.Serializable;
 import java.util.List;
 
-import com.google.common.base.Objects;
-import com.sj.web.model.system.SysMenu;
-import com.sj.web.model.system.SysRole;
-import com.sj.web.model.system.SysUser;
+import com.sj.web.model.bean.system.SysMenu;
+import com.sj.web.model.bean.system.SysRole;
+import com.sj.web.model.bean.system.SysUser;
 
 /**
  * 自定义Authentication对象，使得Subject除了携带用户的登录名外还可以携带更多信息.

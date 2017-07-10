@@ -1,7 +1,11 @@
 package com.sj.web.model.dao.system;
 
-import com.sj.web.model.bean.system.SysUser;
 import java.util.List;
+
+import org.apache.ibatis.annotations.Param;
+
+import com.sj.web.common.mybatis.plugin.Page;
+import com.sj.web.model.bean.system.SysUser;
 
 /**
  * 
@@ -50,6 +54,30 @@ public interface SysUserMapper {
     * @throws
      */
     List<SysUser> selectAll();
+    
+    
+    
+    /**
+     * 
+    * @Title: selectByUsercodePwd
+    * @Description: 根据用户编码和密码获得用户对象
+    * @param usercode 用户编码
+    * @param pwd 密码
+    * @return
+    * @throws
+     */
+    SysUser selectByUsercodePwd(@Param("usercode") String usercode,@Param("pwd") String pwd);
+  
+    
+    /**
+     * 
+    * @Title: selectAll
+    * @Description: 查找所有用户，翻页
+    * @param page
+    * @return
+    * @throws
+     */
+    List<SysUser> selectAllByPage(@Param("page") Page<SysUser> page);
 
     /**
      * 

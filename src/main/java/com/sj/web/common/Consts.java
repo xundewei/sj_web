@@ -1,7 +1,12 @@
 package com.sj.web.common;
 
 /**
- * Created by Administrator on 2015-01-15.
+ * 
+* @ClassName: Consts
+* @Description: 对系统硬编码的去除
+* @author TODY happyming886@126.com
+* @date 2017年7月8日 下午5:11:19
+*
  */
 public class Consts {
     public static final String appCache = "appCache";

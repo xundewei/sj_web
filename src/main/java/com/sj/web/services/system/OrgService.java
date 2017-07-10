@@ -3,23 +3,84 @@ package com.sj.web.services.system;
 import java.util.List;
 
 import com.sj.core.utils.web.easyui.EzTreeNode;
-import com.sj.web.model.system.SysOrg;
-
-
+import com.sj.web.common.security.ShiroUser;
+import com.sj.web.model.bean.system.SysOrg;
+import com.sj.web.model.vo.system.OrgTreeGridVO;
 
 /**
  * 
- * @Description: 机构业务实现接口
- * @author tody
- * @date 2017年5月4日下午8:56:59
+* @ClassName: OrgService
+* @Description: 机构的业务实现接口
+* @author TODY happyming886@126.com
+* @date 2017年7月8日 上午11:56:24
+*
  */
 public interface OrgService{
 	
+	
 	/**
-	 * 取到全部机构
-	 * @return
+	 * 
+	* @Title: getAllOrg
+	* @Description: 查找所有的机构VO
+	* @return
+	* @throws
 	 */
-	public List<SysOrg> getAllOrg();
+	public List<OrgTreeGridVO> getAllOrg();
+	
+	
+	
+	/**
+	 * 
+	* @Title: getByPrimaryKey
+	* @Description: 根据主键找到机构VO
+	* @param pk_sys_org
+	* @return
+	* @throws
+	 */
+	public OrgTreeGridVO getByPrimaryKey(String pk_sys_org);
+	
+	
+	
+	
+	/**
+	 * 
+	* @Title: addSysOrg
+	* @Description: 新增一个机构
+	* @param sysorg 机构对象
+	* @param shiroUser 登入用户对象
+	* @return
+	* @throws
+	 */
+	public String addSysOrg(SysOrg sysorg,ShiroUser shiroUser);
+	
+	
+	
+
+	/**
+	 * 
+	* @Title: modifySysOrg
+	* @Description: 更新机构
+	* @param sysorg
+	* @return
+	* @throws
+	 */
+	public int modifySysOrg(SysOrg sysorg);
+	
+	
+	
+	/**
+	 * 
+	* @Title: removeSysOrg
+	* @Description: TODO(这里用一句话描述这个方法的作用)
+	* @param pk_sys_org
+	* @return
+	* @throws
+	 */
+	public String removeSysOrg(String pk_sys_org,String orgcode);
+	
+	
+	
+	
 	
 	
 	/**
@@ -40,33 +101,4 @@ public interface OrgService{
 	 */
 	public List<SysOrg> getByLastOrg(String orgcode);
 	
-	
-	/**
-	 * 根据ORGCODE找到机构
-	 * @return
-	 */
-	public SysOrg selectByPrimaryKey(String pk_sys_org);
-	
-	
-	/**
-	 * 新增机构操作
-	 * @return
-	 */
-	public int addSysOrg(SysOrg sysorg);
-	
-	
-	/**
-	 * 更新操作
-	 * @return
-	 */
-	public int updateSysOrg(SysOrg sysorg);
-	
-	
-	/**
-	 * 删除机构操作
-	 * @return
-	 */
-	public int deleteSysOrg(String pk_sys_org);
-	
-
 }

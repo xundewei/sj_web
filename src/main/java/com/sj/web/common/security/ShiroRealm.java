@@ -1,8 +1,5 @@
 package com.sj.web.common.security;
 
-import java.util.ArrayList;
-import java.util.List;
-
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -17,8 +14,7 @@ import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.SimplePrincipalCollection;
 
 import com.sj.core.utils.SpringUtils;
-import com.sj.web.model.system.SysRole;
-import com.sj.web.model.system.SysUser;
+import com.sj.web.model.bean.system.SysUser;
 import com.sj.web.services.system.UserService;
 
 

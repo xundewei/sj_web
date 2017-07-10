@@ -3,7 +3,8 @@ package com.sj.web.services.system;
 import java.util.List;
 
 import com.sj.core.utils.web.easyui.EzTreeNode;
-import com.sj.web.model.system.SysMenu;
+import com.sj.web.model.bean.system.SysMenu;
+import com.sj.web.model.vo.system.MenuTreeGridVO;
 
 
 /**
@@ -14,12 +15,50 @@ import com.sj.web.model.system.SysMenu;
  */
 public interface SysMenuService{
 	
+
+	/**
+	 * 
+	* @Title: getMenuAccordion
+	* @Description: 菜单-百叶窗接口 lev=1
+	* @param pk_sys_user 用户主键
+	* @return
+	* @throws
+	 */
+	public List<SysMenu> getMenuAccordion(String pk_sys_user);
 	
-	 /**
-     * 找到所有菜单
-     * @return
+	/**
+	 * 
+	* @Title: getMenuLeftTree
+	* @Description: 菜单-百叶窗-tree接口 lev>=2
+	* @param pk_sys_user
+	* @param menucode
+	* @return
+	* @throws
+	 */
+	public List<EzTreeNode> getMenuLeftTree(String pk_sys_user,String menucode);
+	
+	
+	/**
+	 * 
+	* @Title: getAll
+	* @Description: 查找所有的菜单
+	* @return
+	* @throws
+	 */
+    public  List<MenuTreeGridVO>  getAll();
+	
+	
+    /**
+     * 
+    * @Title: addSysMenu
+    * @Description: 新增菜单
+    * @param sysmenu 菜单对象
+    * @return
+    * @throws
      */
-    public List<SysMenu> getAll();
+    public String addSysMenu(SysMenu sysmenu);
+	
+
     
     
   
@@ -29,24 +68,11 @@ public interface SysMenuService{
      * 		pkSysMenu 主键
      * @return
      */
-    public SysMenu getByPrimaryKey(String pkSysMenu);
+    public MenuTreeGridVO getByPrimaryKey(String pkSysMenu);
 	
-    /**
-     * 根据编码找到菜单
-     * @param 
-     * 		menucode 菜单编码
-     * @return 
-     * 		菜单记录
-     */
-    public SysMenu SelectByMenuCode(String menucode);
+
 	
-    /**
-     * 新增菜单数据
-     * @param 
-     * 		sysmenu 新增的数据
-     * @return
-     */
-    public  int addSysMenu(SysMenu sysmenu);
+ 
     
     /**
      * 通过主键修改菜单数据
@@ -65,24 +91,6 @@ public interface SysMenuService{
      * @return
      */
     public int deleteByPrimaryKey(String pkSysMenu);
-    
-    
-    /**
-     * 根据角色找到此角色下面的所有的一级菜单
-     * @param 
-     * 		pk_sys_user  用户主键
-     * @return
-     */
-    public List<SysMenu> GetMenuBylev1(String pk_sys_user);
-    
-    /**
-     * 根据角色和父节点编码找到菜单下面所有的菜单
-     * @param 
-     *      pk_sys_user 用户主键
-     * 		menucode  一级菜单CODE(父节点编码)
-     * @return
-     */
-    public List<EzTreeNode> GetMenuByMoreLev2(String pk_sys_user,String menucode);
     
 
 }

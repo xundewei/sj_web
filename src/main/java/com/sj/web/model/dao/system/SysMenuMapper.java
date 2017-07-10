@@ -31,6 +31,16 @@ public interface SysMenuMapper {
     * @throws
      */
     int insert(SysMenu record);
+    
+    /**
+     * 
+    * @Title: updateByPrimaryKey
+    * @Description: 根据主键更新菜单
+    * @param record
+    * @return
+    * @throws
+     */
+    int updateByPrimaryKey(SysMenu record);
 
     /**
      * 
@@ -53,11 +63,33 @@ public interface SysMenuMapper {
 
     /**
      * 
-    * @Title: updateByPrimaryKey
-    * @Description: 根据主键更新菜单
-    * @param record
+    * @Title: selectMenuAccordion
+    * @Description: 查询主界面菜单-百叶窗的数据
+    * @param pk_sys_user 用户主键
     * @return
     * @throws
      */
-    int updateByPrimaryKey(SysMenu record);
+    List<SysMenu> selectMenuAccordion(String pk_sys_user);
+    
+    
+    /**
+     * 
+    * @Title: selectMenuLeftTree
+    * @Description: 查询主界面菜单-百叶窗-tree的数据
+    * @param pk_sys_user 用户主键
+    * @return
+    * @throws
+     */
+    List<SysMenu> selectMenuLeftTree(String pk_sys_user);
+    
+    /**
+     * 
+    * @Title: selectByMenuCode
+    * @Description: 根据菜单编码查找菜单
+    * @param menucode 菜单编码
+    * @return
+    * @throws
+     */
+    SysMenu selectByMenuCode(String menucode);
+    
 }

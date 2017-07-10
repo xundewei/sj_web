@@ -1,10 +1,13 @@
 package com.sj.web.controllers;
 
 
+import org.apache.shiro.SecurityUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.web.context.request.RequestContextHolder;
 import org.springframework.web.context.request.ServletRequestAttributes;
+
+import com.sj.web.common.security.ShiroUser;
 
 import javax.servlet.http.HttpServletRequest;
 import javax.servlet.http.HttpSession;
@@ -44,6 +47,16 @@ public class BaseController {
 
         HttpSession session = request.getSession();
         return session;
+    }
+    
+    /**
+     * 获取当前Shiro用户
+     * @return
+     */
+    protected ShiroUser getCurrentShiroUser(){
+        ShiroUser user = (ShiroUser) SecurityUtils.getSubject().getPrincipal();
+        SecurityUtils.getSubject().isPermitted("admin");
+        return user;
     }
     
 }
