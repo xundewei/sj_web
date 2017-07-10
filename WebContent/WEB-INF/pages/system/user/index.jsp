@@ -6,15 +6,25 @@
         $("#sys_user_grid").datagrid({
             url: "system/user/list",
             columns: [[
-                {field: 'id', title: '用户ID', width: 80, sortable: true, hidden: true},
+                {field: 'pkSysUser', title: '用户ID', width: 80, sortable: true, hidden: true},
                 {field: 'usercode', title: '用户编号', width: 80, sortable: true},
-                {field: 'displayname', title: '用户名称', width: 80, sortable: true},
-                {field: 'loginname', title: '登录名称', width: 80, sortable: true},
-                {field: 'sex', title: '性别', width: 80, sortable: true},
+                {field: 'username', title: '用户名称', width: 80, sortable: true},
+                {	field: 'sex', 
+                	title: '性别', 
+                	width: 80, 
+                	sortable: true,
+                	formatter: function (value, row, index) {
+                        if (value=="01") {
+                            return "男";
+                        } else {
+                            return "女";
+                        }
+                    }
+                },
                 {field: 'mobile', title: '手机', width: 80, sortable: false},
-                {field: 'orgaid', title: '机构ID', width: 160, align: 'right', sortable: false, hidden: true},
+                {field: 'pkSysOrg', title: '机构ID', width: 160, align: 'right', sortable: false, hidden: true},
                 {
-                    field: 'enableflag',
+                    field: 'flag',
                     title: '是否可用',
                     width: 50,
                     sortable: true,
@@ -28,8 +38,9 @@
                     styler: function (value, row, index) {
                         if (value) {
                             return 'color:blue;';
+                        } else{
+                        	return 'color:red;';
                         }
-                        //return 'color:green;';
                     }
                 },
                 {field: 'remark', title: '备注', width: 100, align: 'right', sortable: false}
@@ -100,12 +111,9 @@
         //重置按钮动作
         $("#sys_user_btnReset").click(function () {
             $("#sys_user_name").prop("value", "");
-            $("#sys_user_orgaid").val("");
-            $("#sys_user_organame").val("");
-//            $("#sys_user_level").prop("checked", false);
-
+            $("#sys_user_orgcode").val("");
+            $("#sys_user_orgname").val("");
             $('#sys_user_tree1').tree("select", "");
-
             hlg.grid.clearQueryParams("#sys_user_grid");
             hlg.grid.load("#sys_user_grid");
         });
@@ -114,14 +122,15 @@
     //配置组织树
     function sys_user_ConfigTree() {
         $('#sys_user_tree1').tree({
-            url: 'system/public/loadorgatree',
+            url: 'system/reference/loadorgtree',
             lines: true,
             onClick: function (node) {
-                $("#sys_user_orgaid").val("");
-                $("#sys_user_organame").val("");
-                //var attrObj = JSON.parse(node.attributes);
-                $("#sys_user_orgaid").val(node.id);
-                $("#sys_user_organame").val(node.text);
+                $("#sys_user_orgcode").val("");
+                $("#sys_user_orgname").val("");
+                $("#sys_user_pk_sys_code").val("");
+                $("#sys_user_orgcode").val(node.id);
+                $("#sys_user_orgname").val(node.text);
+                $("#sys_user_pk_sys_code").val(node.attributes);
                 sys_user_doQuery();
             }
         });
@@ -131,7 +140,7 @@
     function sys_user_doQuery() {
         var queryObj = {};
         queryObj.name = $("#sys_user_name").val();
-        queryObj.orgaid = $("#sys_user_orgaid").val();
+        queryObj.orgaid = $("#sys_user_orgcode").val();
         if($("#sys_user_level").prop("checked")){
             queryObj.level = "1"
         }else{
@@ -170,7 +179,7 @@
             return;
         }
 
-        var $rowid = row.id;
+        var $rowid = row.pkSysUser;
         if ($rowid == null) {
             hlg.dialog.showInfo("请先选择一条记录！");
             return;
@@ -217,8 +226,9 @@
         <div style="padding: 5px;">
             <form id="sys_user_form">
                 用户名称：<input id="sys_user_name" name="sys_user_name" type="text"/>
-                <input type="hidden" id="sys_user_orgaid"/>
-                <input type="hidden" id="sys_user_organame"/>
+                <input type="hidden" id="sys_user_orgcode"/>
+                <input type="hidden" id="sys_user_pk_sys_code"/>
+                <input type="hidden" id="sys_user_orgname"/>
                 <a id="sys_user_btnQuery" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'">查询</a>
                 <a id="sys_user_btnReset" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-undo'">重置</a>
                 <input type="checkbox" checked="checked" id="sys_user_level"/>只显示选中机构直属用户
@@ -228,12 +238,12 @@
 
     <%--左右布局--%>
     <div style="margin:0 auto; width:100%;">
-        <!-- <div id="sys_user_sidebar" style=" float:left; width:250px; height:500px;padding-right:5px;">
+         <div id="sys_user_sidebar" style=" float:left; width:250px; height:500px;padding-right:5px;">
             <div id="sys_user_sidepanel" class="easyui-panel hlg-leftpanel" style="height:500px;"
                  data-options="fit:true" title="组织机构">
                 <ul id="sys_user_tree1"></ul>
             </div>
-        </div> -->
+        </div> 
         <div id="sys_user_content">
             <table id="sys_user_grid" ></table>
         </div>

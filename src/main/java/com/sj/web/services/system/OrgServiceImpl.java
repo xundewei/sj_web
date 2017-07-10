@@ -6,6 +6,7 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.sj.core.utils.BeanMapper;
 import com.sj.core.utils.web.easyui.EzTreeNode;
@@ -22,6 +23,7 @@ import com.sj.web.model.vo.system.OrgTreeGridVO;
  * @date 2017年5月4日下午8:56:32
  */
 @Service("orgService")
+@Transactional
 public class OrgServiceImpl implements OrgService {
 	@Autowired
 	private SysOrgMapper sysOrgMapper;
@@ -114,6 +116,7 @@ public class OrgServiceImpl implements OrgService {
 			ezTreeNode.setId(sysorg.getOrgcode());
 			ezTreeNode.setPid(sysorg.getParentcode());
 			ezTreeNode.setText(sysorg.getOrgname());
+			ezTreeNode.setAttributes(sysorg.getPkSysOrg());
 			list.add(ezTreeNode);
 		}
 		List<EzTreeNode> lsit2 = TreeBuilder.buildByRecursive(list);

@@ -92,6 +92,7 @@ public class LoginController extends BaseController {
 		} catch (Exception e) {
 			if (token != null)
 				token.clear();
+			System.out.println(e.getMessage());
 			errorMsg = "提示信息：用户名或密码不正确，请重新输入！";
 		}
 		model.addAttribute("errorMessage", errorMsg);

@@ -1,81 +1,113 @@
-<?xml version="1.0" encoding="UTF-8" ?>
-<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<?xml version="1.0" encoding="UTF-8"?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
 <mapper namespace="com.sj.web.model.dao.system.SysUserMapper">
 	<resultMap id="BaseResultMap" type="com.sj.web.model.bean.system.SysUser">
-		<id column="PK_SYS_USER" property="pkSysUser" jdbcType="VARCHAR" />
-		<result column="USERCODE" property="usercode" jdbcType="VARCHAR" />
-		<result column="USERNAME" property="username" jdbcType="VARCHAR" />
-		<result column="PWD" property="pwd" jdbcType="VARCHAR" />
-		<result column="TABMODE" property="tabmode" jdbcType="CHAR" />
-		<result column="THEME" property="theme" jdbcType="VARCHAR" />
-		<result column="FLAG" property="flag" jdbcType="CHAR" />
-		<result column="CREATEUSER" property="createuser" jdbcType="VARCHAR" />
-		<result column="DR" property="dr" jdbcType="CHAR" />
-		<result column="TS" property="ts" jdbcType="VARCHAR" />
-		<result column="REMARK" property="remark" jdbcType="VARCHAR" />
+		<id column="PK_SYS_USER" jdbcType="VARCHAR" property="pkSysUser" />
+		<result column="USERCODE" jdbcType="VARCHAR" property="usercode" />
+		<result column="USERNAME" jdbcType="VARCHAR" property="username" />
+		<result column="PWD" jdbcType="VARCHAR" property="pwd" />
+		<result column="TABMODE" jdbcType="CHAR" property="tabmode" />
+		<result column="THEME" jdbcType="VARCHAR" property="theme" />
+		<result column="FLAG" jdbcType="CHAR" property="flag" />
+		<result column="CREATEUSER" jdbcType="VARCHAR" property="createuser" />
+		<result column="DR" jdbcType="CHAR" property="dr" />
+		<result column="TS" jdbcType="VARCHAR" property="ts" />
+		<result column="REMARK" jdbcType="VARCHAR" property="remark" />
+		<result column="SEX" jdbcType="CHAR" property="sex" />
+		<result column="MOBILE" jdbcType="VARCHAR" property="mobile" />
+		<result column="PK_SYS_ORG" jdbcType="VARCHAR" property="pkSysOrg" />
 	</resultMap>
 	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
-		delete from SYS_USER
+		delete from
+		SYS_USER
 		where PK_SYS_USER = #{pkSysUser,jdbcType=VARCHAR}
 	</delete>
 	<insert id="insert" parameterType="com.sj.web.model.bean.system.SysUser">
-		insert into SYS_USER (PK_SYS_USER, USERCODE, USERNAME,
+		insert into SYS_USER
+		(PK_SYS_USER, USERCODE, USERNAME,
 		PWD, TABMODE, THEME, FLAG,
-		CREATEUSER, DR, TS, REMARK
-		)
-		values (#{pkSysUser,jdbcType=VARCHAR}, #{usercode,jdbcType=VARCHAR},
+		CREATEUSER, DR, TS, REMARK,
+		SEX, MOBILE, PK_SYS_ORG)
+		values
+		(#{pkSysUser,jdbcType=VARCHAR}, #{usercode,jdbcType=VARCHAR},
 		#{username,jdbcType=VARCHAR},
-		#{pwd,jdbcType=VARCHAR}, #{tabmode,jdbcType=CHAR}, #{theme,jdbcType=VARCHAR},
+		#{pwd,jdbcType=VARCHAR},
+		#{tabmode,jdbcType=CHAR}, #{theme,jdbcType=VARCHAR},
 		#{flag,jdbcType=CHAR},
-		#{createuser,jdbcType=VARCHAR}, #{dr,jdbcType=CHAR}, #{ts,jdbcType=VARCHAR},
-		#{remark,jdbcType=VARCHAR}
-		)
+		#{createuser,jdbcType=VARCHAR},
+		#{dr,jdbcType=CHAR}, #{ts,jdbcType=VARCHAR},
+		#{remark,jdbcType=VARCHAR},
+		#{sex,jdbcType=CHAR},
+		#{mobile,jdbcType=VARCHAR}, #{pkSysOrg,jdbcType=VARCHAR})
 	</insert>
 	<update id="updateByPrimaryKey" parameterType="com.sj.web.model.bean.system.SysUser">
 		update SYS_USER
 		set USERCODE = #{usercode,jdbcType=VARCHAR},
-		USERNAME = #{username,jdbcType=VARCHAR},
+		USERNAME =
+		#{username,jdbcType=VARCHAR},
 		PWD = #{pwd,jdbcType=VARCHAR},
-		TABMODE = #{tabmode,jdbcType=CHAR},
+		TABMODE =
+		#{tabmode,jdbcType=CHAR},
 		THEME = #{theme,jdbcType=VARCHAR},
-		FLAG = #{flag,jdbcType=CHAR},
+		FLAG =
+		#{flag,jdbcType=CHAR},
 		CREATEUSER = #{createuser,jdbcType=VARCHAR},
-		DR = #{dr,jdbcType=CHAR},
+		DR =
+		#{dr,jdbcType=CHAR},
 		TS = #{ts,jdbcType=VARCHAR},
-		REMARK = #{remark,jdbcType=VARCHAR}
+		REMARK =
+		#{remark,jdbcType=VARCHAR},
+		SEX = #{sex,jdbcType=CHAR},
+		MOBILE =
+		#{mobile,jdbcType=VARCHAR},
+		PK_SYS_ORG = #{pkSysOrg,jdbcType=VARCHAR}
 		where PK_SYS_USER = #{pkSysUser,jdbcType=VARCHAR}
 	</update>
-	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
-		parameterType="java.lang.String">
-		select PK_SYS_USER, USERCODE, USERNAME, PWD, TABMODE, THEME, FLAG,
+	<select id="selectByPrimaryKey" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select PK_SYS_USER, USERCODE, USERNAME, PWD, TABMODE, THEME,
+		FLAG,
 		CREATEUSER, DR,
-		TS, REMARK
+		TS, REMARK, SEX, MOBILE, PK_SYS_ORG
 		from SYS_USER
 		where PK_SYS_USER = #{pkSysUser,jdbcType=VARCHAR}
 	</select>
 	<select id="selectAll" resultMap="BaseResultMap">
-		select PK_SYS_USER, USERCODE, USERNAME, PWD, TABMODE, THEME, FLAG,
+		select PK_SYS_USER, USERCODE,
+		USERNAME, PWD, TABMODE, THEME, FLAG,
 		CREATEUSER, DR,
-		TS, REMARK
+		TS, REMARK, SEX,
+		MOBILE, PK_SYS_ORG
 		from SYS_USER
-		order by age desc,username asc
+	</select>
+
+	<select id="selectByUserCode" parameterType="java.lang.String"
+		resultMap="BaseResultMap">
+		select PK_SYS_USER, USERCODE, USERNAME, PWD, TABMODE, THEME,
+		FLAG,
+		CREATEUSER, DR,
+		TS, REMARK, SEX, MOBILE, PK_SYS_ORG
+		from SYS_USER
+		where USERCODE = #{usercode,jdbcType=VARCHAR}
 	</select>
 
 	<select id="selectByUsercodePwd" resultMap="BaseResultMap">
 		select
 		PK_SYS_USER,
 		USERCODE, USERNAME, PWD, TABMODE, THEME, FLAG, CREATEUSER, DR,
-		TS, REMARK
+		TS,
+		REMARK, SEX, MOBILE, PK_SYS_ORG
 		from SYS_USER
-		where USERCODE = #{usercode} AND PWD = #{pwd}
+		where USERCODE =
+		#{usercode} AND PWD = #{pwd}
 	</select>
-	
+
 	<select id="selectAllByPage" resultMap="BaseResultMap">
-		select PK_SYS_USER, USERCODE, USERNAME, PWD, TABMODE, THEME, FLAG,
-		CREATEUSER, DR,
-		TS, REMARK
+		select PK_SYS_USER,
+		USERCODE, USERNAME, PWD, TABMODE, THEME, FLAG, CREATEUSER, DR,
+		TS,
+		REMARK, SEX, MOBILE, PK_SYS_ORG
 		from SYS_USER
-		order by age desc,username asc
 	</select>
 
 

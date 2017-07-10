@@ -1,6 +1,6 @@
 <%@ page contentType="text/html;charset=UTF-8" pageEncoding="UTF-8" language="java" %>
 <div id="sys_user_AddDialog" class="easyui-dialog" title="新增"
-     style="width:600px;height:350px;padding:10px"
+     style="width:800px;height:350px;padding:5px"
      data-options="
                 closed: true,
                 modal: true,
@@ -20,45 +20,32 @@
             ">
     <form id="sys_user_a_form">
         <div class="hlg-title">基本信息</div>
-        <input type="hidden" id="sys_user_a_orgaid" name="orgaid"/>
-        <table style="width: 100%; border-collapse: collapse; padding: 10px;">
+        <input type="hidden" id="sys_user_a_pk_sys_code" name="pkSysOrg"/>
+        <table style="width: 100%; border-collapse: collapse; padding: 5px;">
             <tr>
                 <td style="text-align: right; width: 15%">姓名：</td>
-                <td><input name="displayname" class="easyui-validatebox"
-                           data-options="required:true"/></td>
+                <td><input name="username" class="easyui-validatebox"data-options="required:true"/></td>
                 <td style="text-align: right; width: 15%">编号：</td>
                 <td><input name="usercode"/></td>
             </tr>
             <tr>
-                <td style="text-align: right;">登录名：</td>
-                <td><input name="loginname" class="easyui-validatebox"
-                           data-options="required:true"/></td>
                 <td style="text-align: right;">性别：</td>
                 <td>
-                    <input type="radio" id="sex" name="sex" value="男" checked="checked"/>男
-                    <input type="radio" name="sex" value="女"/>女
+                    <input type="radio" id="sex" name="sex" value="01" checked="checked"/>男
+                    <input type="radio" name="sex" value="02"/>女
                 </td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">固定电话：</td>
-                <td><input id="sys_user_a_phone" name="phone"/></td>
                 <td style="text-align: right;">手机：</td>
                 <td><input id="sys_user_a_mobile" name="mobile"/></td>
             </tr>
             <tr>
-                <td style="text-align: right;">邮箱：</td>
-                <td><input name="email"/></td>
-                <td style="text-align: right;">地址：</td>
-                <td><input name="address"/></td>
-            </tr>
-            <tr>
                 <td style="text-align: right;">所属机构：</td>
                 <td>
-                    <input id="sys_user_a_organame" readonly="readonly"/>
+                    <input id="sys_user_a_orgname" readonly="readonly"/>
                     <a id="sys_user_a_btnQuery" href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="sys_user_a_selOrg()">选择</a>
+                    
                 </td>
                 <td style="text-align: right;">是否可用：</td>
-                <td><input type="checkbox" checked="checked" id="sys_user_a_enableflag" name="enableflag" value="true" data-unchecked-value="false"/></td>
+                <td><input type="checkbox" checked="checked" id="sys_user_a_flag" name="flag" value="true" data-unchecked-value="false"/></td>
             </tr>
             <tr>
                 <td style="text-align: right; vertical-align: top;">备注：</td>
@@ -75,15 +62,14 @@
         //清除对话框中的显示值，如果有的话
         hlg.form.clear("#sys_user_a_form");
         $("#sex").prop("checked", true);
-        $("#sys_user_a_enableflag").prop("checked", true);
-
+        $("#sys_user_a_flag").prop("checked", true);
         //将左侧树选中节点的机构id/name传入过来，作为新增数据的父
-        var id = $("#sys_user_orgaid").val();
-        $("#sys_user_a_orgaid").val(id);
+        var name = $("#sys_user_orgname").val();
+        var pkSysOrg= $("#sys_user_pk_sys_code").val();
 
-        var name = $("#sys_user_organame").val();
-        $("#sys_user_a_organame").val(name);
-
+        $("#sys_user_a_pk_sys_code").val(pkSysOrg);
+        $("#sys_user_a_orgname").val(name);
+        
         $('#sys_user_AddDialog').dialog('open');
     }
 

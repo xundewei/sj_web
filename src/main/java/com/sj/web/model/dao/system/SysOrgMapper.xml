@@ -72,7 +72,6 @@
 		REMARK, CREATEUSER,
 		TS, DR
 		from SYS_ORG
-		order by age desc,username asc
 	</select>
 
 	<select id="selectByOrgcode" resultMap="BaseResultMap">

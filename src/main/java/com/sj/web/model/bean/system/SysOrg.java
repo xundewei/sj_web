@@ -18,7 +18,7 @@ public class SysOrg implements Serializable{
 
     private String duty;
 
-    private String enableflag;
+    private boolean enableflag;
 
     private String remark;
 
@@ -76,12 +76,12 @@ public class SysOrg implements Serializable{
         this.duty = duty == null ? null : duty.trim();
     }
 
-    public String getEnableflag() {
+    public boolean getEnableflag() {
         return enableflag;
     }
 
-    public void setEnableflag(String enableflag) {
-        this.enableflag = enableflag == null ? null : enableflag.trim();
+    public void setEnableflag(boolean enableflag) {
+        this.enableflag = enableflag ;
     }
 
     public String getRemark() {

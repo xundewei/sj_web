@@ -3,7 +3,9 @@ package com.sj.web.model.bean.system;
 import java.io.Serializable;
 
 public class SysUser implements Serializable{
-
+    /**
+	* @Fields serialVersionUID : TODO(用一句话描述这个变量表示什么)
+	*/
 	private static final long serialVersionUID = 1L;
 
 	private String pkSysUser;
@@ -14,11 +16,11 @@ public class SysUser implements Serializable{
 
     private String pwd;
 
-    private String tabmode;
+    private boolean tabmode;
 
     private String theme;
 
-    private String flag;
+    private boolean flag;
 
     private String createuser;
 
@@ -27,6 +29,12 @@ public class SysUser implements Serializable{
     private String ts;
 
     private String remark;
+
+    private String sex;
+
+    private String mobile;
+
+    private String pkSysOrg;
 
     public String getPkSysUser() {
         return pkSysUser;
@@ -60,12 +68,12 @@ public class SysUser implements Serializable{
         this.pwd = pwd == null ? null : pwd.trim();
     }
 
-    public String getTabmode() {
+    public boolean getTabmode() {
         return tabmode;
     }
 
-    public void setTabmode(String tabmode) {
-        this.tabmode = tabmode == null ? null : tabmode.trim();
+    public void setTabmode(boolean tabmode) {
+        this.tabmode = tabmode ;
     }
 
     public String getTheme() {
@@ -76,12 +84,12 @@ public class SysUser implements Serializable{
         this.theme = theme == null ? null : theme.trim();
     }
 
-    public String getFlag() {
+    public boolean getFlag() {
         return flag;
     }
 
-    public void setFlag(String flag) {
-        this.flag = flag == null ? null : flag.trim();
+    public void setFlag(boolean flag) {
+        this.flag = flag;
     }
 
     public String getCreateuser() {
@@ -114,5 +122,29 @@ public class SysUser implements Serializable{
 
     public void setRemark(String remark) {
         this.remark = remark == null ? null : remark.trim();
+    }
+
+    public String getSex() {
+        return sex;
+    }
+
+    public void setSex(String sex) {
+        this.sex = sex == null ? null : sex.trim();;
+    }
+
+    public String getMobile() {
+        return mobile;
+    }
+
+    public void setMobile(String mobile) {
+        this.mobile = mobile == null ? null : mobile.trim();
+    }
+
+    public String getPkSysOrg() {
+        return pkSysOrg;
+    }
+
+    public void setPkSysOrg(String pkSysOrg) {
+        this.pkSysOrg = pkSysOrg == null ? null : pkSysOrg.trim();
     }
 }

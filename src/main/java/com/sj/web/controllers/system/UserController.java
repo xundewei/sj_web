@@ -6,11 +6,13 @@ import java.util.Map;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.web.bind.annotation.RequestBody;
 import org.springframework.web.bind.annotation.RequestMapping;
 import org.springframework.web.bind.annotation.RequestMethod;
 import org.springframework.web.bind.annotation.RequestParam;
 import org.springframework.web.bind.annotation.ResponseBody;
 
+import com.sj.core.utils.web.JsonResult;
 import com.sj.core.utils.web.easyui.EzPage;
 import com.sj.core.utils.web.easyui.EzPageResult;
 import com.sj.web.controllers.BaseController;
@@ -35,7 +37,7 @@ public class UserController extends BaseController {
 //    private AppRoleService appRoleService;
 //
     @Autowired
-    private UserService service;
+    private UserService userService;
 //
 //    @Autowired
 //    private OrgaService orgaService;
@@ -112,7 +114,7 @@ public class UserController extends BaseController {
 //
 //                pageResult = service.getListByPage(pageRequest, group);
 //            }
-        	Map map=service.getAllSysUsers("");
+        	Map map=userService.getAllSysUsers("");
             return EzPageResult.build(new Integer((int) map.get("total")), map.get("rows"));
         } catch (Exception ex) {
             logger.error("LoadData失败！", ex);
@@ -151,52 +153,19 @@ public class UserController extends BaseController {
 //        return result;
 //    }
 //
-//    /**
-//     * 4.新增接口
-//     * URL：/system/user/add POST
-//     * 请求的Body中包含一个User的json数据(或者对应的视图对象，收到后再进行转换)
-//     *
-//     * @param entity
-//     * @return
-//     */
-//    @RequestMapping(value = "add", method = RequestMethod.POST)
-//    @ResponseBody
-//    public JsonResult add(@RequestBody Sys_User entity) {
-//        try {
-//
-//            if (service.existUserCode(entity.getUsercode())) {
-//                return JsonResult.error("用户编号[" + entity.getUsercode() + "]已经存在！");
-//            }
-//
-//            if (service.existLoginName(entity.getLoginname())) {
-//                return JsonResult.error("用户登录名[" + entity.getLoginname() + "]已经存在！");
-//            }
-//
-//            entity.setId(UUID.randomUUID().toString());
-//            entity.setDeleteflag(false);
-//
-//            //设置为当前公司
-//            ShiroRealm.ShiroUser shiroUser = getCurrentUser();
-//            String groupid = shiroUser.groupid;
-//            entity.setGroupid(groupid);
-//
-//            //默认密码1234
-//            entity.setPwd(Utils.getMD5("1234").toUpperCase());
-//
-//            service.add(entity);
-//
-//            //更新系统权限缓存
-//            appRoleService.evictAllAppRole();
-//
-//            return JsonResult.success();
-//        } catch (Exception ex) {
-//            //写日志
-//            //做异常处理
-//            //返回错误信息到前台
-//            logger.error("新增失败！", ex);
-//            return JsonResult.error("新增失败！");
-//        }
-//    }
+    /**
+     * 4.新增接口
+     * URL：/system/user/add POST
+     * 请求的Body中包含一个User的json数据(或者对应的视图对象，收到后再进行转换)
+     *
+     * @param entity
+     * @return
+     */
+    @RequestMapping(value = "add", method = RequestMethod.POST)
+    @ResponseBody
+    public JsonResult add(@RequestBody SysUser entity) {
+    	return userService.add(entity, getCurrentShiroUser());
+    }
 //
 //    /**
 //     * 5.更新/修改接口

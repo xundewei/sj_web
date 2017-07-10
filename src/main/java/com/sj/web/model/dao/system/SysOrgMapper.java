@@ -83,4 +83,8 @@ public interface SysOrgMapper {
     * @throws
      */
     int updateByPrimaryKey(SysOrg record);
+    
+    
+    
+  
 }

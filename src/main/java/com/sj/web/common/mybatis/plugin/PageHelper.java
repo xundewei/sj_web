@@ -76,7 +76,10 @@ public class PageHelper implements Interceptor {
 			BoundSql boundSql = delegate.getBoundSql();
 			Page page = findPageObject(boundSql.getParameterObject());
 			if (page == null) {
-				logger.debug("没有Page对象作为参数, 不是分页查询.");
+				if(logger.isDebugEnabled()){
+					logger.debug("没有Page对象作为参数, 不是分页查询.");
+				}
+				
 				return invocation.proceed();
 			} else {
 				logger.debug("检测到分页Page对象, 使用分页查询.");
@@ -84,7 +87,9 @@ public class PageHelper implements Interceptor {
 				prepareAndCheckDatabaseType(connection); // 檢測數據庫類型
 				String sql = boundSql.getSql();
 				String pageSql = buildPageSql(page, sql);
-				logger.debug("分页时, 生成分页pageSql: " + pageSql);
+				if(logger.isDebugEnabled()){
+					logger.debug("分页时, 生成分页pageSql: " + pageSql);
+				}
 				ReflectUtil.setFieldValue(boundSql, "sql", pageSql);
 				return invocation.proceed();
 			}
@@ -131,7 +136,10 @@ public class PageHelper implements Interceptor {
 				throw new PageNotSupportException(
 						"Page not support for the type of database, database product name [" + productName + "]");
 			}
-			logger.debug("自动检测到的数据库类型为: " + dialect);
+			if(logger.isDebugEnabled()){
+				logger.debug("自动检测到的数据库类型为: " + dialect);
+			}
+			
 		}
 	}
 	

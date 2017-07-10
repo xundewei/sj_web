@@ -2,6 +2,8 @@ package com.sj.web.services.system;
 
 import java.util.Map;
 
+import com.sj.core.utils.web.JsonResult;
+import com.sj.web.common.security.ShiroUser;
 import com.sj.web.model.bean.system.SysUser;
 
 
@@ -29,5 +31,17 @@ public interface UserService{
      * 		MAP 多少记录和具体记录数
      */
     public Map<String,Object> getAllSysUsers(String searchFilter);
+    
+    
+    /**
+     * 
+    * @Title: add
+    * @Description: 用户新增
+    * @param sysuser 用户对象
+    * @return
+    * @throws
+     */
+    public JsonResult add(SysUser sysuser,ShiroUser shiroUser);
+    
 
 }
