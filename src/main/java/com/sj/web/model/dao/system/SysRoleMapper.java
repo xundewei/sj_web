@@ -1,7 +1,9 @@
 package com.sj.web.model.dao.system;
 
-import com.sj.web.model.bean.system.SysRole;
 import java.util.List;
+
+import com.sj.web.model.bean.system.SysRole;
+import com.sj.web.model.vo.system.SysUserRoleVO;
 
 /**
  * 
@@ -60,4 +62,7 @@ public interface SysRoleMapper {
     * @throws
      */
     int updateByPrimaryKey(SysRole record);
+    
+   
+    
 }

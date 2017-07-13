@@ -42,11 +42,11 @@
 
     function sys_user_OpenResetDialog(row) {
         if (!row) {
-            hlg.dialog.showInfo("请先选择一条记录！");
+            hlg.dialog.showInfo("请先选择一行记录！");
             return;
         }
 
-        var $rowid = row.id;
+        var $rowid = row.pkSysUser;
         if ($rowid == null) {
             hlg.dialog.showInfo("请先选择一条记录！");
             return;
@@ -74,10 +74,10 @@
         }
 
         //验证通过后保存数据到后台
-        var url = "system/user/update2";
+        var url = "system/user/resetPwd";
         var entity = {};
-        entity.id=$("#sys_user_r_id").val();
-        entity.name=p1;
+        entity.Param1=$("#sys_user_r_id").val();
+        entity.Param2=p1;
         hlg.ajax.saveEntity(url, entity, function(data){
             $('#sys_user_ResetDialog').dialog('close');
         });

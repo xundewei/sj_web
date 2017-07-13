@@ -23,10 +23,10 @@
         <input type="hidden" id="sys_user_a_pk_sys_code" name="pkSysOrg"/>
         <table style="width: 100%; border-collapse: collapse; padding: 5px;">
             <tr>
+            	<td style="text-align: right; width: 15%">用户编号：</td>
+                <td><input name="usercode" class="easyui-validatebox"data-options="required:true"/></td>
                 <td style="text-align: right; width: 15%">姓名：</td>
                 <td><input name="username" class="easyui-validatebox"data-options="required:true"/></td>
-                <td style="text-align: right; width: 15%">编号：</td>
-                <td><input name="usercode"/></td>
             </tr>
             <tr>
                 <td style="text-align: right;">性别：</td>
@@ -74,10 +74,10 @@
     }
 
     function sys_user_a_selOrg(){
-        hlg.dialog.openOrgaDialog(false,function(data){
+    	sys.dialog.openReferenceOrgDialog(false,function(data){
            if(data.length>0){
-               $("#sys_user_a_orgaid").val(data[0].id);
-               $("#sys_user_a_organame").val(data[0].name);
+               $("#sys_user_a_pk_sys_code").val(data[0].id);
+               $("#sys_user_a_orgname").val(data[0].name);
            }
         });
     }

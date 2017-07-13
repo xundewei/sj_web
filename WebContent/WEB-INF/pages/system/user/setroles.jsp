@@ -25,11 +25,11 @@
 
         <div>
                 <c:forEach items="${list}" var="role">
-                    <c:if test="${role.checked=='0'}">
-                        <input type="checkbox" name="roles[]" value="${role.id}"/>${role.name}
+                    <c:if test="${role.isown=='0'}">
+                        <input type="checkbox" name="roles[]" value="${role.rolecode}"/>${role.rolename}
                     </c:if>
-                    <c:if test="${role.checked=='1'}">
-                        <input type="checkbox" checked="checked" name="roles[]" value="${role.id}"/>${role.name}
+                    <c:if test="${role.isown=='1'}">
+                        <input type="checkbox" checked="checked" name="roles[]" value="${role.rolecode}"/>${role.rolename}
                     </c:if>
                     &nbsp;&nbsp;&nbsp;&nbsp;
                 </c:forEach>

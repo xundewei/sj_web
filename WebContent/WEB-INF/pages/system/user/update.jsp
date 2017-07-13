@@ -20,47 +20,32 @@
             ">
     <form id="sys_user_u_form">
         <div class="hlg-title">基本信息</div>
-        <input type="hidden" id="sys_user_u_orgaid" name="orgaid"/>
-        <input type="hidden" id="sys_user_u_groupid" name="groupid" />
-        <input type="hidden" id="sys_user_u_id" name="id"/>
+        <input type="hidden" id="sys_user_u_orgaid" name="pkSysOrg"/>
+        <input type="hidden" id="sys_user_u_pkSysUser" name="pkSysUser"/>
         <table style="width: 100%; border-collapse: collapse; padding: 10px;">
             <tr>
+                <td style="text-align: right; width: 15%">用户编号：</td>
+                <td><input name="usercode" /></td>
                 <td style="text-align: right; width: 15%">姓名：</td>
-                <td><input name="displayname" class="easyui-validatebox"
-                           data-options="required:true"/></td>
-                <td style="text-align: right; width: 15%">编号：</td>
-                <td><input name="usercode"/></td>
+                <td><input name="username" class="easyui-validatebox"data-options="required:true"/></td>
             </tr>
             <tr>
-                <td style="text-align: right;">登录名：</td>
-                <td><input name="loginname" class="easyui-validatebox"
-                           data-options="required:true"/></td>
                 <td style="text-align: right;">性别：</td>
                 <td>
-                    <input type="radio" id="sex" name="sex" value="男" checked="checked"/>男
-                    <input type="radio" name="sex" value="女"/>女
+                    <input type="radio" id="sex" name="sex" value="01" checked="checked"/>男
+                    <input type="radio" name="sex" value="02"/>女
                 </td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">固定电话：</td>
-                <td><input name="phone"/></td>
-                <td style="text-align: right;">手机：</td>
+                 <td style="text-align: right;">手机：</td>
                 <td><input name="mobile"/></td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">邮箱：</td>
-                <td><input name="email"/></td>
-                <td style="text-align: right;">地址：</td>
-                <td><input name="address"/></td>
             </tr>
             <tr>
                 <td style="text-align: right;">所属机构：</td>
                 <td>
-                    <input id="sys_user_u_organame" name="organame" readonly="readonly"/>
+                    <input id="sys_user_u_organame" name="orgname" readonly="readonly"/>
                     <a href="#" class="easyui-linkbutton" data-options="iconCls:'icon-search'" onclick="sys_user_u_selOrg()">选择</a>
                 </td>
                 <td style="text-align: right;">是否可用：</td>
-                <td><input type="checkbox" checked="checked" id="sys_user_u_enableflag" name="enableflag" value="true" data-unchecked-value="false"/></td>
+                <td><input type="checkbox" checked="checked" id="sys_user_u_flag" name="flag" value="true" data-unchecked-value="false"/></td>
             </tr>
             <tr>
                 <td style="text-align: right; vertical-align: top;">备注：</td>
@@ -78,7 +63,7 @@
             return;
         }
 
-        var $rowid = row.id;
+        var $rowid = row.pkSysUser;
         if ($rowid == null) {
             hlg.dialog.showInfo("请先选择一条记录！");
             return;
@@ -91,8 +76,8 @@
 
         var url = "system/user/" + $rowid;
         hlg.form.load("#sys_user_u_form", url, function(data){
-            if(data.enableflag){
-                $("#sys_user_u_enableflag").prop("checked", true);
+            if(data.flag){
+                $("#sys_user_u_flag").prop("checked", true);
             }
         });
     }

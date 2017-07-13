@@ -1,6 +1,11 @@
 package com.sj.core.utils.web;
 
 import java.io.Serializable;
+import java.util.Map;
+
+import org.slf4j.LoggerFactory;
+
+import com.sj.web.common.StateIdentifier;
 
 /**
  * 服务端返回给客户端的数据封装对象
@@ -8,6 +13,10 @@ import java.io.Serializable;
 public class JsonResult implements Serializable {
 
     private static final long serialVersionUID = 2652608027682835212L;
+    
+    private static org.slf4j.Logger logger = LoggerFactory.getLogger(JsonResult.class);
+    
+    
     /**
      * 服务端业务逻辑是否执行成功
      */
@@ -85,6 +94,34 @@ public class JsonResult implements Serializable {
      */
     public static JsonResult error(String errorCode, String message) {
         return new JsonResult(false, errorCode, message, null);
+    }
+    
+    /**
+     * 
+    * @Title: analyzeMaptoJsonResult
+    * @Description: 用于controller层解析service返回消息
+    * @param map
+    * @return
+    * @throws
+     */
+    public static JsonResult analyzeMaptoJsonResult(Map<String,Object> map) {
+    	try {
+    		Integer status_value = (Integer) map.get(StateIdentifier.JsonResult_Status); //1 表示成功  2标示失败
+    		JsonResult jr=null;
+    		switch (status_value) {
+    		case 1:
+    			jr=new JsonResult(true, "", "", null);
+    			break;
+    		case 2:
+    			String msg_value = (String) map.get(StateIdentifier.JsonResult_Message);
+    			jr= new JsonResult(false, "", msg_value, null);
+    			break;
+    		}
+    		return jr;
+		} catch (Exception e){
+			logger.debug("给的状态值不对,只能给1,2两个状态值,必须是整数类型");
+		}
+		return null;
     }
 
     public boolean isSuccess() {

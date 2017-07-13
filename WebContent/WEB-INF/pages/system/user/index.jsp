@@ -157,13 +157,13 @@
             return;
         }
 
-        var $rowid = row.id;
+        var $rowid = row.pkSysUser;
         if ($rowid == null) {
             hlg.dialog.showInfo("请先选择一条记录！");
             return;
         }
 
-        var msg = "确定删除用户[" + row.displayname + "]吗？";
+        var msg = "确定删除用户[" + row.username + "]吗？";
         hlg.dialog.showConfirm(msg, function () {
             var url = "system/user/delete/" + $rowid;
             hlg.ajax.deleteEntity(url, function () {

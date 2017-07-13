@@ -15,40 +15,29 @@
             ">
     <form id="sys_user_d_form">
         <div class="hlg-title">基本信息</div>
-        <input type="hidden" id="sys_user_d_orgaid" name="orgaid"/>
+        <input type="hidden" id="sys_user_d_orgaid" name="pkSysOrg"/>
         <table style="width: 100%; border-collapse: collapse; padding: 10px;">
             <tr>
+             	<td style="text-align: right; width: 15%">用户编号：</td>
+                <td><input name="usercode"  readonly="readonly"/></td>
                 <td style="text-align: right; width: 15%">姓名：</td>
-                <td><input name="displayname" readonly="readonly"/></td>
-                <td style="text-align: right; width: 15%">编号：</td>
-                <td><input name="usercode"/></td>
+                <td><input name="username" readonly="readonly"/></td>
+               
             </tr>
             <tr>
-                <td style="text-align: right;">登录名：</td>
-                <td><input name="loginname" readonly="readonly"/></td>
                 <td style="text-align: right;">性别：</td>
                 <td>
-                    <input type="radio" name="sex" value="男"/>男
-                    <input type="radio" name="sex" value="女"/>女
+                    <input type="radio" name="sex" value="01"/>男
+                    <input type="radio" name="sex" value="02"/>女
                 </td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">固定电话：</td>
-                <td><input name="phone" readonly="readonly"/></td>
-                <td style="text-align: right;">手机：</td>
-                <td><input name="mobile" readonly="readonly"/></td>
-            </tr>
-            <tr>
-                <td style="text-align: right;">邮箱：</td>
-                <td><input name="email" readonly="readonly"/></td>
-                <td style="text-align: right;">地址：</td>
-                <td><input name="address" readonly="readonly"/></td>
+                 <td style="text-align: right;">手机：</td>
+                 <td><input name="mobile" readonly="readonly"/></td>
             </tr>
             <tr>
                 <td style="text-align: right;">所属机构：</td>
-                <td><input name="organame" readonly="readonly"/></td>
+                <td><input name="orgname" readonly="readonly"/></td>
                 <td style="text-align: right;">是否可用：</td>
-                <td><input type="checkbox" id="sys_user_d_enableflag" name="enableflag" readonly="readonly"/></td>
+                <td><input type="checkbox" id="sys_user_d_flag" name="flag" readonly="readonly"/></td>
             </tr>
             <tr>
                 <td style="text-align: right; vertical-align: top;">备注：</td>
@@ -67,7 +56,7 @@
             return;
         }
 
-        var $rowid = row.id;
+        var $rowid = row.pkSysUser;
         if ($rowid == null) {
             hlg.dialog.showInfo("请先选择一条记录！");
             return;
@@ -81,7 +70,7 @@
         var url = "system/user/" + $rowid;
         hlg.form.load("#sys_user_d_form", url, function(data){
             if(data.enableflag){
-                $("#sys_user_d_enableflag").prop("checked", true);
+                $("#sys_user_d_flag").prop("checked", true);
             }
         });
     }

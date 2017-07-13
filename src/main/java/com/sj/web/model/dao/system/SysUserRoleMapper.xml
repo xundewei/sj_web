@@ -1,0 +1,92 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sj.web.model.dao.system.SysUserRoleMapper">
+	<resultMap id="BaseResultMap" type="com.sj.web.model.bean.system.SysUserRole">
+		<id column="PK_SYS_USER_ROLE" property="pkSysUserRole" jdbcType="VARCHAR" />
+		<result column="PK_SYS_USER" property="pkSysUser" jdbcType="VARCHAR" />
+		<result column="PK_SYS_ROLE" property="pkSysRole" jdbcType="VARCHAR" />
+		<result column="TS" property="ts" jdbcType="VARCHAR" />
+		<result column="DR" property="dr" jdbcType="CHAR" />
+	</resultMap>
+
+	<resultMap id="SysUserRoleVO" type="com.sj.web.model.vo.system.SysUserRoleVO">
+		<id column="PK_SYS_USER_ROLE" property="pkSysUserRole" jdbcType="VARCHAR" />
+		<result column="PK_SYS_USER" property="pkSysUser" jdbcType="VARCHAR" />
+		<result column="USERCODE" property="usercode" jdbcType="VARCHAR" />
+		<result column="USERNAME" property="username" jdbcType="VARCHAR" />
+		<result column="PK_SYS_ROLE" property="pkSysRole" jdbcType="VARCHAR" />
+		<result column="ROLECODE" property="rolecode" jdbcType="VARCHAR" />
+		<result column="ROLENAME" property="rolename" jdbcType="VARCHAR" />
+		<result column="ISOWN" property="isown" jdbcType="VARCHAR" />
+		<result column="TS" property="ts" jdbcType="VARCHAR" />
+		<result column="DR" property="dr" jdbcType="CHAR" />
+	</resultMap>
+
+
+	<delete id="deleteByPrimaryKey" parameterType="java.lang.String">
+		delete from SYS_USER_ROLE
+		where PK_SYS_USER_ROLE = #{pkSysUserRole,jdbcType=VARCHAR}
+	</delete>
+	<insert id="insert" parameterType="com.sj.web.model.bean.system.SysUserRole">
+		insert into SYS_USER_ROLE (PK_SYS_USER_ROLE, PK_SYS_USER, PK_SYS_ROLE,
+		TS, DR)
+		values (#{pkSysUserRole,jdbcType=VARCHAR}, #{pkSysUser,jdbcType=VARCHAR},
+		#{pkSysRole,jdbcType=VARCHAR},
+		#{ts,jdbcType=VARCHAR}, #{dr,jdbcType=CHAR})
+	</insert>
+	<update id="updateByPrimaryKey" parameterType="com.sj.web.model.bean.system.SysUserRole">
+		update SYS_USER_ROLE
+		set PK_SYS_USER = #{pkSysUser,jdbcType=VARCHAR},
+		PK_SYS_ROLE = #{pkSysRole,jdbcType=VARCHAR},
+		TS = #{ts,jdbcType=VARCHAR},
+		DR = #{dr,jdbcType=CHAR}
+		where PK_SYS_USER_ROLE = #{pkSysUserRole,jdbcType=VARCHAR}
+	</update>
+	<select id="selectByPrimaryKey" resultMap="BaseResultMap"
+		parameterType="java.lang.String">
+		select PK_SYS_USER_ROLE, PK_SYS_USER, PK_SYS_ROLE, TS, DR
+		from SYS_USER_ROLE
+		where PK_SYS_USER_ROLE = #{pkSysUserRole,jdbcType=VARCHAR}
+	</select>
+	<select id="selectAll" resultMap="BaseResultMap">
+		select PK_SYS_USER_ROLE, PK_SYS_USER, PK_SYS_ROLE, TS, DR
+		from SYS_USER_ROLE
+		order by age desc,username asc
+	</select>
+
+	<select id="selectByPkSysUserAllRoles" resultMap="SysUserRoleVO"
+		parameterType="java.lang.String">
+		select B.PK_SYS_USER_ROLE,
+		B.PK_SYS_USER,
+		B.USERCODE,
+		B.USERNAME,
+		A.PK_SYS_ROLE,
+		A.ROLECODE,
+		A.ROLENAME,
+		case
+		when NVL(B.PK_SYS_USER, '') is null then
+		0
+		when NVL(B.PK_SYS_USER, '') = '' then
+		0
+		else
+		1
+		end ISOWN,
+		A.DR,
+		A.TS
+		from SYS_ROLE A
+		left join (select PK_SYS_USER_ROLE,
+		A.PK_SYS_USER,
+		USERCODE,
+		USERNAME,
+		A.PK_SYS_ROLE
+		from SYS_USER_ROLE A
+		join SYS_USER B
+		on A.PK_SYS_USER = B.PK_SYS_USER
+		and NVL(A.DR, 0) = 0
+		and NVL(B.DR, 0) = 0
+		where A.PK_SYS_USER = #{pkSysUser,jdbcType=VARCHAR}) B
+		on A.PK_SYS_ROLE = B.PK_SYS_ROLE
+
+	</select>
+
+</mapper>
