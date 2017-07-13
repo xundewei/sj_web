@@ -53,7 +53,7 @@
     <mvc:resources mapping="/lib/**" location="/static/lib/"/>
     <mvc:resources mapping="/images/**" location="/static/images/"/>
     <mvc:resources mapping="/css/**" location="/static/css/"/>
-    <mvc:resources mapping="/js/**" location="/static/js/"/>
-    <mvc:resources mapping="/ui/**" location="/static/ui1/"/>
+    <mvc:resources mapping="/js/**" location="/static/myjs/"/>
+    <mvc:resources mapping="/ui/**" location="/static/login-ui1/"/>
 
 </beans>

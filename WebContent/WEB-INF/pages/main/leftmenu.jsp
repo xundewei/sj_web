@@ -3,7 +3,7 @@
 <%@ include file="/WEB-INF/pages/common/taglibs.jsp" %>
 <style>
 
-    /* 覆盖easyui-tree 原始的样式 */
+     /* 覆盖easyui-tree 原始的样式 */
     .tree-node {
         height: 24px;
         white-space: nowrap;
@@ -14,11 +14,11 @@
         font-size: 12px;
     }
 
-    .tree-node-selected {
+  /*   .tree-node-selected {
         background-color: inherit;
         color: #000000;
     }
-
+ */
   /*   .tree-file {
         background: url(images/main/Menu2.png) no-repeat 2px 1px;
         background-size: 12px;
@@ -76,73 +76,15 @@
         var tabmode = ${tabmode};
 
         if (tabmode) {
-            hlg.main.addTab(title, url, key);
+        	 addTab(title, url, key);
         } else {
-            hlg.main.openContent(url);
+        	openContent(url);
         }
 
 
     }
 
     function myLoadFilter(data, parent) {
-    	//alert("111");
-        /*var state = $.data(this, 'tree');
-
-         function setData(){
-         var serno = 1;
-         var todo = [];
-         for(var i=0; i<data.length; i++){
-         todo.push(data[i]);
-         }
-         while(todo.length){
-         var node = todo.shift();
-         if (node.id == undefined){
-         node.id = '_node_' + (serno++);
-         }
-         if (node.children){
-         node.state = 'closed';
-         node.children1 = node.children;
-         node.children = undefined;
-         todo = todo.concat(node.children1);
-         }
-         }
-         state.tdata = data;
-         }
-         function find(id){
-         var data = state.tdata;
-         var cc = [data];
-         while(cc.length){
-         var c = cc.shift();
-         for(var i=0; i<c.length; i++){
-         var node = c[i];
-         if (node.id == id){
-         return node;
-         } else if (node.children1){
-         cc.push(node.children1);
-         }
-         }
-         }
-         return null;
-         }
-
-         setData();
-
-         var t = $(this);
-         var opts = t.tree('options');
-         opts.onBeforeExpand = function(node){
-         var n = find(node.id);
-         if (n.children && n.children.length){return}
-         if (n.children1){
-         var filter = opts.loadFilter;
-         opts.loadFilter = function(data){return data;};
-         t.tree('append',{
-         parent:node.target,
-         data:n.children1
-         });
-         opts.loadFilter = filter;
-         n.children = n.children1;
-         }
-         };*/
         return data;
     }
 </script>

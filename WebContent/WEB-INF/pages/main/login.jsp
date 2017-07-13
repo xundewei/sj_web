@@ -7,7 +7,7 @@
     <meta http-equiv="x-ua-compatible" content="ie=10"/>
     <title>欢迎登录三伽财团管理系统</title>
     <link href="${ctx}/ui/css/login.css" rel="stylesheet" type="text/css"/>
-    <script language="JavaScript" src="${ctx}/lib/jquery/jquery-1.11.2.min.js"></script>
+    <script language="JavaScript" src="${ctx}/lib/jquery/jquery-1.11.3.min.js"></script>
     <script src="${ctx}/ui/js/cloud.js" type="text/javascript"></script>
 
     <script language="javascript">
