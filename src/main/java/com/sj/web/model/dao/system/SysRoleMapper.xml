@@ -40,6 +40,17 @@
   <select id="selectAll" resultMap="BaseResultMap" >
     select PK_SYS_ROLE, ROLECODE, ROLENAME, CREATEUSER, DR, TS, REMARK
     from SYS_ROLE
-    order by age desc,username asc
   </select>
+  
+   <select id="selectAllByPage" resultMap="BaseResultMap" >
+    select PK_SYS_ROLE, ROLECODE, ROLENAME, CREATEUSER, DR, TS, REMARK
+    from SYS_ROLE
+  </select>
+  
+  
+   <select id="selectByRoleCode" resultMap="BaseResultMap" parameterType="java.lang.String">
+    select PK_SYS_ROLE, ROLECODE, ROLENAME, CREATEUSER, DR, TS, REMARK
+    from SYS_ROLE WHERE ROLECODE = #{rolecode,jdbcType=VARCHAR}
+  </select>
+  
 </mapper>

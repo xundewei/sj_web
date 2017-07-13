@@ -94,7 +94,6 @@
 		ENABLEFLAG, ADMINFLAG, MENUTYPE, REMARK, CREATEUSER, TS, DR
 		from
 		SYS_MENU
-		order by age desc,username asc
 	</select>
 
 	<select id="selectMenuAccordion" parameterType="java.lang.String"

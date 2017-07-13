@@ -2,6 +2,7 @@ package com.sj.web.model.dao.system;
 
 import java.util.List;
 
+import com.sj.web.common.mybatis.plugin.Page;
 import com.sj.web.model.bean.system.SysRole;
 import com.sj.web.model.vo.system.SysUserRoleVO;
 
@@ -14,6 +15,64 @@ import com.sj.web.model.vo.system.SysUserRoleVO;
 *
  */
 public interface SysRoleMapper {
+	
+	
+	
+	 /**
+     * 
+    * @Title: selectAllByPage
+    * @Description: 获取翻页数据
+    * @param page
+    * @return
+    * @throws
+     */
+    List<SysRole> selectAllByPage(Page<SysRole> page);
+	
+	
+	
+    /**
+     * 
+    * @Title: selectByPrimaryKey
+    * @Description: 根据主键查找角色
+    * @param pkSysRole 角色主键
+    * @return
+    * @throws
+     */
+    SysRole selectByPrimaryKey(String pkSysRole);
+	
+	
+	
+	
+    /**
+     * 
+    * @Title: insert
+    * @Description: 新增角色
+    * @param record 角色对象
+    * @return
+    * @throws
+     */
+    int insert(SysRole record);
+	
+	
+	
+	
+    /**
+     * 
+    * @Title: selectAllByPage
+    * @Description: 获取翻页数据
+    * @param page
+    * @return
+    * @throws
+     */
+    List<SysRole> selectByRoleCode(String rolecode);
+	
+	
+	
+	
+	
+	
+	
+	
 	/**
 	 * 
 	* @Title: deleteByPrimaryKey
@@ -24,25 +83,9 @@ public interface SysRoleMapper {
 	 */
     int deleteByPrimaryKey(String pkSysRole);
 
-    /**
-     * 
-    * @Title: insert
-    * @Description: 新增角色
-    * @param record 角色对象
-    * @return
-    * @throws
-     */
-    int insert(SysRole record);
+   
 
-    /**
-     * 
-    * @Title: selectByPrimaryKey
-    * @Description: 根据主键查找角色
-    * @param pkSysRole 角色主键
-    * @return
-    * @throws
-     */
-    SysRole selectByPrimaryKey(String pkSysRole);
+   
 
     /**
      * 
