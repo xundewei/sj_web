@@ -117,7 +117,14 @@ public class RoleServiceImpl implements RoleService {
 	            return JsonResult.error("删除失败！");
 	        }
 	}
-
+	
+	
+	
+	
+	@Override
+	public List<SysRole> getByPkSysUser(String pkSysUser) {
+		return sysRoleMapper.selectByPkSysUser(pkSysUser);
+	}
 
 
 	
@@ -127,6 +134,10 @@ public class RoleServiceImpl implements RoleService {
 		List<SysRole> list = sysRoleMapper.selectAll();
 		return list;
 	}
+
+
+
+
 
 	
 

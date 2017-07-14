@@ -1,10 +1,8 @@
 package com.sj.web.controllers.system;
 
 import java.util.ArrayList;
-import java.util.List;
 import java.util.Map;
 
-import org.apache.commons.lang3.StringUtils;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.ModelMap;
@@ -18,7 +16,6 @@ import org.springframework.web.bind.annotation.ResponseBody;
 import com.sj.core.utils.web.JsonResult;
 import com.sj.core.utils.web.easyui.EzPage;
 import com.sj.core.utils.web.easyui.EzPageResult;
-import com.sj.web.common.security.ShiroRealm;
 import com.sj.web.controllers.BaseController;
 import com.sj.web.model.bean.system.SysUser;
 import com.sj.web.model.vo.RequestParamVO;
@@ -34,23 +31,9 @@ import com.sj.web.services.system.UserService;
 @RequestMapping("/system/user")
 public class UserController extends BaseController {
 
-	// @Autowired
-	// private AppRoleService appRoleService;
-	//
+
 	@Autowired
 	private UserService userService;
-	//
-	// @Autowired
-	// private OrgaService orgaService;
-	//
-	// @Autowired
-	// private UserRolesService userRolesService;
-	//
-	// @Autowired
-	// private RolesService rolesService;
-	//
-	// @Autowired
-	// private TestCacheService testCacheService;
 
 	/**
 	 * 1.默认的Action，返回功能主页面 URL: /system/user GET
@@ -139,44 +122,58 @@ public class UserController extends BaseController {
 		return userService.modifySysUserPwd(entity);
 	}
 
-	//
-	// /**
-	// * 8.修改密码
-	// * URL：/system/user/update3 POST
-	// * 请求的Body中包含一个PwdVO的json数据
-	// *
-	// * @param entity
-	// * @return
-	// */
-	// @RequestMapping(value = "update3", method = RequestMethod.POST)
-	// @ResponseBody
-	// public JsonResult update3(@RequestBody PwdVO entity) {
-	// try {
-	// Sys_User entityFromDB = service.get(entity.p0);
-	// if (entityFromDB == null) {
-	// return JsonResult.error("用户不存在！");
-	// }
-	//
-	// String oldPwd = Utils.getMD5(entity.p1).toUpperCase();
-	// if (!StringUtils.equals(oldPwd, entityFromDB.getPwd())) {
-	// return JsonResult.error("您输入的旧密码不正确！");
-	// }
-	//
-	// String newPwd = Utils.getMD5(entity.p2).toUpperCase();
-	// entityFromDB.setPwd(newPwd);
-	//
-	// service.update(entityFromDB);
-	//
-	// return JsonResult.success();
-	// } catch (Exception ex) {
-	// //写日志
-	// //做异常处理
-	// //返回错误信息到前台
-	// logger.error("修改失败！", ex);
-	// return JsonResult.error("修改失败！");
-	// }
-	// }
-	//
+	/**
+	 * 用于显示修改密码对话框
+	 * 
+	 * @return
+	 */
+	@RequestMapping(value = "change/{id}")
+	public String showPwdDialog(@PathVariable("id") String id, ModelMap model) {
+		model.addAttribute("id", id);
+		return "system/user/change";
+	}
+
+	/**
+	 * 8.修改密码 URL：/system/user/update3 POST 请求的Body中包含一个PwdVO的json数据
+	 *
+	 * @param entity
+	 * @return
+	 */
+	@RequestMapping(value = "update3", method = RequestMethod.POST)
+	@ResponseBody
+	public JsonResult update3(@RequestBody RequestParamVO entity) {
+		return userService.modifySysUserPwd2(entity);
+	}
+
+	/**
+	 * 
+	 * @Title: config @Description: 控制面板对应的界面 @return @throws
+	 */
+	@RequestMapping(value = "config")
+	public String config() {
+		return "system/user/config";
+	}
+
+	@RequestMapping("getconfig")
+	@ResponseBody
+	public JsonResult getConfig() {
+		return userService.getConfig(getCurrentShiroUser());
+	}
+	
+	 /**
+     * 更新/修改接口
+     * URL：/system/userconfig/update POST
+     * 请求的Body中包含一个Userconfig的json数据
+     *
+     * @param entity
+     * @return
+     */
+    @RequestMapping(value = "updateconfig", method = RequestMethod.POST)
+    @ResponseBody
+    public JsonResult updateConfig(@RequestBody SysUser entity) {
+       return userService.modifyConfig(entity);
+    }
+
 	/**
 	 * 显示分配用户角色对话框 URL: setroles/{id} GET
 	 */

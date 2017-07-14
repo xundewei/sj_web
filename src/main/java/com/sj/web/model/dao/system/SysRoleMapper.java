@@ -84,6 +84,18 @@ public interface SysRoleMapper {
     int deleteByPrimaryKey(String pkSysRole);
 
    
+    
+    
+    /**
+     * 
+    * @Title: selectByPkSysUser
+    * @Description: 根据用户主键查找所有角色
+    * @param PkSysUser 用户主键
+    * @return
+    * @throws
+     */
+    List<SysRole> selectByPkSysUser(String PkSysUser);
+    
 
    
 

@@ -69,9 +69,9 @@
         //验证通过后保存数据到后台
         var url = "system/user/update3";
         var entity = {};
-        entity.p0=$("#sys_user_cg_id").val();
-        entity.p1=p1;
-        entity.p2=p2;
+        entity.param1=$("#sys_user_cg_id").val();
+        entity.param2=p1;
+        entity.param3=p2;
         hlg.ajax.saveEntity(url, entity, function(data){
             $('#sys_user_ChangeDialog').dialog('close');
         });

@@ -38,6 +38,18 @@ public interface SysMenuService{
 	public List<EzTreeNode> getMenuLeftTree(String pk_sys_user,String menucode);
 	
 	
+	
+	/**
+	 * 
+	* @Title: getMenuByPkSysUser
+	* @Description: 根据用户主键获取所有的菜单对象
+	* @param pk_sys_user
+	* @return
+	* @throws
+	 */
+	public List<SysMenu> getMenuByPkSysUser(String PkSysUser);
+	
+	
 	/**
 	 * 
 	* @Title: getAll

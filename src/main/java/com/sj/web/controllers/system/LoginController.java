@@ -79,11 +79,12 @@ public class LoginController extends BaseController {
 				if ("1".equals(user.getFlag()) || "1".equals(user.getDr())) {
 					errorMsg = "提示信息：登录用户已被禁用";
 				} else {
-					// shiro login check
+					// shiro login check 
 					appRealm.clearCachedAuthorizationInfo(usercode);
 					token = new UsernamePasswordToken(usercode, password);
 					token.setRememberMe(true);
 					Subject currentUser = SecurityUtils.getSubject();
+					//加载用户登入相关信息
 					currentUser.login(token);
 					return "redirect:/";
 				}

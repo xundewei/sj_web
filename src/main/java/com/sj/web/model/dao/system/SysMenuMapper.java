@@ -92,4 +92,17 @@ public interface SysMenuMapper {
      */
     SysMenu selectByMenuCode(String menucode);
     
+    
+    
+   
+    /**
+     * 
+    * @Title: selectMenuByPkSysUser
+    * @Description: 根据用户主键获取所有的菜单
+    * @param pk_sys_user
+    * @return
+    * @throws
+     */
+    List<SysMenu> selectMenuByPkSysUser(String pk_sys_user);
+    
 }

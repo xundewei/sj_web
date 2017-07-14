@@ -65,7 +65,15 @@ public interface RoleService{
 	
 	
 
-
+	/**
+	 * 
+	* @Title: selectByPkSysUser
+	* @Description: 根据用户主键找到所有角色
+	* @param pkSysUser 用户主键
+	* @return
+	* @throws
+	 */
+	public List<SysRole> getByPkSysUser(String pkSysUser);
 	
 
 	

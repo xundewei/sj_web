@@ -176,15 +176,6 @@ public class ReferenceController {
 	// return "system/public/showuserdialog";
 	// }
 	//
-	// /**
-	// * 用于显示修改密码对话框
-	// * @return
-	// */
-	// @RequestMapping(value = "p/{id}")
-	// public String showPwdDialog(@PathVariable("id") String id, ModelMap
-	// model){
-	// model.addAttribute("id", id);
-	// return "system/user/change";
-	// }
+	
 
 }

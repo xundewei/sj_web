@@ -76,8 +76,8 @@
         //验证通过后保存数据到后台
         var url = "system/user/resetPwd";
         var entity = {};
-        entity.Param1=$("#sys_user_r_id").val();
-        entity.Param2=p1;
+        entity.param1=$("#sys_user_r_id").val();
+        entity.param2=p1;
         hlg.ajax.saveEntity(url, entity, function(data){
             $('#sys_user_ResetDialog').dialog('close');
         });

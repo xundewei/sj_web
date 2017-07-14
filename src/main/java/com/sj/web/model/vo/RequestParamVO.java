@@ -9,12 +9,12 @@ public class RequestParamVO implements Serializable {
 	private static final long serialVersionUID = -7940541436707918511L;
 	
 	
-	public String Param1;
-    public String Param2;
-    public String Param3;
-    public String Param4;
-    public String Param5;
-    public String Param6;
-    public String Param7;
-    public String Param8;
+	public String param1;
+    public String param2;
+    public String param3;
+    public String param4;
+    public String param5;
+    public String param6;
+    public String param7;
+    public String param8;
 }

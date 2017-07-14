@@ -16,6 +16,8 @@ import org.springframework.ui.ModelMap;
 
 import com.sj.core.utils.BeanMapper;
 import com.sj.core.utils.web.JsonResult;
+import com.sj.web.common.Consts;
+import com.sj.web.common.Utils;
 import com.sj.web.common.mybatis.plugin.Page;
 import com.sj.web.common.security.ShiroUser;
 import com.sj.web.model.bean.system.SysOrg;
@@ -50,7 +52,7 @@ public class UserServiceImpl implements UserService {
 
 	@Override
 	public SysUser getByLogin(String usercode, String pwd) {
-		SysUser user = sysUserMapper.selectByUsercodePwd(usercode, pwd);
+		SysUser user = sysUserMapper.selectByUsercodePwd(usercode, Utils.getMD5(pwd).toUpperCase());
 		return user;
 	}
 
@@ -80,7 +82,7 @@ public class UserServiceImpl implements UserService {
 			sysuser.setPkSysUser(UUID.randomUUID().toString());
 			sysuser.setDr("0");
 			sysuser.setCreateuser(shiroUser.pkSysUser);
-			sysuser.setPwd("1234");
+			sysuser.setPwd(Utils.getMD5("1234").toUpperCase());
 			sysUserMapper.insert(sysuser);
 			return JsonResult.success();
 		} catch (Exception ex) {
@@ -179,12 +181,12 @@ public class UserServiceImpl implements UserService {
 	@Override
 	public JsonResult modifySysUserPwd(RequestParamVO entity) {
 		try {
-			SysUser entityFromDB =  sysUserMapper.selectByPrimaryKey(entity.Param1);
+			SysUser entityFromDB =  sysUserMapper.selectByPrimaryKey(entity.param1);
 			if (entityFromDB == null) {
 				return JsonResult.error("用户不存在！");
 			}
 
-			entityFromDB.setPwd(entity.Param2);
+			entityFromDB.setPwd(Utils.getMD5(entity.param2).toUpperCase());
 
 			sysUserMapper.updateByPrimaryKey(entityFromDB);
 
@@ -207,6 +209,61 @@ public class UserServiceImpl implements UserService {
 		model.addAttribute("list", ListVO);
 		return model;
 		
+	}
+
+	@Override
+	public JsonResult modifySysUserPwd2(RequestParamVO entity) {
+		try {
+			SysUser entityFromDB =  sysUserMapper.selectByPrimaryKey(entity.param1);
+			if (entityFromDB == null) {
+				return JsonResult.error("用户不存在！");
+			}
+
+			String oldPwd = Utils.getMD5(entity.param2).toUpperCase();
+			if (!StringUtils.equals(oldPwd, entityFromDB.getPwd())) {
+				return JsonResult.error("您输入的旧密码不正确！");
+			}
+			
+			entityFromDB.setPwd(Utils.getMD5(entity.param3).toUpperCase());
+
+			sysUserMapper.updateByPrimaryKey(entityFromDB);
+
+			return JsonResult.success();
+		} catch (Exception ex) {
+			logger.error("修改失败！", ex);
+			return JsonResult.error("修改失败！");
+		}
+	}
+
+	@Override
+	public JsonResult getConfig(ShiroUser shiroUser) {
+		JsonResult result;
+		try {
+			SysUser entity =sysUserMapper.selectByPrimaryKey(shiroUser.pkSysUser);
+			if (StringUtils.isEmpty(entity.getTheme()))
+				entity.setTheme(Consts.DEFAULT_THEME);
+			result = JsonResult.success(entity);
+		} catch (Exception ex) {
+			String message = "获取数据失败";
+			logger.error(message, ex);
+			result = JsonResult.error(message);
+		}
+
+		return result;
+	}
+
+	@Override
+	public JsonResult modifyConfig(SysUser entity) {
+		 try {
+			    SysUser sysuser = sysUserMapper.selectByPrimaryKey(entity.getPkSysUser());
+			    sysuser.setTabmode(entity.getTabmode());
+			    sysuser.setTheme(entity.getTheme());
+			    sysUserMapper.updateByPrimaryKey(sysuser);
+	            return JsonResult.success();
+	        } catch (Exception ex) {
+	            logger.error("修改失败！", ex);
+	            return JsonResult.error("修改失败！");
+	        }
 	}
 
 }

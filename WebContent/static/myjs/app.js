@@ -333,54 +333,53 @@ hlg.dialog.showProcess = function (isShow, msg) {
     });
 };
 
-//加载服务器端定义的一个对话框(即并未在当前网页预定义)，并显示出来
-hlg.dialog.openRemoteDialog = function (dId, dUrl, isModel, callback) {
-    var divId = dId + "_div";
-    var $divId = "#" + divId;
-    var ddiv = document.getElementById(divId);
-    ;
-    if (ddiv == null) {
-        var dContent = "<div id='" + divId + "'></div>";
-        $("body").append(dContent);
-    } else {
-        $($divId).empty();
-    }
-
-    var dQueryId = "#" + dId;
-    $.ajax({
-        type: "get",
-        url: dUrl,
-        dataType: "html",
-        success: function (context, textStatus) {
-            $($divId).html(context);
-            $.parser.parse($divId);
-            $(dQueryId).dialog({
-                modal: isModel,
-                onClose: function (event, ui) {
-                    var data = appMap.getValue(dId);
-                    appMap.remove(dId);
-
-                    //console.info("callback:" + data);
-                    if (callback != null && data != null) {
-                        callback(data);
-                    }
-
-                    $(dQueryId).dialog("destroy");
-                    $(dQueryId).remove();
-                    //console.info("remove dialog:" + dId);
-                }
-
-            });
-
-            $(dQueryId).dialog("open");
-        }
-    });
-
-};
+////加载服务器端定义的一个对话框(即并未在当前网页预定义)，并显示出来
+//hlg.dialog.openRemoteDialog = function (dId, dUrl, isModel, callback) {
+//    var divId = dId + "_div";
+//    var $divId = "#" + divId;
+//    var ddiv = document.getElementById(divId);
+//    ;
+//    if (ddiv == null) {
+//        var dContent = "<div id='" + divId + "'></div>";
+//        $("body").append(dContent);
+//    } else {
+//        $($divId).empty();
+//    }
+//
+//    var dQueryId = "#" + dId;
+//    $.ajax({
+//        type: "get",
+//        url: dUrl,
+//        dataType: "html",
+//        success: function (context, textStatus) {
+//            $($divId).html(context);
+//            $.parser.parse($divId);
+//            $(dQueryId).dialog({
+//                modal: isModel,
+//                onClose: function (event, ui) {
+//                    var data = appMap.getValue(dId);
+//                    appMap.remove(dId);
+//
+//                    //console.info("callback:" + data);
+//                    if (callback != null && data != null) {
+//                        callback(data);
+//                    }
+//
+//                    $(dQueryId).dialog("destroy");
+//                    $(dQueryId).remove();
+//                    //console.info("remove dialog:" + dId);
+//                }
+//
+//            });
+//
+//            $(dQueryId).dialog("open");
+//        }
+//    });
+//
+//};
 
 //在关闭服务器对话框前，准备好要返回的数据，一般不需要特意调用，直接使用closeRemoteDialog即可
 hlg.dialog.passRemoteDialogData = function (dId, data) {
-    //console.info("pass dialog data:" + dId + " data:" + data);
     if (data) {
         appMap.add(dId, data);
     }

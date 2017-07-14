@@ -1,5 +1,7 @@
 package com.sj.web.common.security;
 
+import java.util.List;
+
 import org.apache.commons.lang3.StringUtils;
 import org.apache.shiro.authc.AuthenticationException;
 import org.apache.shiro.authc.AuthenticationInfo;
@@ -12,9 +14,16 @@ import org.apache.shiro.cache.Cache;
 import org.apache.shiro.realm.AuthorizingRealm;
 import org.apache.shiro.subject.PrincipalCollection;
 import org.apache.shiro.subject.SimplePrincipalCollection;
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 
 import com.sj.core.utils.SpringUtils;
+import com.sj.web.common.Utils;
+import com.sj.web.model.bean.system.SysMenu;
+import com.sj.web.model.bean.system.SysRole;
 import com.sj.web.model.bean.system.SysUser;
+import com.sj.web.services.system.RoleService;
+import com.sj.web.services.system.SysMenuService;
 import com.sj.web.services.system.UserService;
 
 
@@ -25,18 +34,38 @@ import com.sj.web.services.system.UserService;
  * @date 2017年5月9日上午10:40:57
  */
 public class ShiroRealm extends AuthorizingRealm {
+	
+	private static  Logger logger = LoggerFactory.getLogger(ShiroRealm.class);
 
     //注意：自定义Realm里面不能使用@Autowired来注入Bean，否则会因为Bean加载顺序的问题导致对应Service的EhCahce失效
     private UserService userService;
-
-   
+    
+    
+    private RoleService roleService;
+    
+    
+    private SysMenuService sysMenuService;
+    
 
     public UserService getUserService() {
         if(userService == null) {
             userService = SpringUtils.getBean(UserService.class);
         }
-
         return userService;
+    }
+    
+    public RoleService getRoleService() {
+        if(roleService == null) {
+        	roleService = SpringUtils.getBean(RoleService.class);
+        }
+        return roleService;
+    }
+    
+    public SysMenuService getSysMenuService() {
+        if(sysMenuService == null) {
+        	sysMenuService = SpringUtils.getBean(SysMenuService.class);
+        }
+        return sysMenuService;
     }
 
   
@@ -118,6 +147,7 @@ public class ShiroRealm extends AuthorizingRealm {
     public void clearCachedAuthorizationInfo(String principal) {
         SimplePrincipalCollection principals = new SimplePrincipalCollection(
                 principal, getName());
+        logger.debug("强制清空清空用户关联权限认证！");
         clearCachedAuthorizationInfo(principals);
     }
 
@@ -125,6 +155,7 @@ public class ShiroRealm extends AuthorizingRealm {
      * 清空所有关联认证
      */
     public void clearAllCachedAuthorizationInfo() {
+    	logger.debug("清空所有关联认证！");
         Cache<Object, AuthorizationInfo> cache = getAuthorizationCache();
         if (cache != null) {
             for (Object key : cache.keys()) {
@@ -143,28 +174,30 @@ public class ShiroRealm extends AuthorizingRealm {
      */
     @Override
     protected AuthenticationInfo doGetAuthenticationInfo(AuthenticationToken authenticationToken) throws AuthenticationException {
-
+    	logger.debug("加载用户登入信息！shiroUser ");
         //获取用户输入的登录名称和密码
         UsernamePasswordToken token = (UsernamePasswordToken) authenticationToken;
         String userLoginCode = token.getUsername();  //得到登入名
         String password = new String(token.getPassword()); //得到密码
         //进行加密
-//        password = Utils.getMD5(password).toUpperCase();
-        token.setPassword(password.toCharArray());
+        token.setPassword(Utils.getMD5(password).toUpperCase().toCharArray());
 
         //从数据库中查询用户用信息
         SysUser dbUser = getUserService().getByLogin(userLoginCode, password);
         if (dbUser == null)
             return null;
-
-
-        ShiroUser shiroUser = new ShiroUser(dbUser);
+        //加载角色信息
+        List<SysRole> listrole=getRoleService().getByPkSysUser(dbUser.getPkSysUser()); 
+        //加载菜单信息
+        List<SysMenu> listmenu = getSysMenuService().getMenuByPkSysUser(dbUser.getPkSysUser());
+        
+        ShiroUser shiroUser = new ShiroUser(dbUser,listrole,listmenu);
 
         //此处无需对比,对比的逻辑Shiro会做,我们只需返回一个和令牌相关的正确的验证信息
         SimpleAuthenticationInfo info = new SimpleAuthenticationInfo(shiroUser, dbUser.getPwd(), getName());
        
         //如果验证通过，那么清除上次授权的缓存,跟原来的TOKEN比较
-        if (StringUtils.equals(userLoginCode, dbUser.getUsercode()) && StringUtils.equals(password,dbUser.getPwd() )) {
+        if (StringUtils.equals(userLoginCode, dbUser.getUsercode()) && StringUtils.equals(Utils.getMD5(password).toUpperCase(),dbUser.getPwd() )) {
             clearCache(info.getPrincipals());
             clearCachedAuthorizationInfo(info.getPrincipals());
         }

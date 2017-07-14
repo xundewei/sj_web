@@ -53,4 +53,18 @@
     from SYS_ROLE WHERE ROLECODE = #{rolecode,jdbcType=VARCHAR}
   </select>
   
+  
+   <select id="selectByPkSysUser" resultMap="BaseResultMap" parameterType="java.lang.String" >
+   select PK_SYS_ROLE, ROLECODE, ROLENAME, CREATEUSER, DR, TS, REMARK
+  from SYS_USER A
+  join SYS_USER_ROLE B
+    on A.PK_SYS_USER = B.PK_SYS_USER
+   and NVL(A.DR, 0) = 0
+  join SYS_ROLE C
+    on B.PK_SYS_ROLE = C.PK_SYS_ROLE
+   and NVL(C.DR, 0) = 0
+ where A.PK_SYS_USER = #{PkSysUser, jdbcType = VARCHAR}
+  </select>
+  
+  
 </mapper>

@@ -29,27 +29,27 @@
 <script type="text/javascript" src="${ctx}/lib/layer/layer.js?v=1.9.3"></script>
 <script type="text/javascript" src="${ctx}/lib/form/jquery.serializejson.js?v=2.6.1"></script>
 
-<div data-options="region:'north',border:false,split:true" style="height: 85px">
+<div data-options="region:'north',border:false,split:false" style="height: 85px">
     <div id="top">
         <div id="logo">
-            <span>${groupname}</span>
+             <span>${groupname}</span> 
         </div>
         <div class="fl_r">
             <img alt="" src="${ctx}/images/main/pic_1.jpg"/></div>
     </div>
     <div id="nav">
         <div class="yh">
-            欢迎您， <label id="lblSignIn" style="margin-right:15px">${userDisplayName}</label>
+            欢迎您， <label id="lblSignIn" style="margin-right:15px">${shirouser.username}</label>
             当前时间：<span id="bgclock"></span>
-            <input type="hidden" id="main_userid" value="${userId}"/>
-            <input type="hidden" id="main_username" value="${userDisplayName}"/>
-            <input type="hidden" id="main_userloginname" value="${userLoginName}"/>
+            <input type="hidden" id="main_userid" value="${shirouser.pkSysUser}"/>
+            <input type="hidden" id="main_usercode" value="${shirouser.usercode}"/>
+            <input type="hidden" id="main_username" value="${shirouser.username}"/>
         </div>
         <div id="menu">
             <ul>
                 <li><a href="#" id="main_mypage" class="hlg-menu" data-url="main/home">我的首页</a></li>
                 <li><a href="#" id="main_changepwd">修改密码</a></li>
-                <li><a href="#" id="main_control" class="hlg-menu" data-url="system/userconfig">控制面板</a></li>
+                <li><a href="#" id="main_control" class="hlg-menu" data-url="system/user/config">控制面板</a></li>
                 <li><a href="#" id="main_help" class="hlg-menu" data-url="main/help">帮助</a></li>
                 <li><a href="#" id="main_exit">安全退出</a></li>
             </ul>
@@ -187,7 +187,7 @@
     function initTopBar() {
         $("#main_changepwd").click(function () {
             var id = $("#main_userid").val();
-            hlg.dialog.openRemoteDialog("sys_user_ChangeDialog", "system/public/p/" + id, true);
+            sys.dialog.open_RemoteDialog("sys_user_ChangeDialog", "system/user/change/" + id, true);
         });
 
         $("#main_exit").click(function () {

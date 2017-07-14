@@ -6,6 +6,7 @@ import java.util.UUID;
 
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
+import org.springframework.transaction.annotation.Transactional;
 
 import com.sj.core.utils.BeanMapper;
 import com.sj.core.utils.web.easyui.EzTreeNode;
@@ -20,6 +21,7 @@ import com.sj.web.model.vo.system.MenuTreeGridVO;
  * @author TODY 2017年4月24日14:52:26
  */
 @Service("sysMenuService")
+@Transactional
 public class SysMenuServiceImpl implements SysMenuService {
 	@Autowired
 	private SysMenuMapper sysMenuMapper;
@@ -133,6 +135,16 @@ public class SysMenuServiceImpl implements SysMenuService {
 		MenuTreeGridVO vo = BeanMapper.map(content, MenuTreeGridVO.class);
 		vo._parentId = content.getParentcode();
 		return vo;
+	}
+
+
+	/**
+	 * 登入--权限使用
+	 * 
+	 */
+	@Override
+	public List<SysMenu> getMenuByPkSysUser(String PkSysUser) {
+		return sysMenuMapper.selectMenuByPkSysUser(PkSysUser);
 	}
 
 

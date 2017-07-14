@@ -33,8 +33,16 @@ public class ShiroUser  implements Serializable{
         this.pkSysUser = dbUser.getPkSysUser();
         this.usercode = dbUser.getUsercode();
         this.username = dbUser.getUsername();
-        
         this.user = dbUser;
+    }
+    
+    public ShiroUser(SysUser dbUser,List<SysRole> RoleList,List<SysMenu> MenuList) {
+        this.pkSysUser = dbUser.getPkSysUser();
+        this.usercode = dbUser.getUsercode();
+        this.username = dbUser.getUsername();
+        this.user = dbUser;
+        this.RoleList = RoleList;
+        this.MenuList = MenuList;
     }
 
 
