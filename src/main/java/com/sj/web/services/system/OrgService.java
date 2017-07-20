@@ -2,6 +2,7 @@ package com.sj.web.services.system;
 
 import java.util.List;
 
+import com.sj.core.utils.web.JsonResult;
 import com.sj.core.utils.web.easyui.EzTreeNode;
 import com.sj.web.common.security.ShiroUser;
 import com.sj.web.model.bean.system.SysOrg;
@@ -64,7 +65,7 @@ public interface OrgService{
 	* @return
 	* @throws
 	 */
-	public int modifySysOrg(SysOrg sysorg);
+	public JsonResult modifySysOrg(SysOrg sysorg,ShiroUser shiroUser);
 	
 	
 	

@@ -20,12 +20,16 @@
             ">
     <form id="sys_roles_u_form">
         <div class="hlg-title">基本信息</div>
-        <input type="hidden" id="sys_roles_u_id" name="id"/>
-        <input type="hidden" id="sys_roles_u_groupid" name="groupid"/>
+        <input type="hidden" id="sys_roles_u_id" name="pkSysRole"/>
         <table style="width: 100%; border-collapse: collapse; padding: 10px;">
+         <tr>
+                <td style="text-align: right; width: 15%">角色编码：</td>
+                <td><input name="rolecode" class="easyui-validatebox"
+                           data-options="required:true"/></td>
+            </tr>
             <tr>
-                <td style="text-align: right; width: 15%">名称：</td>
-                <td><input name="name" class="easyui-validatebox"
+                <td style="text-align: right; width: 15%">角色名称：</td>
+                <td><input name="rolename" class="easyui-validatebox"
                            data-options="required:true"/></td>
             </tr>
             <tr>
@@ -44,7 +48,7 @@
             return;
         }
 
-        var $rowid = row.id;
+        var $rowid = row.pkSysRole;
         if ($rowid == null) {
             hlg.dialog.showInfo("请先选择一条记录！");
             return;

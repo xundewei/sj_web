@@ -53,6 +53,11 @@
     from SYS_ROLE WHERE ROLECODE = #{rolecode,jdbcType=VARCHAR}
   </select>
   
+    <select id="selectByRoleCodeAndRoleName" resultMap="BaseResultMap" >
+    select PK_SYS_ROLE, ROLECODE, ROLENAME, CREATEUSER, DR, TS, REMARK
+    from SYS_ROLE WHERE ROLECODE = #{rolecode} AND ROLENAME=#{rolename}
+  </select>
+  
   
    <select id="selectByPkSysUser" resultMap="BaseResultMap" parameterType="java.lang.String" >
    select PK_SYS_ROLE, ROLECODE, ROLENAME, CREATEUSER, DR, TS, REMARK

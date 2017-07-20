@@ -12,6 +12,9 @@ sys.dialog = {};
 sys.dialog.openReferenceOrgDialog = function (multiSelect, callback) {
     sys.dialog.open_RemoteDialog("pub_select_org_Dialog", "system/reference/showorgdialog?multi=" + multiSelect, true, callback);
 };
+
+
+
 sys.dialog.openReferenceMenuDialog = function (multiSelect, callback) {
     sys.dialog.open_RemoteDialog("pub_select_menu_Dialog", "system/reference/showorgdialog?multi=" + multiSelect, true, callback);
 };

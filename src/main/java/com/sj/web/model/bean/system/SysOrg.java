@@ -3,6 +3,8 @@ package com.sj.web.model.bean.system;
 import java.io.Serializable;
 import java.math.BigDecimal;
 
+import com.sj.core.utils.DateUtil;
+
 public class SysOrg implements Serializable{
 	private static final long serialVersionUID = 1L;
 

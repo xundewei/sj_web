@@ -2,6 +2,8 @@ package com.sj.web.model.dao.system;
 
 import java.util.List;
 
+import org.apache.ibatis.annotations.Param;
+
 import com.sj.web.common.mybatis.plugin.Page;
 import com.sj.web.model.bean.system.SysRole;
 import com.sj.web.model.vo.system.SysUserRoleVO;
@@ -117,6 +119,18 @@ public interface SysRoleMapper {
     * @throws
      */
     int updateByPrimaryKey(SysRole record);
+    
+    
+    /**
+     * 
+    * @Title: selectByRoleCodeAndRoleName
+    * @Description: 通过角色编码和角色名称 获取角色对象数组
+    * @param rolecode
+    * @param rolename
+    * @return
+    * @throws
+     */
+    List<SysRole> selectByRoleCodeAndRoleName(@Param("rolecode") String rolecode,@Param("rolename") String rolename);
     
    
     

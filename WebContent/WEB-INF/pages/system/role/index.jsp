@@ -6,11 +6,11 @@
         $("#sys_roles_grid").datagrid({
             url: "system/roles/list",
             columns: [[
-                {field: 'id', title: '编号', width: 100, sortable: true, hidden: true},
-                {field: 'name', title: '名称', width: 100, sortable: true},
-                {field: 'remark', title: '备注', width: 100, align: 'right', sortable: true}
+                {field: 'pkSysRole', title: '主键', width: 100, sortable: true, hidden: true},
+                {field: 'rolecode', title: '角色编码', width: 100, sortable: true},
+                {field: 'rolename', title: '角色名称', width: 100, align: 'right', sortable: true}
             ]],
-            sortName: "name",     //默认的排序字段
+            sortName: "rolecode",     //默认的排序字段
             sortOrder: "asc",   //默认的排序方向
             onClickRow: function (rowIndex, rowData) {
                 sys_roles_QueryGrid2(rowData);
@@ -73,7 +73,7 @@
             return;
         }
 
-        var $rowid = row.id;
+        var $rowid = row.pkSysRole;
         if ($rowid == null) {
             return;
         }
@@ -92,13 +92,13 @@
             return;
         }
 
-        var $rowid = row.id;
+        var $rowid = row.pkSysRole;
         if ($rowid == null) {
             hlg.dialog.showInfo("请先选择一条记录！");
             return;
         }
 
-        var msg = "确定删除角色[" + row.name + "]吗？";
+        var msg = "确定删除角色[" + row.rolecode + "]吗？";
         hlg.dialog.showConfirm(msg, function () {
             var url = "system/roles/delete/" + $rowid;
             hlg.ajax.deleteEntity(url, function () {
@@ -130,15 +130,14 @@
     function sys_roles_ConfigGrid2() {
         $("#sys_roles_grid2").treegrid({
             loadMsg: "",
-            url: 'system/perms/list',
-            idField: 'menuid',
-            treeField: 'displayname',
+            url: 'system/menu/listrolemenu',
+            idField: 'menucode',
+            treeField: 'menuname',
             columns: [[
-                {field: 'id', title: '编号', width: 100, sortable: false, hidden: true},
-                {field: 'roleid', title: 'RoleId', width: 100, sortable: false, hidden: true},
+                {field: 'pkSysMenu', title: '编号', width: 100, sortable: false, hidden: true},
+                {field: 'menucode', title: 'RoleId', width: 100, sortable: false, hidden: true},
                 {field: 'menuid', title: '菜单编号', width: 100, sortable: false, hidden: true},
-                {field: 'menuname', title: '菜单名称', width: 100, hidden: true},
-                {field: 'displayname', title: '菜单名称', width: 120, sortable: false},
+                {field: 'menuname', title: '菜单名称', width: 120, sortable: false},
                 {field: 'displayorder', title: '显示顺序', width: 40, sortable: false, hidden: true},
                 {
                     field: 'level', title: '菜单级别', width: 50, formatter: function (value, row, index) {

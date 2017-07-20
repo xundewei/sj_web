@@ -75,8 +75,9 @@
 
     function sys_user_a_selOrg(){
     	sys.dialog.openReferenceOrgDialog(false,function(data){
+    		debugger;
            if(data.length>0){
-               $("#sys_user_a_pk_sys_code").val(data[0].id);
+               $("#sys_user_a_pk_sys_code").val(data[0].pk);
                $("#sys_user_a_orgname").val(data[0].name);
            }
         });

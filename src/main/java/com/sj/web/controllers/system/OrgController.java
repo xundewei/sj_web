@@ -138,13 +138,7 @@ public class OrgController extends BaseController {
 	@RequestMapping(value = "update", method = RequestMethod.POST)
 	@ResponseBody
 	public JsonResult update(@RequestBody SysOrg entity) {
-		try {
-			orgService.modifySysOrg(entity);
-			return JsonResult.success();
-		} catch (Exception ex) {
-			logger.error("修改失败！", ex);
-			return JsonResult.error("修改失败！");
-		}
+		return orgService.modifySysOrg(entity,getCurrentShiroUser());
 	}
 
 	

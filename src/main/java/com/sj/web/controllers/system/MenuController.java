@@ -77,6 +77,28 @@ public class MenuController extends BaseController {
 			return EzPageResult.build(0, new ArrayList<MenuTreeGridVO>());
 		}
 	}
+	
+	
+	/**
+	 * 
+	* @Title: list
+	* @Description: 2.获取Grid数据的接口 URL: /system/menu/listrolemenu GET
+	* @param sort
+	* @param order
+	* @return
+	* @throws
+	 */
+	@RequestMapping("listrolemenu")
+	@ResponseBody
+	public Map<String, Object> list(@RequestParam(value = "roleid", required = false) String roleid) {
+		try {
+			List<MenuTreeGridVO> voList = sysMenuService.getAll();
+			return EzPageResult.build(voList.size(), voList);
+		} catch (Exception ex) {
+			logger.error("获取菜单数据失败！", ex);
+			return EzPageResult.build(0, new ArrayList<MenuTreeGridVO>());
+		}
+	}
 
 	
 	

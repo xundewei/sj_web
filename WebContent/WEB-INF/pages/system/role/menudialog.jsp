@@ -42,7 +42,7 @@
             return;
         }
 
-        var $rowid = row.id;
+        var $rowid = row.pkSysRole;
         if ($rowid == null) {
             hlg.dialog.showInfo("请先在左侧角色列表中选择一个角色！");
             return;

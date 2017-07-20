@@ -21,9 +21,14 @@
     <form id="sys_roles_a_form">
         <div class="hlg-title">基本信息</div>
         <table style="width: 100%; border-collapse: collapse; padding: 10px;">
+          <tr>
+                <td style="text-align: right; width: 15%">角色编码：</td>
+                <td><input name="rolecode" class="easyui-validatebox"
+                           data-options="required:true"/></td>
+            </tr>
             <tr>
-                <td style="text-align: right; width: 15%">名称：</td>
-                <td><input name="name" class="easyui-validatebox"
+                <td style="text-align: right; width: 15%">角色名称：</td>
+                <td><input name="rolename" class="easyui-validatebox"
                            data-options="required:true"/></td>
             </tr>
             <tr>

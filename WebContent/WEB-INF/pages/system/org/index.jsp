@@ -215,7 +215,7 @@
         }
         var $rowcode = row.orgcode;
         
-        var msg = "确定删除机构[" + row.name + "]吗？";
+        var msg = "确定删除机构[" + row.orgname + "]吗？";
         hlg.dialog.showConfirm(msg, function () {
             var url = "system/org/delete/id/" + $rowid+"/code/"+$rowcode;
             hlg.ajax.deleteEntity(url, function () {

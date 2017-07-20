@@ -26,5 +26,9 @@ public class Consts {
     
     //抬头名称
     public static final String GROUPNAME = "三伽财团信息管理系统";
+    
+    
+  //默认值
+    public static final String BEAN_DR = "0";
 
 }

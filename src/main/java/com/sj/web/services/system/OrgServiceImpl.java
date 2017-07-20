@@ -1,16 +1,22 @@
 package com.sj.web.services.system;
 
+import java.time.LocalTime;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import org.slf4j.Logger;
+import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 import org.springframework.transaction.annotation.Transactional;
 
 import com.sj.core.utils.BeanMapper;
+import com.sj.core.utils.DateUtil;
+import com.sj.core.utils.web.JsonResult;
 import com.sj.core.utils.web.easyui.EzTreeNode;
 import com.sj.core.utils.web.easyui.TreeBuilder;
+import com.sj.web.common.Consts;
 import com.sj.web.common.security.ShiroUser;
 import com.sj.web.model.bean.system.SysOrg;
 import com.sj.web.model.dao.system.SysOrgMapper;
@@ -25,6 +31,7 @@ import com.sj.web.model.vo.system.OrgTreeGridVO;
 @Service("orgService")
 @Transactional
 public class OrgServiceImpl implements OrgService {
+	private static Logger logger = LoggerFactory.getLogger(OrgServiceImpl.class);
 	@Autowired
 	private SysOrgMapper sysOrgMapper;
 
@@ -51,6 +58,8 @@ public class OrgServiceImpl implements OrgService {
 			// 以随机数作为ID
 			sysorg.setPkSysOrg(UUID.randomUUID().toString());
 			sysorg.setCreateuser(shiroUser.pkSysUser);
+			sysorg.setTs(DateUtil.getStringDate());
+			sysorg.setDr(Consts.BEAN_DR);
 			try {
 				sysOrgMapper.insert(sysorg);
 			} catch (Exception ex) {
@@ -62,9 +71,17 @@ public class OrgServiceImpl implements OrgService {
 	
 	
 	@Override
-	public int modifySysOrg(SysOrg sysorg) {
-		int i = sysOrgMapper.updateByPrimaryKey(sysorg);
-		return i;
+	public JsonResult modifySysOrg(SysOrg sysorg,ShiroUser shiroUser) {
+		try {
+			sysorg.setCreateuser(shiroUser.pkSysUser);
+			sysorg.setTs(DateUtil.getStringDate());
+			sysorg.setDr(Consts.BEAN_DR);
+			sysOrgMapper.updateByPrimaryKey(sysorg);
+			return JsonResult.success();
+		} catch (Exception ex) {
+			logger.error("修改失败！", ex);
+			return JsonResult.error("修改失败！");
+		}
 	}
 	
 	

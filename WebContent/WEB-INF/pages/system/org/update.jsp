@@ -54,7 +54,7 @@
     function sys_org_u_selOrg(){
         sys.dialog.openReferenceOrgDialog(false,function(data){
             if(data.length>0){
-                $("#sys_org_u_parentcode").val(data[0].id);
+                $("#sys_org_u_parentcode").val(data[0].code);
         //        $("#sys_org_u_parentname").val(data[0].name);
             }
         });
@@ -65,7 +65,7 @@
         var entity = {};
         entity.pkSysOrg = $("#sys_org_u_pksysorg").val();
         entity.orgcode = $("#sys_org_u_orgcode").val();
-        entity.name = $("#sys_org_u_orgname").val();
+        entity.orgname = $("#sys_org_u_orgname").val();
         entity.displayorder = $("#sys_org_u_displayorder").val();
         entity.parentcode = $("#sys_org_u_parentcode").val();
         entity.duty = $("#sys_org_u_duty").val();

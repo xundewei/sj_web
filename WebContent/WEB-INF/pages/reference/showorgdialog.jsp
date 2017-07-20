@@ -72,6 +72,7 @@ var nodeId;
 
     //确定按钮动作
     function pub_select_org_Dialog_OK() {
+    	debugger;
         var data = [];
         var $tree = $('#pub_org_tree');
         var ischeck = $tree.tree("options").checkbox;
@@ -85,8 +86,10 @@ var nodeId;
             for (var i = 0; i < checkedNodes.length; i++) {
                 var checkedNode = checkedNodes[i];
                 var cnode = {};
-                cnode.id = checkedNode.id;
+                debugger;
+                cnode.pk = checkedNode.attributes;
                 cnode.name = checkedNode.text;
+                cnode.code = checkedNode.id
                 data[i] = cnode;
             }
         } else {
@@ -95,21 +98,22 @@ var nodeId;
                 hlg.dialog.showInfo("请选择一个组织机构！");
                 return;
             }
-
             var node = {};
-            node.id = selectednodes.id;
+            node.pk = selectednodes.attributes;
             node.name = selectednodes.text;
+            node.code = selectednodes.id;
             data[0] = node;
+          //  var node = {};
+          //  cnode.name = checkedNode.text;
+          //  cnode.code = checkedNode.id
+          //  data[0] = node;
         }
 
         //传递数据回去
-        close_org_RemoteDialog("pub_select_org_Dialog", data);
+        sys.dialog.close_RemoteDialog("pub_select_org_Dialog", data);
     }
     
-  //关闭组织机构选择对话框，并传回数据（没有数据，不传即可）
-    function close_org_RemoteDialog (data) {
-        sys.dialog.close_RemoteDialog("pub_select_org_Dialog", data);
-    };
+
     
   //确定按钮动作
     function pub_select_menu_Dialog_OK() {
@@ -126,8 +130,9 @@ var nodeId;
             for (var i = 0; i < checkedNodes.length; i++) {
                 var checkedNode = checkedNodes[i];
                 var cnode = {};
-                cnode.id = checkedNode.id;
+                cnode.pk = checkedNode.attributes;
                 cnode.name = checkedNode.text;
+                cnode.code = checkedNode.id
                 data[i] = cnode;
             }
         } else {
@@ -144,12 +149,8 @@ var nodeId;
         }
 
         //传递数据回去
-        close_memu_RemoteDialog("pub_select_menu_Dialog", data);
-    }
-  //关闭组织机构选择对话框，并传回数据（没有数据，不传即可）
-    function close_memu_RemoteDialog (data) {
         sys.dialog.close_RemoteDialog("pub_select_menu_Dialog", data);
-    };
+    }
 
 
 </script>

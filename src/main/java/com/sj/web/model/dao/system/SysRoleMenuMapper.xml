@@ -1,0 +1,39 @@
+<?xml version="1.0" encoding="UTF-8" ?>
+<!DOCTYPE mapper PUBLIC "-//mybatis.org//DTD Mapper 3.0//EN" "http://mybatis.org/dtd/mybatis-3-mapper.dtd" >
+<mapper namespace="com.sj.web.model.dao.system.SysRoleMenuMapper" >
+  <resultMap id="BaseResultMap" type="com.sj.web.model.bean.system.SysRoleMenu" >
+    <id column="PK_SYS_ROLE_MENU" property="pkSysRoleMenu" jdbcType="VARCHAR" />
+    <result column="PK_SYS_ROLE" property="pkSysRole" jdbcType="VARCHAR" />
+    <result column="PK_SYS_MENU" property="pkSysMenu" jdbcType="VARCHAR" />
+    <result column="DR" property="dr" jdbcType="CHAR" />
+    <result column="TS" property="ts" jdbcType="VARCHAR" />
+  </resultMap>
+  <delete id="deleteByPrimaryKey" parameterType="java.lang.String" >
+    delete from SYS_ROLE_MENU
+    where PK_SYS_ROLE_MENU = #{pkSysRoleMenu,jdbcType=VARCHAR}
+  </delete>
+  <insert id="insert" parameterType="com.sj.web.model.bean.system.SysRoleMenu" >
+    insert into SYS_ROLE_MENU (PK_SYS_ROLE_MENU, PK_SYS_ROLE, PK_SYS_MENU, 
+      DR, TS)
+    values (#{pkSysRoleMenu,jdbcType=VARCHAR}, #{pkSysRole,jdbcType=VARCHAR}, #{pkSysMenu,jdbcType=VARCHAR}, 
+      #{dr,jdbcType=CHAR}, #{ts,jdbcType=VARCHAR})
+  </insert>
+  <update id="updateByPrimaryKey" parameterType="com.sj.web.model.bean.system.SysRoleMenu" >
+    update SYS_ROLE_MENU
+    set PK_SYS_ROLE = #{pkSysRole,jdbcType=VARCHAR},
+      PK_SYS_MENU = #{pkSysMenu,jdbcType=VARCHAR},
+      DR = #{dr,jdbcType=CHAR},
+      TS = #{ts,jdbcType=VARCHAR}
+    where PK_SYS_ROLE_MENU = #{pkSysRoleMenu,jdbcType=VARCHAR}
+  </update>
+  <select id="selectByPrimaryKey" resultMap="BaseResultMap" parameterType="java.lang.String" >
+    select PK_SYS_ROLE_MENU, PK_SYS_ROLE, PK_SYS_MENU, DR, TS
+    from SYS_ROLE_MENU
+    where PK_SYS_ROLE_MENU = #{pkSysRoleMenu,jdbcType=VARCHAR}
+  </select>
+  <select id="selectAll" resultMap="BaseResultMap" >
+    select PK_SYS_ROLE_MENU, PK_SYS_ROLE, PK_SYS_MENU, DR, TS
+    from SYS_ROLE_MENU
+    order by age desc,username asc
+  </select>
+</mapper>

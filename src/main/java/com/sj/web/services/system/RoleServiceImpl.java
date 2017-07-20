@@ -63,7 +63,7 @@ public class RoleServiceImpl implements RoleService {
 	public JsonResult addSysRole(SysRole entity ,ShiroUser shiroUser) {
 		try {
 			
-            if (sysRoleMapper.selectByRoleCode(entity.getRolecode())!=null) {
+            if (sysRoleMapper.selectByRoleCode(entity.getRolecode()).size()>0) {
                 return JsonResult.error("角色名称[" + entity.getRolename() + "]已经存在！");
             }
             
@@ -80,13 +80,24 @@ public class RoleServiceImpl implements RoleService {
 	}
 	
 	
-	
+	/**
+	 * 角色修改逻辑：
+	 * 	1.判断是否存在此角色
+	 * 	2.判断角色编码是否重复，如果重复需要判断 编码和名称是否重复
+	 */
 	@Override
 	public JsonResult modifySysRoleByPrimaryKey(SysRole entity) {
 		 try {
 	            SysRole entityFromDB = sysRoleMapper.selectByPrimaryKey(entity.getPkSysRole());
 	            if (entityFromDB == null) {
-	                return JsonResult.error("ID=" + entity.getRolecode() + "不存在！");
+	                return JsonResult.error("ID=" + entity.getPkSysRole() + "不存在！");
+	            }
+	            List<SysRole> list = sysRoleMapper.selectByRoleCode(entity.getRolecode());
+	            if(list.size()>0){
+	            	List<SysRole> list2 = sysRoleMapper.selectByRoleCodeAndRoleName(entity.getRolecode(), entity.getRolename());
+	            	if(list2.size()>0){
+	            		 return JsonResult.error("角色编码=" + entity.getRolecode() + " 和角色名称 = "+entity.getRolename()+" 已近存在！");
+	            	}
 	            }
 	            sysRoleMapper.updateByPrimaryKey(entity);
 	            return JsonResult.success();
