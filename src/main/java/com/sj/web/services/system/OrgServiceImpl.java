@@ -5,6 +5,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.UUID;
 
+import org.apache.commons.lang3.StringUtils;
 import org.slf4j.Logger;
 import org.slf4j.LoggerFactory;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -76,6 +77,9 @@ public class OrgServiceImpl implements OrgService {
 			sysorg.setCreateuser(shiroUser.pkSysUser);
 			sysorg.setTs(DateUtil.getStringDate());
 			sysorg.setDr(Consts.BEAN_DR);
+			if(StringUtils.equals(sysorg.getOrgcode(), sysorg.getParentcode())){
+				return JsonResult.error("不能选择自己作为上级机构！请重新选择上级机构");
+			}
 			sysOrgMapper.updateByPrimaryKey(sysorg);
 			return JsonResult.success();
 		} catch (Exception ex) {
@@ -87,20 +91,20 @@ public class OrgServiceImpl implements OrgService {
 	
 	
 	@Override
-	public String removeSysOrg(String pk_sys_org,String orgcode) {
+	public JsonResult removeSysOrg(String pk_sys_org,String orgcode) {
 		SysOrg entityFromDB = sysOrgMapper.selectByPrimaryKey(pk_sys_org);
 		List<SysOrg> list = sysOrgMapper.selectEndOrg(orgcode);
 		if (entityFromDB == null) {
-			return "ID=" + orgcode + "不存在！";
+			return JsonResult.error("ID=" + orgcode + "不存在！");
 		}else if (list.size()>0) {
-			return "此机构不是末级机构，请先删除此机构一下的机构";
+			return  JsonResult.error("此机构不是末级机构，请先删除此机构一下的机构");
 		}else{
 			try {
 				sysOrgMapper.deleteByPrimaryKey(pk_sys_org);
 			} catch (Exception e) {
-				return "失败";
+				return  JsonResult.error("失败");
 			}
-			return "成功";
+			return JsonResult.success();
 		}
 	}
 	
@@ -174,6 +178,7 @@ public class OrgServiceImpl implements OrgService {
 	private OrgTreeGridVO convertToVO(SysOrg content) {
 		OrgTreeGridVO vo = BeanMapper.map(content, OrgTreeGridVO.class);
 		vo._parentId = content.getParentcode();
+		vo.parentname = "后续缓存中拿";
 		return vo;
 	}
 

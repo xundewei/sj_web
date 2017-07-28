@@ -156,13 +156,6 @@ public class OrgController extends BaseController {
 	@RequestMapping(value = "delete/id/{id}/code/{code}", method = RequestMethod.POST)
 	@ResponseBody
 	public JsonResult delete(@PathVariable("id") String id,@PathVariable("code") String code) {
-		String msg=orgService.removeSysOrg(id, code);
-		if(msg.equals("成功")){
-			return JsonResult.success();
-		}else if(msg.equals("失败")){
-			return JsonResult.error("删除失败！");
-		}else{
-			return JsonResult.error(msg);	
-		}
+		return orgService.removeSysOrg(id, code);
 	}
 }

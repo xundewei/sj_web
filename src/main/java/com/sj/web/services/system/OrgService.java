@@ -77,7 +77,7 @@ public interface OrgService{
 	* @return
 	* @throws
 	 */
-	public String removeSysOrg(String pk_sys_org,String orgcode);
+	public JsonResult removeSysOrg(String pk_sys_org,String orgcode);
 	
 	
 	
